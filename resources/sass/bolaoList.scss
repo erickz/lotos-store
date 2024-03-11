@@ -1,0 +1,29 @@
+#bolaoInfosModal {
+    .card-header {
+        .bolao-contest {
+            label {
+                font-size: 1em;
+            }
+        }
+    }
+
+    .gamesList {
+
+        ul {
+            max-height: 242px;
+            overflow-y: scroll;
+
+            li {
+                display: block;
+    
+                .id-game {
+                    width: 35px;
+                }
+    
+                .number {
+                    
+                }
+            }
+        }
+    }
+}

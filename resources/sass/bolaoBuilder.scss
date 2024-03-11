@@ -1,0 +1,254 @@
+.bg-steps {
+  background-color: #F1FAFE !important;
+}
+
+.bolaoSteps {
+  
+  .titleStep {
+    font-size: 22px;
+    color: #888;
+  }
+
+  .iconHolder {
+    font-size: 28px;
+    color: #3e97ff;
+  }
+
+  .bolaoStep {
+    outline: #3e97ff 1px dashed !important;
+
+    &.bg-dark,
+    &.bg-secondary2,
+    &.bg-success {
+      outline: none !important;
+
+      .titleStep {
+        color: #FFF;
+      }
+    }
+  }
+}
+
+.loteryChoice {
+  font-size: 32px;
+  cursor: pointer;
+
+  &.bg-mg {
+    background-color: #5ECE79;
+  }
+
+  &.bg-lf {
+    background-color: #8950FC;
+  }
+
+  &.bg-qn {
+    background-color: #405BA5;
+  }
+
+  &.bg-ds {
+    background-color: #F54E60;
+  }
+
+  &:hover {
+    position: relative;
+
+    &:before {
+      content: "";
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      opacity: 0.1;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+}
+
+.bolaoBuilder {
+  position: relative;
+  min-height: 350px;
+
+  .btn.dropdown-toggle {
+		line-height: 18px;
+
+    .caret {
+      display: inline-block;
+      width: 0;
+      height: 0;
+      margin-left: 2px;
+      vertical-align: middle;
+      border-bottom: 4px solid;
+      border-right: 4px solid transparent;
+      border-left: 4px solid transparent;
+      margin-bottom: 4px;
+    }
+	}
+
+  .dropdown-menu {
+    li a {
+      padding-left: 20px;
+      cursor: pointer;
+    }
+  }
+
+  .finishButton {
+    text-align: right;
+  }
+}
+
+.bolaoBuilder .numberPicker .numbersToSelectCt {
+  flex-wrap: wrap;
+}
+
+.bolaoBuilder .numberPicker .number {
+  // display: inline-block;
+  width: 30px;
+  height: 31px;
+  background-color: #FFF;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 15px;
+}
+
+.bolaoBuilder .numberPicker .number:hover {
+  background-color: #E90F67;
+  border-color: #E90F67 !important;
+  color: #FFF !important;
+}
+
+.bolaoBuilder .numberPicker .number.chosen {
+  background-color: #E90F67;
+  border-color: #E90F67 !important;
+  color: #FFF !important;
+}
+
+.bolaoBuilder .chosenNumbersCt {
+  min-height: 30px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 4px 3px;
+}
+
+.bolaoBuilder .wrapperSaving {
+  position: absolute;
+  left: 0;
+  top: 25%;
+  z-index: 8889;
+  width: 100%;
+  height: 100%;
+}
+
+.bolaoBuilder .wrapperSaving .layer {
+  z-index: 8887;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.bolaoBuilder .wrapperSaving img {
+  margin: 4% auto 0 auto;
+  width: 30%;
+  padding: 10px;
+  display: block;
+  z-index: 8889;
+  padding-bottom: 0;
+}
+
+.bolaoBuilder .wrapperSaving strong {
+  display: block;
+  margin: auto;
+  width: 17%;
+  padding: 10px;
+  color: #666;
+  z-index: 8889;
+  text-transform: uppercase;
+  font-size: 16px;
+}
+
+.bolaoGameListing .deleteGame {
+  cursor: pointer;
+}
+
+.bolaoGameListing .trGames {
+  -webkit-transition: opacity 3s ease-in-out;
+  -moz-transition: opacity 3s ease-in-out;
+  -ms-transition: opacity 3s ease-in-out;
+  -o-transition: opacity 3s ease-in-out;
+
+  opacity: 1;
+}
+
+.bolaoGameListing .listing-enter-active, .bolaoGameListing .listing-leave-active {
+  transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+}
+
+.bolaoGameListing .listing-enter, .bolaoGameListing .listing-leave-to {
+  transform: scale(0);
+  opacity: 0;
+}
+
+.progress-bar-level {
+
+  span {
+      display: block;
+      height: 5px;
+      width: 25%;
+      background-color: #fe635f;
+  }
+
+  &.level2 span {
+      width: 50%;
+      background-color: #feb45f;
+  }
+
+  &.level3 span {
+      width: 100%;
+      background-color: #54d16d;
+  }
+
+  ul {
+      list-style: circle;
+      padding-left: 1.50em;
+      margin-top: 10px;
+  }
+}
+
+.removeBolao {
+  cursor: pointer;
+}
+
+.bolaoBuilder .games-list {
+  
+  .game {
+    .slNumbers {
+      flex-flow: wrap;
+    }
+  }
+
+  tbody {
+    display: block;
+    max-height: 300px;
+  }
+
+  thead, tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+}
+
+#bolaoConfirmationModal {
+  .label {
+    width: auto;
+    height: auto;
+    border-radius: 0;
+  }
+}

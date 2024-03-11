@@ -1,0 +1,100 @@
+<?php
+
+namespace App\Http\Controllers\Adm;
+
+use App\Http\Controllers\AdmBaseController;
+use App\Http\Requests\Store{{modelName}};
+use App\Http\Requests\Update{{modelName}};
+use App\Repositories\Contracts\{{modelName}}RepositoryInterface;
+use Illuminate\Http\Request;
+
+class {{modelNamePlural}}Controller extends AdmBaseController
+{
+
+    /**
+     * Where to redirect {{modelNamePluralLowerCase}} after login.
+     *
+     * @var string
+     */
+    protected $redirectTo = '/login';
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct({{modelName}}RepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    public function index(Request $request)
+    {
+        ${{modelNamePluralLowerCase}} = $this->repository->paginate($request->all());
+
+        return view('adm.{{modelNamePluralLowerCase}}.index', compact('{{modelNamePluralLowerCase}}'));
+    }
+
+    public function create()
+    {
+        return view('adm.{{modelNamePluralLowerCase}}.create');
+    }
+
+    public function store(Store{{modelName}} $request)
+    {
+        if (! $request->validated()){
+            return back()->withErrors();
+        }
+
+        ${{modelNameSingularLowerCase}} = $this->repository->store($request->except('csrf'));
+
+        return $this->redirectWithMessage(
+            ['name' => 'adm.{{modelNamePluralLowerCase}}.edit', 'params' => [${{modelNameSingularLowerCase}}->id]]
+            ,['message' => '{{modelName}} created with success', 'type' => 'success']
+        );
+    }
+
+    public function edit($id = null)
+    {
+        ${{modelNameSingularLowerCase}} = $this->repository->find($id);
+
+        return view('adm.{{modelNamePluralLowerCase}}.edit')->with(compact('{{modelNameSingularLowerCase}}'));
+    }
+
+    public function update(Update{{modelName}} $request, $id)
+    {
+        if (! $request->validated()){
+            return back()->withErrors();
+        }
+
+        $this->repository->update($id, $request->except(['_token', '_method']));
+
+        return $this->redirectWithMessage(
+            ['name' => 'adm.{{modelNamePluralLowerCase}}.edit', 'params' => [$id]]
+            ,['message' => '{{modelName}} edited with success', 'type' => 'success']
+        );
+    }
+
+    public function delete($id = null)
+    {
+        $sessionMessage = [];
+
+        if ($id){
+            $deleted = $this->repository->delete([$id]);
+
+            $sessionMessage = [
+                'message' => 'Register deleted with success'
+                ,'type' => 'success'
+            ];
+
+            if (! $deleted){
+                $sessionMessage = [
+                    'message' => 'It wasn`t possible to delete the register'
+                    ,'type' => 'danger'
+                ];
+            }
+        }
+
+        return redirect()->route('adm.{{modelNamePluralLowerCase}}.index')->with($sessionMessage);
+    }
+}

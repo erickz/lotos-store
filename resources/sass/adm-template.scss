@@ -1,0 +1,25 @@
+//All the css from the theme
+//@import '../vendor/adm-template/css/libs/ckeditor.css';
+@import '../vendor/adm-template/css/compiled/fonts.css';
+@import '../vendor/adm-template/css/compiled/calendar.css';
+@import '../vendor/adm-template/css/compiled/wizard.css';
+@import '../vendor/adm-template/css/libs/datepicker.css';
+@import '../vendor/adm-template/css/libs/daterangepicker.css';
+@import '../vendor/adm-template/css/libs/dropzone.css';
+@import '../vendor/adm-template/css/libs/fullcalendar.css';
+@import '../vendor/adm-template/css/libs/fullcalendar.print.css';
+@import '../vendor/adm-template/css/libs/jquery-jvectormap-1.2.2.css';
+@import '../vendor/adm-template/css/libs/jquery.nouislider.css';
+@import '../vendor/adm-template/css/libs/jquery-ui.custom_ZATIAL_SA_NEPOUZIVA.css';
+@import '../vendor/adm-template/css/libs/select2.min.css';
+@import '../vendor/adm-template/css/libs/morris.css';
+@import '../vendor/adm-template/css/bootstrap/from-theme/bootstrap.css';
+@import '../vendor/adm-template/css/compiled/elements.css';
+@import '../vendor/adm-template/css/compiled/layout.css';
+
+//Font awesome
+@import '../vendor/fa/css/all.css';
+
+//My styles
+@import 'adm-custom';
+@import 'spacing';

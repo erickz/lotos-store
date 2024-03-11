@@ -1,0 +1,11 @@
+//All the css from the theme
+@import '../vendor/adm-template/css/compiled/fonts.css';
+@import '../vendor/adm-template/css/bootstrap/from-theme/bootstrap.css';
+@import '../vendor/adm-template/css/compiled/elements.css';
+@import '../vendor/adm-template/css/compiled/layout.css';
+
+//Font awesome
+@import '../vendor/fa/css/all.css';
+
+//Mine styles
+@import 'adm-custom';

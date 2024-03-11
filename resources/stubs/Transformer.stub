@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Http\Transformers;
+
+class {{classSingular}}Transformer
+{
+    /**
+     * @param array ${{classPluralLowerCase}}
+     * @param boolean $fullData
+     * @return array
+     */
+    public function transform(${{classPluralLowerCase}}, $fullData = true)
+    {
+
+        if (is_a(${{classPluralLowerCase}}, 'Illuminate\Database\Eloquent\Collection') ||
+            is_a(${{classPluralLowerCase}}, 'Illuminate\Pagination\LengthAwarePaginator'))
+        {
+            $data = [];
+
+            foreach(${{classPluralLowerCase}} as ${{classSingularLowerCase}}){
+                $data[] = $this->doTransform(${{classSingularLowerCase}});
+            }
+
+            return $data;
+        }
+
+        return $this->doTransform(${{classPluralLowerCase}});
+    }
+
+    private function doTransform(${{classSingularLowerCase}} = null)
+    {
+        $transformed = [
+            'id' => ${{classSingularLowerCase}}->id
+            ,'name' => ${{classSingularLowerCase}}->name
+        ];
+
+        return $transformed;
+    }
+}

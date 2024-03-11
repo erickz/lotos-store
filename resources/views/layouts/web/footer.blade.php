@@ -1,0 +1,26 @@
+<div class="footer bg-white py-4 d-flex flex-lg-column" id="kt_footer">
+    <!--begin::Container-->
+    <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between">
+        <!--begin::Copyright-->
+        <div class="text-dark order-2 order-md-1 copyright align-items-center">
+            <a href="#" target="_blank" class="text-dark-75 text-hover-primary d-flex align-items-center">
+                <i class="icon icon-logo d-flex me-2"></i>
+                <div>
+                    <span class="d-block"><b>{{ env('APP_NAME') }}</b> - 2023</span>
+                </div>
+            </a>
+        </div>
+        <!--end::Copyright-->
+        <!--begin::Nav-->
+        <div class="nav nav-dark order-1 order-md-2">
+            <a href="{{ route('web.loteries.megasena') }}" class="nav-link pr-3 pl-0">Mega Sena</a>
+            <a href="{{ route('web.loteries.lotofacil') }}" class="nav-link pr-3 pl-0">Lotofácil</a>
+            <a href="{{ route('web.loteries.quina') }}" class="nav-link pr-3 pl-0">Quina</a>
+            <a href="{{ route('web.loteries.duplasena') }}" class="nav-link pr-3 pl-0">Dupla Sena</a>
+            <a href="{{ route('web.blog.index') }}" class="nav-link pr-3 pl-0">Blog</a>
+            <a href="{{ route('web.staticPages.faq') }}" class="nav-link pr-3 pl-0">FAQ</a>
+            <a href="{{ route('web.staticPages.about') }}" class="nav-link pr-3 pl-0">Sobre nós</a>
+            <a href="{{ route('web.staticPages.contact') }}" class="nav-link pl-3 pr-0">Contato</a>
+        </div>
+        <!--end::Nav-->
+</div><!-- /footer -->

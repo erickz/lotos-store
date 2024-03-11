@@ -1,0 +1,8 @@
+{
+    "(and :count more error)": "(e mais :count erro)",
+    "(and :count more errors)": "(e mais :count erros)",
+    "Showing": "Exibindo",
+    "to": "de",
+    "of": "de",
+    "results": "resultados"
+}

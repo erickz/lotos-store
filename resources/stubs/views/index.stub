@@ -1,0 +1,41 @@
+@extends('layouts.adm.adm')
+
+@section('titlePage', '{{modelNamePlural}} - Index')
+
+@section('content')
+
+<div class="col-md-10" id="content-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="clearfix">
+                <h1 class="pull-left">{{modelNamePlural}}</h1>
+
+                <div class="pull-right top-page-ui">
+                    @if (auth()->user()->can('create-{{modelNamePluralLowerCase}}'))
+                    <a href="{{ route('adm.{{modelNamePluralLowerCase}}.create') }}" class="btn btn-primary pull-right">
+                        <i class="fas fa-plus-circle"></i> Add {{modelNameSingularLowerCase}}
+                    </a>
+                    @endif
+                </div>
+            </div>
+
+            @include('adm.elements.alert')
+
+            <div class="row">
+                <div class="col-lg-12">
+                    @if(${{modelNamePluralLowerCase}}->count() <= 0)
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle fa-fw fa-lg"></i> Não há {{modelNamePluralLowerCase}} serem exibidos
+                    </div>
+                    @else
+                    @include('adm.{{modelNamePluralLowerCase}}.listing')
+                    @endif
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@endsection

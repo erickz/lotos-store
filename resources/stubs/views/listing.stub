@@ -1,0 +1,63 @@
+<div class="main-box clearfix">
+    <div class="table-responsive">
+        <table class="table customer-list">
+            <thead>
+            <tr>
+                <th><span>Name</span></th>
+                <th><span>Email</span></th>
+                <th><span>Created</span></th>
+                <th class="text-center"><span>Status</span></th>
+                <th>&nbsp;</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            @foreach (${{modelNamePluralLowerCase}} as ${{modelNameSingularLowerCase}})
+            <tr>
+                <td>
+                    @if (auth()->user()->can('update-{{modelNamePluralLowerCase}}'))
+                    <a href="{{ route('adm.{{modelNamePluralLowerCase}}.edit', [ ${{modelNameSingularLowerCase}}->id ]) }}" class="user-link">
+
+                    </a>
+                    @else
+
+                    @endif
+                </td>
+                <td>
+                    @if (auth()->user()->can('update-{{modelNamePluralLowerCase}}'))
+                    <a href="{{ route('adm.{{modelNamePluralLowerCase}}.edit', [ ${{modelNameSingularLowerCase}}->id ]) }}" class="user-link">
+
+                    </a>
+                    @else
+
+                    @endif
+                </td>
+                <td>
+                    {{ ${{modelNameSingularLowerCase}}->getCreatedAtFormatted() }}
+                </td>
+                <td style="width: 20%;">
+                    @if (auth()->user()->can('update-{{modelNamePluralLowerCase}}'))
+                    <a href="{{ route('adm.{{modelNamePluralLowerCase}}.edit', [${{modelNameSingularLowerCase}}->id]) }}" class="table-link">
+                                                        <span class="fa-stack">
+                                                            <i class="fa fa-square fa-stack-2x"></i>
+                                                            <i class="fas fa-pen fa-stack-1x fa-inverse"></i>
+                                                        </span>
+                    </a>
+                    @endif
+
+                    @if (auth()->user()->can('delete-{{modelNamePluralLowerCase}}'))
+                    <a href="{{ route('adm.{{modelNamePluralLowerCase}}.destroy', [${{modelNameSingularLowerCase}}->id]) }}" class="table-link danger">
+                                                            <span class="fa-stack">
+                                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                                <i class="fas fa-trash fa-stack-1x fa-inverse"></i>
+                                                            </span>
+                    </a>
+                    @endif
+                </td>
+            </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
+    {{ ${{modelNamePluralLowerCase}}->links() }}
+</div>

@@ -1,0 +1,26 @@
+@extends('layouts.web.web')
+
+@section('titlePage', 'Perguntas Frequentes - Encontre Respostas Rápidas')
+@section('descriptionPage', 'Descubra informações sobre nossos serviços, como comprar cotas, vender bolões online e muito mais. Confira agora!')
+
+@section('content')
+
+<!--begin::Entry-->
+<!--begin::Entry-->
+<div class="mt-5">
+    <!--begin::Container-->
+    <div class="p-5 container">
+        <h1 class='ps-0 mb-0 text-secondary'>FAQ</h1>
+
+        <div class='w-100 mt-5'>
+            <div class='bg-white p-5 col-md-12 rounded'>
+                @include('web.faq_container', ['allFaq' => true])
+            </div>  
+        </div>
+
+        @include('web.boxes_to_action')
+
+    </div><!--end::Container-->
+</div><!--end::Entry-->
+
+@endsection
