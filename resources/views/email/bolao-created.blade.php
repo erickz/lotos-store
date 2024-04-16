@@ -25,13 +25,10 @@
                             <b>Valor por Cota:</b> R${{ number_format($bolaoData['price'], 2, ',', '.') }}
                         </p>
                         <p>
-                            Agora é a hora de colocar a estratégia em ação! Acesse o painel do cliente e doe cotas do seu bolão para quantos amigos quiser!
-                        </p>
-                        <p>
                             <a href='{{ route("web.customers.bets") }}'>Clique aqui para ver suas apostas</a>
                         </p>
                         <p>
-                            Se você tiver alguma dúvida ao longo do caminho ou precisar de assistência, nossa equipe de suporte está sempre à disposição para ajudar. Aproveite cada momento, aumente suas chances e prepare-se para a possibilidade de uma emocionante vitória!
+                            Se tiver alguma dúvida, não hesite em entrar em contato com nossa equipe de suporte.
                         </p>
                         <p>
                             Boa sorte!

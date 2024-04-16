@@ -6,7 +6,7 @@
             <a href="#" target="_blank" class="text-dark-75 text-hover-primary d-flex align-items-center">
                 <i class="icon icon-logo d-flex me-2"></i>
                 <div>
-                    <span class="d-block"><b>{{ env('APP_NAME') }}</b> - 2023</span>
+                    <span class="d-block"><b>{{ env('APP_NAME') }}</b> - 2024</span>
                 </div>
             </a>
         </div>
@@ -20,7 +20,6 @@
             <a href="{{ route('web.blog.index') }}" class="nav-link pr-3 pl-0">Blog</a>
             <a href="{{ route('web.staticPages.faq') }}" class="nav-link pr-3 pl-0">FAQ</a>
             <a href="{{ route('web.staticPages.about') }}" class="nav-link pr-3 pl-0">Sobre nós</a>
-            <a href="{{ route('web.staticPages.contact') }}" class="nav-link pl-3 pr-0">Contato</a>
         </div>
         <!--end::Nav-->
 </div><!-- /footer -->

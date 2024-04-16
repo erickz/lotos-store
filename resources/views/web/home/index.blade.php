@@ -6,7 +6,7 @@
 @section('content')
 
 <div class='bannerHomepage text-center' style='background-color: #202020'>
-    <img data-src='{{ asset("img/banner-black-friday.jpeg") }} ' class='w-100 max-w-1000px unveil'/>
+    <img data-src='{{ asset("img/banner-home.png") }} ' class='w-100 unveil'/>
 </div><!-- /col-lg-12 -->
 
 <div class='d-flex flex-column'>
@@ -21,10 +21,12 @@
                 <div class='bg-info p-5 me-2 text-white stepByStepHome position-relative col'>
                     <div class='titleStep d-flex flex-column mb-5'>
                         <span class='numberStep me-2'>0<b>1</b></span> 
-                        <span class='titleName'><b>Monte suas apostas</b></span>
+                        <span class='titleName'><b>Crie sua conta</b></span>
                     </div>
                     <div>
-                        Escolha suas dezenas da sorte, monte seu bolão e <b>aposte sem sair de casa.</b>
+                        <a class='cursor-pointer text-white' data-toggle="modal" data-target="#registerModal">
+                            <b>Crie sua conta grátis</b>
+                        </a> e comece a participar
                     </div>
                     <!-- <div class='iconHolder'>
                         <i class='fas fa-receipt text-white'></i>
@@ -33,10 +35,10 @@
                 <div class='bg-secondary text-info3 p-5 me-2 stepByStepHome position-relative col'>
                     <div class='titleStep d-flex flex-column mb-5'>
                         <span class='numberStep me-2'>0<b>2</b></span> 
-                        <span class='titleName'><b>Venda ou Compartilhe seu Bolão</b></span>
+                        <span class='titleName'><b>Adquira Cotas</b></span>
                     </div>
                     <div>
-                        Venda as cotas do seu Bolão no nosso site afim de maximizar seus ganhos! Você pode também <b>doar cotas para quantos amigos quiser</b>.
+                        Confira a lista de Bolões, escolha o seu favorito e compre a quantidade de cotas desejada
                     </div>
                     <!-- <div class='iconHolder'>
                         <i class='fas fa-share-alt text-gray'></i>
@@ -60,7 +62,7 @@
                         <span class='titleName'><b>Remunerações</b></span>
                     </div>
                     <div>
-                        Ao final do concurso, o criador do bolão receberá <b>a receita das cotas vendidas</b> enquanto a premiação das apostas será distribuída <b>de forma justa e proporcional as cotas de cada participantes.</b>
+                        Ao final do concurso, o valor da premiação será distribuído de <b>de forma justa e proporcional as cotas de cada participantes.</b>
                     </div>
                     <!-- <div class='iconHolder'>
                         <i class='fas fa-hand-holding-usd text-gray'></i>
@@ -89,23 +91,23 @@
             <div class="d-flex justify-content-between d-flex-responsive">
                 <div class='bg-success text-white p-5 me-2 col benefitCard'>
                     <div class='d-flex align-items-center'>
-                        <div class='iconStep me-5'><i class='fas text-white fa-coins'></i></div>
+                        <div class='iconStep me-5'><i class='fas text-white fa-star'></i></div>
                         <div>
-                            <h2 class='ps-0 mb-0 pb-2'><b>Aposta lucrativa</b></h2>
+                            <h2 class='ps-0 mb-0 pb-2'><b>Aumente suas chances</b></h2>
                             <div>
-                                Ganhe até <b>45% de lucro</b> com seus bolões! Aqui você <b>ganha pela venda de cada cota</b> do seu bolão, e ao vender todas elas você não apenas cobre os custos como também <b>lucra com as vendas!</b>
+                                Maximize seus ganhos! Adquira as cotas de um bolão e tenha <b>muito mais chances de ganhar!</b>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class='bg-secondary text-info3 p-5 me-2 col benefitCard'>
                     <div class='d-flex align-items-center'>
-                        <div class='iconStep me-5'><i class='fas text-info3 fa-check-double'></i></div>
+                        <div class='iconStep me-5'><i class='fas text-info3 fa-chart-line'></i></div>
 
                         <div>
-                            <h2 class='ps-0 mb-0 pb-2'><b>Ganhe até 2 vezes!</b></h2>
+                            <h2 class='ps-0 mb-0 pb-2'><b>Bolões estratégicos!</b></h2>
                             <div>
-                                Na {{ env("APP_NAME") }} <b>você pode ganhar duas vezes!</b> A primeira na <b>venda de suas cotas</b> e a segunda <b>ao ser premiado!</b>
+                                Oferecemos bolões cuidadosamente elaborados, <b>baseados em análises estatísticas e estratégias de jogo.</b>
                             </div>
                         </div>
                     </div>

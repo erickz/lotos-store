@@ -21,7 +21,7 @@
                             <b>Data da Compra:</b> {{ $dataBuy }} <br />
                         </p>
                         <p>
-                            <a href='{{ route("web.boloes.create") }}'>Clique aqui e crie um bolão</a> ou <a href='{{ route("web.boloes.listing") }}'>Clique aqui para comprar cotas</a>
+                            <a href='{{ route("web.boloes.listing") }}'>Clique aqui e adquira cotas de Bolões estratégicos</a>!
                         </p>
                         <p>
                             Se tiver alguma dúvida ou precisar de assistência, nossa equipe de suporte está sempre à disposição para ajudar.

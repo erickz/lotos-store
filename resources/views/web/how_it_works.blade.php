@@ -63,15 +63,15 @@ Aproveite nossa plataforma intuitiva e comece a apostar ou vender seus bolões h
                         </div>
                     </div>
                     <div class='titleStep mb-5 text-center'>
-                        <span class='titleName text-primary'><b>Monte seus jogos</b></span>
+                        <span class='titleName text-primary'><b>Adquira cotas</b></span>
                     </div>
                     <div class='text-primary text-center'>
-                        Na <a href='{{ route("web.boloes.create") }}' class=''><u>criação de bolão</u></a> você monta suas apostas ou <b>gera jogos otimizados</b> com nossa ferramenta. 
+                        Na <a href='{{ route("web.boloes.listing") }}' class=''><u>listagem de bolões</u></a> selecione o grupo que mais te interessa e compre suas cotas
                     </div>
                 </div>
             </div>
             <div class="stepByStepCt howItWorksSteps mt-2 d-flex justify-content-between d-flex-responsive">
-                <div class='text-white p-5 pt-8 me-2 stepByStepHome shadow-sm rounded position-relative col'>
+                <!-- <div class='text-white p-5 pt-8 me-2 stepByStepHome shadow-sm rounded position-relative col'>
                     <div class='d-flex justify-content-center'>
                         <div class='numberStep mt-1 text-center'>
                             <span class='rounded display-5 rounded-circle bg-primary p-2 px-6 me-2'><b>4</b></span> 
@@ -88,11 +88,11 @@ Aproveite nossa plataforma intuitiva e comece a apostar ou vender seus bolões h
                         Venda as cotas do seu Bolão na nossa plataforma afim de maximizar seus ganhos.
                         Você pode também <b>doar cotas para quantos amigos quiser!</b>
                     </div>
-                </div>
+                </div> -->
                 <div class='p-5 pt-8 me-2 text-white stepByStepHome shadow-sm rounded position-relative col'>
                     <div class='d-flex justify-content-center'>
                         <div class='numberStep mt-1 text-center'>
-                            <span class='rounded display-5 rounded-circle bg-primary p-2 px-6 me-2'><b>5</b></span> 
+                            <span class='rounded display-5 rounded-circle bg-primary p-2 px-6 me-2'><b>4</b></span> 
                         </div>
                         
                         <div class='stepIcon text-center'>
@@ -103,13 +103,13 @@ Aproveite nossa plataforma intuitiva e comece a apostar ou vender seus bolões h
                         <span class='titleName text-primary'><b>Conferência automática</b></span>
                     </div>
                     <div class='text-primary text-center'>
-                        Após o concurso ser realizado, a {{ env("APP_NAME") }} realiza a conferência de todas as apostas automaticamente.
+                        Após o concurso ser realizado, a {{ env("APP_NAME") }} realiza a conferência de todas as apostas automaticamente - <b>de forma eficiente e segura</b>
                     </div>
                 </div>
                 <div class='text-white p-5 pt-8 me-2 stepByStepHome shadow-sm rounded position-relative col'>
                     <div class='d-flex justify-content-center'>
                         <div class='numberStep mt-1 text-center'>
-                            <span class='rounded display-5 rounded-circle bg-primary p-2 px-6 me-2'><b>6</b></span> 
+                            <span class='rounded display-5 rounded-circle bg-primary p-2 px-6 me-2'><b>5</b></span> 
                         </div>
                         
                         <div class='stepIcon text-center'>
@@ -120,8 +120,24 @@ Aproveite nossa plataforma intuitiva e comece a apostar ou vender seus bolões h
                         <span class='titleName text-primary'><b>Premiações</b></span>
                     </div>
                     <div class='text-primary text-center'>
-                        Cada participante será premiado proporcionalmente a quantidade de cotas que possuir, enquanto o criador do bolão será remunerado pelas vendas das cotas 
-                        - e caso possua cotas do bolão também será premiado.
+                        Cada participante será premiado proporcionalmente a quantidade de cotas que possuir, <b>quantos mais cotas tiver maior será a premiação recebida</b>
+                    </div>
+                </div>
+                <div class='text-white p-5 pt-8 me-2 stepByStepHome shadow-sm rounded position-relative col'>
+                    <div class='d-flex justify-content-center'>
+                        <div class='numberStep mt-1 text-center'>
+                            <span class='rounded display-5 rounded-circle bg-primary p-2 px-6 me-2'><b>6</b></span> 
+                        </div>
+                        
+                        <div class='stepIcon text-center'>
+                            <i class='display-2 fas fa-reply-all text-primary'></i>
+                        </div>
+                    </div>
+                    <div class='titleStep mb-5 text-center'>
+                        <span class='titleName text-primary'><b>Solicite o saque</b></span>
+                    </div>
+                    <div class='text-primary text-center'>
+                        Na página de <a href="<?php route('web.customers.rescue') ?>"><u>resgate de créditos</u></a>, solicite o <b>saque da sua premiação</b>
                     </div>
                 </div>
             </div>

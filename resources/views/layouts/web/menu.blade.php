@@ -5,13 +5,6 @@
             <i class="menu-arrow"></i>
         </a>
     </li>
-    <li class="menu-item menu-item-submenu menu-item-rel {{ request()->routeIs('web.loteries.megasenaSpecial') ? 'menu-item-open menu-item-here' : '' }}" data-menu-toggle="click" aria-haspopup="true">
-        <a href="{{ route('web.loteries.megasenaSpecial') }}" class="menu-link">
-            <span class="menu-text">Mega da Virada</span>
-            <span class="menu-desc"></span>
-            <i class="menu-arrow"></i>
-        </a>
-    </li>
     <li class="menu-item menu-item-submenu menu-item-rel {{ request()->routeIs('web.boloes.listing') || request()->routeIs('web.boloes.listingByLot') || request()->routeIs('web.boloes.listing_all') || request()->routeIs('web.boloes.customer') ? 'menu-item-open menu-item-here' : '' }}" data-menu-toggle="click" aria-haspopup="true">
         <a href="{{ route('web.boloes.listing') }}" class="menu-link">
             <span class="menu-text">Bolões</span>
