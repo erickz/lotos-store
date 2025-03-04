@@ -1,15 +1,15 @@
-<div class="bolaoBuilder mt-10 col-md-12" data-color='{{ $lotery->getColorClass() }}' data-loto-alias="{{ strtolower($lotery->initials) }}" data-costs='{{ $lotery->getCostsJson() }}' data-biggestnumber='{{ $lotery->biggest_number }}' data-minnumber='{{ $lotery->min_numbers }}' data-maxnumber='{{ $lotery->max_numbers }}'>
-    <h1 class='ps-0 mb-5 text-{{ $lotery->getColorClass() }}'><b>Criar Bolão: {{ $lotery->name }}</b></h1>
+<div class="bolaoBuilder text-center mt-10 col-md-12" data-color='{{ $lotery->getColorClass() }}' data-loto-alias="{{ strtolower($lotery->initials) }}" data-costs='{{ $lotery->getCostsJson() }}' data-biggestnumber='{{ $lotery->biggest_number }}' data-minnumber='{{ $lotery->min_numbers }}' data-maxnumber='{{ $lotery->max_numbers }}'>
+    <h1 class='ps-0 mb-5'><b>Novo Bolão da {{ $lotery->name }}</b></h1>
 
     @csrf
 
     <div class=''>
-        <div class='alert alert-light ms-0'><i class='fas fa-info-circle me-2 text-primary'></i> Gere seus jogos ou selecione seus números da sorte para criar seu bolão. <b class='color-default'>Boa sorte!</b></div>
+        <div class='alert alert-light ms-0'><i class='fas fa-info-circle me-2 text-primary'></i> Selecione seus números da sorte e crie um Bolão <b>(o valor mínimo é R$45,00)</b></div>
 
-        <div class='d-flex d-flex-responsive justify-content-between mt-4'>
+        <div class='d-flex d-flex-responsive justify-content-center mt-4'>
 
-            <div class='generateNumbersCt mt-4'>
-                <h3 class='ps-0 border-0 mb-4 text-start'><b>Gerar jogos</b></h3>
+            <div class='generateNumbersCt mt-4 border border-dash p-4 me-10'>
+                <h3 class='ps-0 border-0 mb-4 text-start'><b>Quero gerar jogos automáticamente</b></h3>
                 <div class='d-flex justify-content-start align-items-center'>
                     <div class='slHolder max-w-80px'>
                         <select class='form-control numbersDozens'>
@@ -41,8 +41,8 @@
                 </div>
             </div>
 
-            <div class="numberPicker col-md-5 pe-0 ps-0 text-center mt-4 mb-2">
-                <h3 class='ps-0 border-0 mb-4 text-start'><b>Monte seu jogo</b></h3>
+            <div class="numberPicker col-md-5 text-center mt-4 mb-2 border border-dash p-4">
+                <h3 class='ps-0 border-0 mb-4 text-start'><b>Quero selecionar meus números</b></h3>
                 <div class="statsCt chosenNumbersCt p-0 mt-8 mb-5 pb-2">
                     <div class='container ps-0 pe-0 mb-3'>
                         <div class='row'>
@@ -98,9 +98,9 @@
                 </div>
                 <div class='btCt mt-3 d-flex align-items-center'>
                     <div class="btn btn-success addBolao me-1">
-                        <strong class='d-block'><i class="fas fa-plus-circle fa-lg"></i> Adicionar</strong>
+                        <strong class='d-block'><i class="fas fa-plus-circle fa-lg"></i> Adicionar Números</strong>
                     </div>
-                    <div class="btn btn-warning cleanBolao">
+                    <div class="btn btn-secondary cleanBolao">
                         <strong class='d-block'><i class="fas fa-broom fa-lg"></i> Limpar</strong>
                     </div>
                 </div>
@@ -108,9 +108,10 @@
         </div>
     </div>
 
-    <div class='mt-5 listBets'>
-        <h2 class='ps-4'>Apostas 
+    <div class='mt-10 listBets'>
+        <h2 class='ps-4'><b>Apostas 
             <span class='qtGames'>(0)</span>
+            </b>
         </h2>
         <div class='lblHolder mb-2'>
             <b class='text-primary'>Seu bolão tem <i class='label label-inline label-primary font-larger px-2 chancesTg'><b>MAIS CHANCES</b></i> de ganhar!</b>
@@ -136,7 +137,7 @@
 
                 <span class='me-3'><strong>Valor mínimo:</strong> R$45,00</span>
                 <button type='submit' class="btn-submit btn btn-success ml-2">
-                    Prosseguir <i class="fas fa-chevron-right fa-lg ms-2"></i>
+                    <b>Finalizar <i class="fas fa-chevron-right fa-lg ms-2"></i></b>
                 </button>
             </form>
         </div>

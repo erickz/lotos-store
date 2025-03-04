@@ -13,17 +13,14 @@
     <div class="container">
         <div class="col-lg-12">
             <div class="main-box clearfix">
-                <h1 class='ps-0 mb-8 text-primary'>Meus bolões</h1>
+                <h1 class='ps-0 mb-8 text-primary'><b>Meus Bolões</b></h1>
 
-                @include('web.customers.menu')
+                {{-- @include('web.customers.menu') --}}
                 
                 <div class="row mt-5 mybets">
                     @include('web.includes.alert')
 
-                    <div class='col-lg-12'>
-                        <div class='badge badge-pill bg-info me-2'>
-                            <b>Meus créditos:</b> {{ auth()->guard('web')->user()->getFormattedCredits() }}
-                        </div>
+                    <div class='col-lg-12 p-0'>
                         <div class='d-flex align-items-left'>
                             @if($boloes->count() > 0)
                                 <a href='{{ route("web.boloes.customer", [ auth()->guard("web")->user()->id ]) }}' class="btn btn-info mt-2 mb-2 me-2 previewBoloesPage">
@@ -33,7 +30,7 @@
                                     </strong>
                                 </a>
                             @endif
-                            <a href="{{ route('web.boloes.create') }}" class="{{ $boloes->count() <= 0 ? 'ms-auto' : '' }} mt-2 mb-2 btn btn-success createBolao"><strong>+ Criar Bolão</strong></a>
+                            <a href="{{ route('web.boloes.create') }}" class="{{ $boloes->count() <= 0 ? 'ms-auto' : '' }} mt-2 mb-2 me-2 btn btn-success createBolao"><strong>+ Criar Bolão</strong></a>
                         </div>
                         
                         <div class='b-table mt-3'>
@@ -41,7 +38,7 @@
                                 <table class='table table-white is-fullwidth is-striped is-hoverable text-center'>
                                     <thead>
                                         <tr>
-                                            <td>#</td>
+                                            <!-- <td>#</td> -->
                                             <td>Loteria</td>
                                             <td>Concurso</td>
                                             <td>Nome</td>
@@ -55,12 +52,12 @@
                                     <tbody>
                                         @if($boloes->count() <= 0)
                                             <tr>
-                                                <td class='text-center' colspan='9'>Você ainda não fez nenhum bolão. <a href='{{ route("web.boloes.create") }}' class='text-info'><ins>Crie um agora</ins></a> e convide seus amigos para jogar com você!</td>
+                                                <td class='text-center' colspan='9'>Você ainda não fez nenhum bolão.</td>
                                             </tr>
                                         @else
                                             @foreach($boloes as $bolao)
                                                 <tr>
-                                                    <td data-label='Id' class="align-middle">#{{ $bolao->id }}</td>
+                                                    {{-- <td data-label='Id' class="align-middle">#{{ $bolao->id }}</td> --}}
                                                     <td data-label='Loteria' class="align-middle">{!! $bolao->lotery->getLabelInitials() !!}</td>
                                                     <td data-label='Concurso' class="align-middle">
                                                         <b>Nº {{ $bolao->concurso->number }}

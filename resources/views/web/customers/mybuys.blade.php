@@ -14,21 +14,14 @@
         <div class="col-lg-12">
             <div class="main-box clearfix">
 
-                <h1 class='ps-0 mb-8 text-primary'>Lista de cotas compradas</h1>
+                <h1 class='ps-0 mb-8 text-primary'><b>Minhas compras</b></h1>
 
-                @include('web.customers.menu')
+                {{-- @include('web.customers.menu') --}}
                 
                 <div class="row mt-5 mybets">
                     @include('web.includes.alert')
                     
-                    <div class='col-lg-12'>
-                        <div class='d-flex align-items-center'>
-                            <div class='badge badge-pill bg-info'>
-                                <b>Meus créditos:</b> {{ auth()->guard('web')->user()->getFormattedCredits() }}
-                            </div>
-                            <a href="{{ route('web.boloes.create') }}" class="createBolao ms-auto btn btn-success"><strong>+ Criar Bolão</strong></a>
-                        </div>
-                        
+                    <div class='col-lg-12 p-0'>                        
                         <div class='b-table mt-3'>
                             <div class='bg-white rounded table-responsive-lg table-wrapper has-mobile-cards'>
                                 <table class='table table-white is-fullwidth is-striped is-hoverable text-center'>
@@ -47,7 +40,7 @@
                                     <tbody>
                                         @if($boloesBought->count() <= 0)
                                             <tr>
-                                                <td class='text-center' colspan='9'>Você ainda não fez nenhuma compra. <a href='{{ route("web.boloes.listing") }}' class='text-info'><ins>Visite nossa página de bolões</ins></a></td>
+                                                <td class='text-center' colspan='9'>Você ainda não fez nenhuma compra.</td>
                                             </tr>
                                         @else
                                             @foreach($boloesBought as $bolaoBought)

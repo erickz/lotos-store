@@ -31,7 +31,7 @@
         <title>{{ request()->routeIs('web.home') ? '' : env('APP_NAME') . ' -' }} @yield('titlePage')</title>
         <meta name="description" content="@yield('descriptionPage', 'Nunca foi tão lucrativo apostar nas loterias online! Aposte de casa nas loterias mais populares do Brasil e venha vender seus bolões online!')">
 
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
         <link href="{{ asset('css/web.css') }}" type="text/css" rel="stylesheet" />
 
         <!-- Favicon -->
@@ -45,29 +45,8 @@
         <![endif]-->
 
         @stack('styles')
-
-        <!-- Meta Pixel Code -->
-        <script>
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '306615862098235');
-        fbq('track', 'PageView');
-        </script>
-        <noscript><img height="1" width="1" style="display:none"
-        src="https://www.facebook.com/tr?id=306615862098235&ev=PageView&noscript=1"
-        /></noscript>
-        <!-- End Meta Pixel Code -->
-
-        @include('facebook-pixel::head')
     </head>
-    <body id="kt_body" style="background-image: url('/img/1-px-white.png'); " class="quick-panel-right offcanvas-right header-fixed subheader-enabled">        
-        @include('facebook-pixel::body')
+    <body id="kt_body" class="quick-panel-right offcanvas-right header-fixed subheader-enabled">        
 
         <div class='menu-mobile'>
             <div class='p-5 pb-0'>
@@ -94,8 +73,6 @@
                 @else
                     <div class="topbar-item me-5 responsive-item">
                         <ul>
-                            <li class='mt-2'><a class='p-0' href='{{ route("web.customers.mybuys") }}' class='text-primary'><i class='fa fa-user me-4 text-primary'></i>Meu painel</a></li>
-                            <li class='mt-2'><a class='p-0' href='{{ route("web.customers.bets") }}' class='text-primary'><i class='fa fa-list-ol me-4 text-primary'></i>Minhas Apostas</a></li>
                             <li class='mt-2'><a class='p-0' href='{{ route("web.cart") }}' class='text-primary'><i class='fa fa-shopping-cart me-3 text-primary'></i>Carrinho</a></li>
                             <li class='mt-2'><a class='p-0' href='{{ route("web.customers.logout") }}' class='text-primary'><i class='fa fa-sign-out-alt me-3 text-primary'></i>Sair</a></li>
                         </ul>
@@ -108,7 +85,7 @@
                 <a class='fa fa-bars menuMobileTrigger'></a>
                 <!--begin::Logo-->
                 <a href="/" class='d-flex flex-column align-self-center'>
-                    <img alt="Logo LotosFácil" title="LotosFácil" src="{{ asset('img/logo-lotos-facil.png') }}" class="max-h-60px">
+                    <img alt="Logo LotosFácil" title="LotosFácil" src="{{ asset('img/logo-lotos-online.png') }}" class="max-h-60px">
                 </a>
                 <!--end::Logo-->
                 @include('layouts.web.header-toolbar')

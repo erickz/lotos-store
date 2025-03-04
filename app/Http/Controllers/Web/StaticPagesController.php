@@ -9,6 +9,7 @@ use App\Repositories\Contracts\BolaoRepositoryInterface;
 
 use Mail;
 use App\Mail\ContactMail;
+use App\Mail\PlatformRequestMail;
 use App\Models\Lotery;
 use App\Models\Blog;
 use App\Models\BolaoSuggestion;
@@ -105,5 +106,26 @@ class StaticPagesController extends WebBaseController
         SitemapGenerator::create(secure_url('/'))->writeToFile($filePath);
 
         return response()->download($filePath);
+    }
+
+    public function platform()
+    {
+        return view('web.platform');
+    }
+
+    public function sendEmailPlatform(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email'
+        ]);
+        
+        if (! $validated){
+            return response()->json(['message' => 'Não foi possível enviar o formulário', 'error' => 1]);
+        }
+
+        Mail::to('erickcmiguel@gmail.com')->send(new PlatformRequestMail(['name' => $request->get('name'), 'email' => $request->get('email'), 'message' => $request->get('message')]));
+
+        return response()->json(['message' => 'Email enviado com sucesso!', 'error' => 0]);
     }
 }

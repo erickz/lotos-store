@@ -16,9 +16,7 @@ $(window).load(function(){
                     e.preventDefault();
 
                     var dataForm = $this.serializeArray();
-                    console.log(dataForm[0]);
                     dataForm._token = $('meta[name="csrf-token"]').attr('content');
-                    console.log(dataForm[0]);
 
                     $.ajax({
                         url: url,
@@ -154,7 +152,6 @@ $(window).load(function(){
                     var totalPriceFormatted = (new Intl.NumberFormat('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}).format(totalPrice));                    
                     var classColorText = '';
 
-                    console.log(creditsUserCt.length);
                     if (creditsUserCt.length > 0 && creditsUser < totalPrice){
                         classColorText = 'text-danger';
                     }
@@ -615,7 +612,6 @@ $(window).load(function(){
                 menuMobileCt.css('display', 'block');
             }
             else {
-                console.log("E");
                 body.removeClass('bodyShadow');
                 menuMobileCt.animate({
                     opacity: 0

@@ -1,6 +1,6 @@
 /* ADM LAYOUT */
 html, body {
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Montserrat', sans-serif;
 	-webkit-font-smoothing: antialiased;
 }
 body {
@@ -8,7 +8,7 @@ body {
 	background: #363636;
 }
 h1, h2, h3, h4, h5, h6 {	
-    font-family: 'Titillium Web', Geneva, sans-serif;
+    /* font-family: 'Titillium Web', Geneva, sans-serif; */
     font-weight: 400;
 }
 h1 {
@@ -312,7 +312,7 @@ blockquote.pull-right:before {
 
 .navbar > .container .navbar-brand {
 	color: #FFFFFF;
-    font-family: 'Titillium Web',Geneva,sans-serif;
+    /* font-family: 'Titillium Web',Geneva,sans-serif; */
     font-weight: 700;
     margin-left: 5px;
 }

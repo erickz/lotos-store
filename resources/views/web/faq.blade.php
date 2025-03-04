@@ -10,7 +10,7 @@
 <div class="mt-5">
     <!--begin::Container-->
     <div class="p-5 container">
-        <h1 class='ps-0 mb-0 text-secondary'>FAQ</h1>
+        <h1 class='ps-0 mb-0 text-secondary'><b>FAQ</b></h1>
 
         <div class='w-100 mt-5'>
             <div class='bg-white p-5 col-md-12 rounded'>
@@ -18,8 +18,7 @@
             </div>  
         </div>
 
-        @include('web.boxes_to_action')
-
+        @include('web.call-to-action-contact')
     </div><!--end::Container-->
 </div><!--end::Entry-->
 

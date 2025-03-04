@@ -14,13 +14,13 @@
     <div class="container">
         <div class="col-lg-12">
             <div class="main-box clearfix">
-                <h1 class='ps-0 mb-8 text-primary'>Resgatar créditos</h1>
+                <h1 class='ps-0 mb-8 text-primary'><b>Resgatar créditos</b></h1>
 
-                @include('web.customers.menu')
+                {{-- @include('web.customers.menu') --}}
                 
                 <div class="row profile-user-info mt-4">
                     <div class='col-lg-12 mb-5 border-bottom'>
-                        <div class='alert alert-light'><i class='fas fa-info-circle me-2 text-primary'></i>Para solicitar o saque dos seus créditos basta enviar a sua chave pix e o valor desejado que iremos realizar a operação em até 48h</div>
+                        <div class='alert alert-light'><i class='fas fa-info-circle me-2 text-primary'></i>Para solicitar o saque dos seus créditos basta enviar a sua chave pix e o valor desejado no formulário e aguardar até a transação ser realizada</div>
 
                         <form id='EditForm' data-url="{{ route('web.customers.rescueSave') }}" method="POST" class="form form-ajax pt-2 pb-5" redirect='1'>
                             {{ csrf_field() }}

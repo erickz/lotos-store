@@ -25,17 +25,35 @@ Compartilhe e venda suas apostas, maximize as possibilidades e celebre prêmios.
                                 <div class="text-primary d-inline">Confirme as opções desejadas e finalize o bolão</div>
                             </div>
                             <div class='mb-5'>
-                                <h2>Resumo</h2>
+                                <h2><b>Resumo</b></h2>
                             </div>
                             <div class='d-flex align-items-center mb-5'>
                                 <div class='col-4 text-end me-5'>
                                     <strong>Loteria:</strong>
                                 </div>    
                                 <div class='col-6'>
-                                    <span class=''><label class='text-{{ $lotery->getColorClass() }}'><b>{{ $lotery->name }}</b></label></span>
+                                    <span class=''><label class=''><b>{{ $lotery->name }}</b></label></span>
                                 </div>    
                             </div>
                             <div class='d-flex align-items-center mb-5'>
+                                <div class='col-4 text-end me-5'>
+                                    <strong>Número de jogos:</strong>
+                                </div>    
+                                <div class='col-6'>
+                                    <b class='qtGames'></b>
+                                </div>    
+                            </div>
+                            @if (auth()->guard('web')->check())
+                                <div class='d-flex align-items-center mt-4 mb-5'>
+                                    <div class='col-4 text-end me-5'>
+                                        <strong>Seus créditos:</strong>
+                                    </div>    
+                                    <div class='col-6'>
+                                        <b class='font-larger'>{{ auth()->guard('web')->user()->getFormattedCredits() }}</b>
+                                    </div>    
+                                </div>
+                            @endif
+                            {{-- <div class='d-flex align-items-center mb-5'>
                                 <div class='col-4 text-end me-5'>
                                     <strong>Nome do bolão:</strong> 
                                 </div>
@@ -44,7 +62,7 @@ Compartilhe e venda suas apostas, maximize as possibilidades e celebre prêmios.
                                     <input type='hidden' name='luckBird' value='{{ $luckBird }}' /><br />
                                     <small>O nome do seu bolão é gerado automaticamente com um pássaro da sorte</small>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class='d-flex align-items-center mb-5'>
                                 <div class='col-4 text-end me-5'>
                                     <strong class='d-inline'>Selecione o concurso: </strong>
@@ -151,21 +169,12 @@ Compartilhe e venda suas apostas, maximize as possibilidades e celebre prêmios.
                                     </div>    
                                 </div>
                             </div>
-                            @if (auth()->guard('web')->check())
-                                <div class='d-flex align-items-center mt-4 mb-5'>
-                                    <div class='col-4 text-end me-5'>
-                                        <strong>Seus créditos:</strong>
-                                    </div>    
-                                    <div class='col-6'>
-                                        <b class='font-larger'>{{ auth()->guard('web')->user()->getFormattedCredits() }}</b>
-                                    </div>    
-                                </div>
-                            @endif
                         </div>
 
                         <div class='mt-5 listBets'>
-                            <h3 class='ps-0'>Apostas 
-                                <label class='qtGames'>(0)</label>
+                            <h3 class='ps-0'><b>Apostas 
+                                (<label class=' '>0</label>)
+                                </b>
                             </h3>
                             <div class='lblHolder mb-4'>
                                 <b class='text-primary'>SEU BOLÃO TEM <i class='label label-inline label-primary font-larger px-2 chancesTg'><b></b></i> DE GANHAR!</b>

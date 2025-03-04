@@ -7,7 +7,7 @@
         @endif
     </a>
     <a {{ isset($lotery) ? 'href=' . route("web.boloes.create", [$lotery->initials]) : "" }} class='bolaoStep rounded p-3 me-2 bg-steps col d-flex align-items-center justify-content-between'>
-        <span class='titleStep {{ $currentMenu == 2 ? "text-primary" : "" }}'><b>02. Crie suas apostas</b></span>
+        <span class='titleStep {{ $currentMenu == 2 ? "text-primary" : "" }}'><b>02. Monte seus jogos</b></span>
 
         @if ($currentMenu == 2)
             <!-- <i class="fas fa-chevron-right iconHolder" ></i> -->

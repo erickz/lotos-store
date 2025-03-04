@@ -16,6 +16,7 @@ class ContactMail extends Mailable
     protected $message = '';
     protected $email = '';
     protected $name = '';
+    protected $reason = '';
 
     /**
      * Create a new message instance.

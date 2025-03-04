@@ -22,6 +22,10 @@ class HomeController extends WebBaseController
 
     public function index()
     {
+        if (auth()->guard('web')->check()){
+            return redirect()->route('web.customers.profile');
+        }
+        
         $boloesSelected = [];
 
         $mostPopulars = $this->repository->getSpecialBoloes($boloesSelected);

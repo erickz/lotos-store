@@ -11,7 +11,7 @@ pronta para atender você.')
 <div class="mt-5">
     <!--begin::Container-->
     <div class="p-5 container">
-        <h1 class='ps-0 mb-0 text-secondary'>Contato</h1>
+        <h1 class='ps-0 mb-0 text-secondary'><b>Contato</b></h1>
 
         <div class='row'>
             <div class='mt-5 bg-white p-5 col-md-12 rounded'>

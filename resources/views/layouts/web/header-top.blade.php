@@ -6,7 +6,7 @@
             <!--begin::Header Logo-->
             <div class="header-logo">
                 <a href="{{ route('web.home') }}">
-                    <img alt="Logo Lotos Fácil" title="Lotos Fácil" src="{{ asset('img/logo-lotos-facil.png') }}" class="max-h-75px">
+                    <img alt="Logo Lotos Fácil" title="Lotos Fácil" src="{{ asset('img/logo-lotos-online.png') }}" class="max-h-75px">
                 </a>
             </div><!--end::Header Logo-->
 

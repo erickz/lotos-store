@@ -1,6 +1,6 @@
 @extends('layouts.web.web')
 
-@section('titlePage', 'Atualizar dados pessoais')
+@section('titlePage', 'Alterar dados')
 
 @section('content')
 
@@ -13,15 +13,12 @@
     <div class="container">
         <div class="col-lg-12">
             <div class="main-box clearfix">
-                <h1 class='ps-0 mb-8 text-primary'>Atualizar dados pessoais</h1>
+                <h1 class='ps-0 mb-8 text-primary'><b>Alterar dados</b></h1>
 
-                @include('web.customers.menu')
+                {{-- @include('web.customers.menu') --}}
                 
                 <div class="row profile-user-info mt-8">
                     <div class='col-lg-12'>
-                        <div class='badge badge-pill bg-info mb-2'>
-                            <b>Meus créditos:</b> {{ auth()->guard('web')->user()->getFormattedCredits() }}
-                        </div>
                         <form id='EditForm' data-url="{{ route('web.customers.update') }}" method="POST" class="form form-ajax pt-2 pb-5" redirect='0'>
                             {{ csrf_field() }}
 

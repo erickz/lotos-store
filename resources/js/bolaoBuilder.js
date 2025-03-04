@@ -67,7 +67,7 @@ $(function(){
         var chancesTg = $('.chancesTg');
         chancesTg.html('<b>' + (nChances <= 0 ? '' : nChances + 'x') + ' mais chances</b>');
 
-        $(".qtGames").text('(' + countGames + ')');
+        $(".qtGames").text(countGames);
     }
 
     var bolaoFinalize = function()

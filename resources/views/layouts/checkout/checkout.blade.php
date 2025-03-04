@@ -74,7 +74,7 @@
                     <!--begin::Header Logo-->
                     <div class="header-logo d-flex">
                         <a href="{{ route('web.home') }}" class='text-left mt-1'>
-                            <img alt="Logo {{ env('APP_NAME') }}" title="{{ env('APP_NAME') }}" src="{{ asset('img/logo-lotos-facil-white.png') }}" class="max-h-60px">
+                            <img alt="Logo {{ env('APP_NAME') }}" title="{{ env('APP_NAME') }}" src="{{ asset('img/logo-lotos-online-white.png') }}" class="max-h-60px">
                         </a>
                         
                         <div class='ms-auto mt-2'>
@@ -91,8 +91,8 @@
 
             <div class='footer mt-5 p-5 text-center h-150px bg-info3'>
                 <div class='d-flex justify-content-center mt-7'>
-                    <h3 class='text-white'>Lotos Fácil</h3>
-                    <div class='ms-3 text-white mt-1'>- www.lotosfacil.com.br</div>
+                    <h3 class='text-white'>{{ env('APP_NAME') }}</h3>
+                <div class='ms-3 text-white mt-1'>- {{ env('APP_URL') }}</div>
                 </div>
                 <img class='securitySeal  max-h-50px' alt="Compra 100% segura" title="Compra 100% segura" src="{{ asset('img/security-seal-checkout-v2.png') }}">
             </div>

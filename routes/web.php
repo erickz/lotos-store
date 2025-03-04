@@ -77,6 +77,11 @@ Route::get('faq', ['as' => 'web.staticPages.faq', 'uses' => 'StaticPagesControll
 Route::get('termos-de-uso', ['as' => 'web.staticPages.terms', 'uses' => 'StaticPagesController@terms']);
 Route::get('contato', ['as' => 'web.staticPages.contact', 'uses' => 'StaticPagesController@contact']);
 Route::post('contato', ['as' => 'web.staticPages.contactPost', 'uses' => 'StaticPagesController@contactPost']);
+Route::get('adquire-sua-propria-plataforma', ['as' => 'web.staticPages.platform', 'uses' => 'StaticPagesController@platform']);
+Route::post('adquire-sua-propria-plataforma', ['as' => 'web.staticPages.postPlatform', 'uses' => 'StaticPagesController@sendEmailPlatform']);
+
+//
+Route::get('blog', ['as' => 'web.blog.index', 'uses' => 'BlogController@index']);
 
 //Blog
 Route::get('blog', ['as' => 'web.blog.index', 'uses' => 'BlogController@index']);
@@ -104,7 +109,7 @@ Route::middleware('auth:web')->group(function(){
     // Route::get('historico-de-creditos', ['as' => 'web.customers.creditsHistory', 'uses' => 'CustomersController@creditsHistory']);
     
     //Todo: remove this line below
-    // Route::get('meu-perfil', ['as' => 'web.customers.profile', 'uses' => 'CustomersController@myPanel']);
+    Route::get('meu-perfil', ['as' => 'web.customers.profile', 'uses' => 'CustomersController@myPanel']);
 
     Route::get('boloes/{bolaoId}/stats', ['as' => 'web.boloes.stats', 'uses' => 'BoloesController@getStats']);
     Route::get('boloes/{bolaoId}/get-invites', ['as' => 'web.boloes.getInvites', 'uses' => 'BoloesController@getInvites']);
