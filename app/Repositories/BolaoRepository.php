@@ -278,7 +278,7 @@ class BolaoRepository implements BolaoRepositoryInterface
             $query->where('boloes.lotery_id', $filters['lotery_id']);
         }
 
-        return $query->paginate(10);
+        return $query->paginate(15);
     }
 
     public function getMostPopular($exceptions = [], $loteryId = NULL)
@@ -414,5 +414,29 @@ class BolaoRepository implements BolaoRepositoryInterface
         sort($arNumbers);
 
         return $arNumbers;
+    }
+
+    public function priceIsValid($games = NULL, $totalToPay = NULL, $lotery = NULL){
+        
+        if (! $games || ! $totalToPay || ! $lotery){
+            return false;
+        }
+
+        $total = 0.00;
+        foreach($games as $game)
+        {
+            $arGame = explode(',', $game);
+            $numberDozens = count($arGame);
+            
+            $cost = $lotery->costs()->where('number_matches', $numberDozens)->first();
+             
+            $total += $cost->cost;
+        }
+
+        if ( $total != $totalToPay ){
+            return false;
+        }
+        
+        return true;
     }
 }

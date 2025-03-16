@@ -5,7 +5,7 @@
             <a href="#" target="_blank" class="text-dark-75 text-hover-primary d-flex align-items-center">
                 <i class="icon icon-logo d-flex me-2"></i>
                 <div>
-                    <span class="d-block"><b>{{ env('APP_NAME') }}</b> - 2024</span>
+                    <span class="d-block"><b>{{ env('APP_NAME') }}</b> - 2025</span>
                 </div>
             </a>
         </div>

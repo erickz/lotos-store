@@ -8,6 +8,8 @@ use App\Repositories\Contracts\CustomerRepositoryInterface;
 use App\Http\Requests\Web\StoreCustomer;
 use App\Http\Requests\Web\UpdateCustomer;
 
+use Intervention\Image\ImageManagerStatic as Image;
+
 class CustomersController extends WebBaseController
 {
     /**
@@ -78,25 +80,44 @@ class CustomersController extends WebBaseController
             return response()->json(['message' => $request->get('redirectTo'), 'error' => 0]);
         }
         else {
-            return response()->json(['message' => route('web.customers.mybuys'), 'error' => 0]);
+            return response()->json(['message' => route('web.customers.profile'), 'error' => 0]);
         }
     }
 
     public function update(UpdateCustomer $request)
     {
-        $id = auth()->guard('web')->user()->id;
-        $errors = $request->validated($id);
-
         try
         {
-            $customer = $this->repository->update($request->except('csrf'), $id);
+            $id = auth()->guard('web')->user()->id;
+            $errors = $request->validated($id);
+
+            $dataToUpdate = $request->except('csrf');
+            
+            if($request->has('profile_image')){
+                $imageName = time().'.'.$request->profile_image->extension();
+
+                $customer = $this->repository->find($id);
+                
+                if (file_exists('img/profile_images/' . $customer->profile_image)){
+                    $deleted = \File::delete('img/profile_images/' . $customer->profile_image);
+                }
+
+                $image_resize = Image::make($request->profile_image->getRealPath());              
+                $image_resize->resize(150, 150);
+                $image_resize->save(public_path('img/profile_images/' . $imageName));
+                
+                $dataToUpdate['profile_image'] = $imageName;
+            }
+
+
+            $customer = $this->repository->update($dataToUpdate, $id);
         }
         catch (\Exception $e)
         {
-            return response()->json(['message' => 'Não foi possível salvar o registro, tente novamente mais tarde', 'error' => 1]);
+            return back()->with(['message' => 'Não foi possível salvar o registro, tente novamente mais tarde', 'error' => 1]);
         }
 
-        return response()->json(['message' => 'Alterações salvas com sucesso', 'error' => 0]);
+        return back()->with(['message' => 'Alterações salvas com sucesso', 'error' => 0]);
     }
 
     public function rescue(Request $request)

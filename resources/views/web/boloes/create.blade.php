@@ -2,7 +2,7 @@
 
 @section('titlePage', 'Crie seu Próprio Bolão de Loteria aqui na ' . env('APP_NAME') . '!')
 @section('descriptionPage', 'Monte seu próprio bolão de loteria e aumente suas chances de vitória. 
-Compartilhe e venda suas apostas, maximize seus ganhos e ganhe prêmios incrivéis. Crie seu bolão agora mesmo!')
+Compartilhe e venda seus jogos, maximize seus ganhos e ganhe prêmios incrivéis. Crie seu bolão agora mesmo!')
 
 @section('content')
 

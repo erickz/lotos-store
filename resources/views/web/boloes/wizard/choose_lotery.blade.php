@@ -1,5 +1,4 @@
 <div class='mt-5'>
-    <!-- <h1 class='text-info2 ps-0'><b>Selecione uma loteria:</b></h1> -->
 
     <?php $j = 1; ?>
     @foreach($loteries as $index => $lotery)

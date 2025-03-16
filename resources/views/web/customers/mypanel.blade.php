@@ -10,14 +10,14 @@
 <section class="py-40">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="display-5 mb-3 text-primary"><b>Crie o seu Bolão com a {{ env('APP_NAME') }}!</b></h2>
+            <h2 class="display-5 mb-3"><b>Crie já um Bolão e venda suas cotas!</b></h2>
             <!-- <p class="lead">Segurança, transparência</p> -->
         </div>
 
         <div class="row justify-content-center align-items-center">
             <div class='text-center'>
             <a href="{{ route('web.boloes.create') }}" class="btn btn-success btn-lg mt-3"><b>Criar Bolão</b></a>
-                <a href="{{ route("web.boloes.customer", [auth()->guard('web')->user()->id]) }}" class="btn btn-primary btn-lg mt-3"><b>Minha página</a>
+                <a href="{{ route("web.boloes.customer", [auth()->guard('web')->user()->id, auth()->guard('web')->user()->getProfileNameForURL()]) }}" class="btn btn-primary btn-lg mt-3"><b>Minha página</a>
             </div>
         </div>
     </div>

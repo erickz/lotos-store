@@ -46,7 +46,7 @@
                             <div class='bg-info p-5 me-2 text-white stepByStepHome position-relative col'>
                                 <div class='titleStep d-flex flex-column mb-5'>
                                     <span class='numberStep me-2'>0<b>1</b></span> 
-                                    <span class='titleName'><b>Monte suas apostas</b></span>
+                                    <span class='titleName'><b>Monte seus jogos</b></span>
                                 </div>
                                 <div>
                                     Escolha suas dezenas da sorte, monte seu bolão e <b>aposte sem sair de casa.</b>
@@ -85,7 +85,7 @@
                                     <span class='titleName'><b>Remunerações</b></span>
                                 </div>
                                 <div>
-                                    Ao final do concurso, o criador do bolão receberá <b>a receita das cotas vendidas</b> enquanto a premiação das apostas será distribuída <b>de forma justa e proporcional as cotas de cada participantes.</b>
+                                    Ao final do concurso, o criador do bolão receberá <b>a receita das cotas vendidas</b> enquanto a premiação dos jogos será distribuída <b>de forma justa e proporcional as cotas de cada participantes.</b>
                                 </div>
                                 <!-- <div class='iconHolder'>
                                     <i class='fas fa-hand-holding-usd text-gray'></i>
@@ -102,9 +102,6 @@
                                     <h3 class='m-0 p-0 pb-1 text-primary text-center text-uppercase mb-2'><b>{{ $suggestion->name }}</b></h3>
 
                                     <div class='mt-2'>
-                                        <!-- <div class='mb-1'>
-                                            <b>Qt. de apostas: {{ $suggestion->qt_bets }} apostas</b>
-                                        </div> -->
                                         <div class='mb-4'>
                                             <ol class='ps-0 w-75 d-flex flex-column m-auto min-h-50px'>
                                                 @foreach( $suggestion->getBets() as $index => $bet )
@@ -138,9 +135,6 @@
                                     <h4 class='m-0 p-0 pb-1 text-primary text-center text-uppercase mb-2'><b>{{ $suggestion->name }}</b></h4>
 
                                     <div class='mt-2'>
-                                        <!-- <div class='mb-1'>
-                                            <b>Qt. de apostas: {{ $suggestion->qt_bets }} apostas</b>
-                                        </div> -->
                                         <div class='mb-4'>
                                             <ol class='ps-0 w-75 d-flex flex-column m-auto min-h-50px'>
                                                 @foreach( $suggestion->getBets() as $index => $bet )

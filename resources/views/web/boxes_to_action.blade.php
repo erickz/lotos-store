@@ -49,7 +49,7 @@
                     <!--begin::Content-->
                     <div class="d-flex flex-column">
                         <h3 class="text-dark h3 mb-3">Crie um bolão</h3>
-                        <div class="text-dark-50 ps-1">Monte suas apostas e crie um bolão já!</div>
+                        <div class="text-dark-50 ps-1">Monte seus jogos e crie um bolão já!</div>
                     </div>
                     <!--end::Content-->
                 </div>

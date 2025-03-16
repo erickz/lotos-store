@@ -37,7 +37,7 @@
                                             Concurso
                                         </th>
                                         <th class='p-2'>
-                                            Nome
+                                            Por
                                         </th>
                                         <th class='p-2'>
                                             Cotas
@@ -61,7 +61,7 @@
                                                 {{ $reserve->bolao->concurso->getDrawDay() }}
                                             </td>
                                             <td class='p-2 align-middle'>
-                                                <b>{{ $reserve->bolao->name }}</b>
+                                                <b>{{ $reserve->bolao->customer->getProfileName() }}</b>
                                             </td>
                                             <td class='p-2 d-flex align-items-center justify-content-center'>
                                                 <div class='slHolder min-w-60px'>
@@ -132,7 +132,7 @@
                                         @elseif( auth()->guard('web')->user()->credits >= session()->get("payment.total") )
                                             <b>Finalizar compra</b>
                                         @else
-                                            <b>Realizar pagamento</b>
+                                            <b>Comprar créditos</b>
                                         @endif
                                     </a>
                                 </div>

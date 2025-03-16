@@ -25,7 +25,7 @@
                             <b>Valor por Cota:</b> R${{ number_format($bolaoData['price'], 2, ',', '.') }}
                         </p>
                         <p>
-                            <a href='{{ route("web.customers.bets") }}'>Clique aqui para ver suas apostas</a>
+                            <a href='{{ route("web.customers.bets") }}'>Clique aqui para ver seus jogos</a>
                         </p>
                         <p>
                             Se tiver alguma dúvida, não hesite em entrar em contato com nossa equipe de suporte.

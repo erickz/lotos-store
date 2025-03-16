@@ -190,6 +190,7 @@ return [
         // Weidner\Goutte\GoutteServiceProvider::class,
         Jorenvh\Share\Providers\ShareServiceProvider::class,
         WebLAgence\LaravelFacebookPixel\LaravelFacebookPixelServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -222,6 +223,7 @@ return [
         'Goutte' => Weidner\Goutte\GoutteFacade::class,
         'Share' => Jorenvh\Share\ShareFacade::class,
         'LaravelFacebookPixel' => WebLAgence\LaravelFacebookPixel\LaravelFacebookPixelFacade::class,
+        'Image' => Intervention\Image\Facades\Image::class
     ])->toArray(),
 
 ];

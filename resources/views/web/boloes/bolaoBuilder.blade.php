@@ -112,7 +112,7 @@
     </div>
 
     <div class='mt-5'>
-        <h2 class='ps-4'>Apostas 
+        <h2 class='ps-4'>Jogos 
             <span class='qtGames'>(0)</span>
         </h2>
         <div class="alert d-none">

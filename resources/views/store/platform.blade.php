@@ -36,7 +36,7 @@
                                 <div class="card-body d-flex flex-column align-items-center text-center">
                                     <i class="fas fa-tasks fa-4x mb-3 text-primary"></i>
                                     <h3 class="card-title mt-2">Gerenciador de Bolões</h3>
-                                    <p class="card-text mt-2">Organize seus concursos, monte as apostas dos seus Bolões, disponibilize aos seus clientes e verifique os jogos automaticamente. Tudo isso de forma rápida e segura.</p>
+                                    <p class="card-text mt-2">Organize seus concursos, monte os jogos dos seus Bolões, disponibilize aos seus clientes e verifique os jogos automaticamente. Tudo isso de forma rápida e segura.</p>
                                 </div>
                             </div>
                         </div>
@@ -45,7 +45,7 @@
                                 <div class="card-body d-flex flex-column align-items-center text-center">
                                     <i class="fas fa-tachometer-alt fa-4x mb-3 text-primary"></i>
                                     <h3 class="card-title mt-2">Paineis de gerenciamento</h3>
-                                    <p class="card-text mt-2">A plataforma conta com painel do cliente para gerenciamento de créditos e dados, e um painel do administrador que oferece controle das funcionalidades do site, gerenciamento dos clientes, das vendas e apostas.</p>
+                                    <p class="card-text mt-2">A plataforma conta com painel do cliente para gerenciamento de créditos e dados, e um painel do administrador que oferece controle das funcionalidades do site, gerenciamento dos clientes, das vendas e jogos.</p>
                                 </div>
                             </div>
                         </div>
@@ -54,7 +54,7 @@
                                 <div class="card-body d-flex flex-column align-items-center text-center">
                                     <i class="fas fa-user-shield fa-4x mb-3 text-primary"></i>
                                     <h3 class="card-title mt-2">Conveniência e Segurança</h3>
-                                    <p class="card-text mt-2">A plataforma foi projetada para oferecer conveniência, segurança e tranquilidade aos usuários durante todo o processo de criação e organização das apostas.</p>
+                                    <p class="card-text mt-2">A plataforma foi projetada para oferecer conveniência, segurança e tranquilidade aos usuários durante todo o processo de criação e organização dos jogos.</p>
                                 </div>
                             </div>
                         </div>
@@ -208,7 +208,7 @@
                     <li class="list-group-item"><i class="fas fa-check text-success me-1"></i><b> Aceita Pix e Cartão de crédito</b></li>
                     <li class="list-group-item"><i class="fas fa-check text-success me-1"></i><b> Painel Administrativo</b></li>
                     <li class="list-group-item"><i class="fas fa-check text-success me-1"></i><b> Painel do Cliente</b></li>
-                    <li class="list-group-item"><i class="fas fa-check text-success me-1"></i><b> Sistema inteligente de geração de apostas</b></li>
+                    <li class="list-group-item"><i class="fas fa-check text-success me-1"></i><b> Sistema inteligente de geração de jogos</b></li>
                     <li class="list-group-item"><i class="fas fa-check text-success me-1"></i><b> Verificação Automática de Resultados</b></li>
                     <li class="list-group-item"><i class="fas fa-check text-success me-1"></i><b> Compartilhamento de Bolões</b></li>
                     <li class="list-group-item"><i class="fas fa-check text-success me-1"></i><b> É possível presentear cotas</b></li>

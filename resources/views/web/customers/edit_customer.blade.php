@@ -19,12 +19,35 @@
                 
                 <div class="row profile-user-info mt-8">
                     <div class='col-lg-12'>
-                        <form id='EditForm' data-url="{{ route('web.customers.update') }}" method="POST" class="form form-ajax pt-2 pb-5" redirect='0'>
+                        <form id='EditForm' action="{{ route('web.customers.update') }}" method="POST" class="form pt-2 pb-5" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
                             <div class="card-body">
-                                <div class="alert d-none mb-2"></div>
+                                @include('web.includes.alert_errorsbag')
 
+                                <div class="form-group row p-1">
+                                    <div class="col-lg-12">
+                                        <!-- <label><strong>Foto do Perfil:</strong></label> -->
+                                        <div class="col-lg-9 col-xl-6">
+                                            <div class="image-input image-input-outline image-input-circle" id="kt_image_3">
+                                                @if($customer->profile_image)
+                                                    <div class="image-input-wrapper" style="background-image: url({{ asset('img/profile_images/' . $customer->profile_image) }})"></div>
+                                                @else
+                                                    <div class="image-input-wrapper mb-4" style="background-image: url({{ asset('img/no-profile-image.png') }}); "></div>
+                                                @endif
+                                                <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+                                                    <i class="fa fa-pen icon-sm text-muted"></i>
+                                                    <input type="file" name="profile_image">
+                                                    <input type="hidden" name="profile_image_remove">
+                                                </label>
+                                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="" data-original-title="Cancel avatar">
+                                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                                </span>
+                                            </div>
+                                            <span class="form-text text-muted">Tamanho recomendado: 150x150.</span>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group row p-1">
                                     <div class="col-lg-12">
                                         <label><strong>Nome Completo:</strong></label>
@@ -32,7 +55,11 @@
                                     </div>
                                 </div>
                                 <div class="form-group row p-1">
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-6">
+                                        <label><strong>Nome do Perfil:</strong></label>
+                                        <input type="text" name="profile_name" class="form-control" value="{{ $customer->profile_name }}" />
+                                    </div>
+                                    <div class="col-lg-6">
                                         <label><strong>Email*:</strong></label>
                                         <input type="email" name="email" class="form-control" value="{{ $customer->email }}" />
                                     </div>
@@ -40,7 +67,7 @@
                                 <div class="form-group row p-1">
                                     <div class="col-lg-6">
                                         <label><strong>CPF:</strong></label>
-                                        <input type="text" name="cpf" class="form-control" value="{{ $customer->cpf }}" />
+                                        <input type="text" name="cpf" class="form-control maskCpf" value="{{ $customer->cpf }}" />
                                     </div>
                                     <div class="col-lg-6">
                                         <label><strong>Data de nascimento*:</strong></label>

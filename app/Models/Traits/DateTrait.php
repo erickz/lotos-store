@@ -28,4 +28,7 @@ trait DateTrait
         return Carbon::createFromFormat('Y-m-d H:i:s', $this->updated_at)->format($format);
     }
 
+    public function getCreatedAgo(){
+        return $this->created_at->diffForHumans(null, true);
+    }
 }

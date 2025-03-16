@@ -24,8 +24,8 @@ class CreditsController extends WebBaseController
             $credits = request()->get('credits');
             $creditsConverted = (float)str_replace(',', '.', str_replace('.', '', $credits));
 
-            if ($creditsConverted < 50){
-                return redirect()->back()->with(['message' => 'Valor minímo é de R$50,00', 'error' => 1]);
+            if ($creditsConverted < 25){
+                return redirect()->back()->with(['message' => 'Valor minímo é de R$25,00', 'error' => 1]);
             }
             session()->put('payment', ['total' => $creditsConverted, 'onlyCredits' => true]);
 

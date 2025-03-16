@@ -54,7 +54,7 @@
     </div>
 
     <div class='mt-4'>
-        <h2>Apostas 
+        <h2>Jogos 
             <span class='qtGames'>
             @if($bolao->games()->count() > 0) 
                 ({{ $bolao->getGamesCount() }})

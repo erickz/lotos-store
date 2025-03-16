@@ -188,3 +188,53 @@ var KTImageInput = function(elementId, options) {
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
     module.exports = KTImageInput;
 }
+
+'use strict';
+
+// Class definition
+var KTImageInputInit = function () {
+	// Private functions
+	var initDemos = function () {
+		var avatar3 = new KTImageInput('kt_image_3');
+
+		// avatar3.on('cancel', function(imageInput) {
+		// 	swal.fire({
+        //         title: 'Image successfully canceled !',
+        //         type: 'success',
+        //         buttonsStyling: false,
+        //         confirmButtonText: 'Awesome!',
+        //         confirmButtonClass: 'btn btn-primary font-weight-bold'
+        //     });
+		// });
+
+		// avatar3.on('change', function(imageInput) {
+		// 	swal.fire({
+        //         title: 'Image successfully changed !',
+        //         type: 'success',
+        //         buttonsStyling: false,
+        //         confirmButtonText: 'Awesome!',
+        //         confirmButtonClass: 'btn btn-primary font-weight-bold'
+        //     });
+		// });
+
+		// avatar3.on('remove', function(imageInput) {
+		// 	swal.fire({
+        //         title: 'Image successfully removed !',
+        //         type: 'error',
+        //         buttonsStyling: false,
+        //         confirmButtonText: 'Got it!',
+        //         confirmButtonClass: 'btn btn-primary font-weight-bold'
+        //     });
+		// });
+	}
+
+	return {
+		// public functions
+		init: function() {
+			initDemos();
+		}
+	};
+}();
+
+
+KTImageInputInit.init();

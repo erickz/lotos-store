@@ -4,6 +4,7 @@ namespace App\Models\Traits;
 
 use App\Models\CreditHistory;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 trait CustomerTrait
 {
@@ -43,6 +44,23 @@ trait CustomerTrait
     public function getFullName()
     {
         return $this->full_name;
+    }
+
+    public function getFullNameShort()
+    {
+        $arName = explode(' ', $this->full_name);
+
+        $name = $arName[0];
+
+        if(isset($arName[1])){
+            $name .= ' ' . substr($arName[1], 0, 1)[0] . '.';
+        }
+
+        if(isset($arName[2])){
+            $name .= ' ' . $arName[2];
+        }
+
+        return $name;
     }
 
     public function getFirstName()
@@ -96,5 +114,24 @@ trait CustomerTrait
         $credHistory->amount = $convertedVal;
         $credHistory->type = 'sub';
         $credHistory->save();
+    }
+
+    public function getProfileName()
+    {
+        if ($this->profile_name){
+            return $this->profile_name;
+        }
+
+        return $this->getFullNameShort();
+    }
+
+    public function getProfileNameForURL(){
+        $profileName = $this->getProfileName();
+
+        if ($profileName){
+            $profileName = Str::slug($profileName);
+        }
+
+        return $profileName;
     }
 }

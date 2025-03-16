@@ -36,13 +36,15 @@ $(function(){
         //Build games listing
         gamesListTbody.html('');
         var nChances = 0;
-        if (bettingsSessionData){
+
+        if (bettingsSessionData != undefined && bettingsSessionData.length > 0){
 
             $.each(bettingsSessionData, function(index, value){
                 var deleteAction = $('<a class="table-link cursor-p danger removeBolao d-block" data-id="' + index + '"><span class="fa-stack"><i class="fa fa-square text-danger fa-stack-2x"></i><i class="fas fa-trash fa-stack-1x fa-inverse"></i></span></a>');
                 if (hasDelete != undefined && hasDelete == 0){
                     deleteAction = '';
                 }
+                
                 var costLine = value.cost.toLocaleString('pt-BR', { minimumFractionDigits: 2,maximumFractionDigits: 2 });
                 //deleteAction.clone().prop('outerHTML')
                 // var $line = $('<tr><td data-label="Id">' + index + '</td><td data-label="Números selecionados">' + value.numbers + '</td><td data-label="Preço" data-cost="' + value.cost + '">' + 'R$'+ costLine + '</td><td data-label="Remover">' + deleteAction.clone().prop('outerHTML') + '</tr>')
@@ -104,16 +106,17 @@ $(function(){
                     }
 
                     var priceCota = slPrices.length > 0 ? slPrices.find(':selected').val() : $('.priceCotas').val();
-                    var revenue = Math.ceil(bolaoTotal * 1.4);
+                    //Previous factor 1.4, now 2.
+                    var revenue = Math.ceil(bolaoTotal * 2);
                     var recomendedCotas = Math.round((revenue / priceCota));
                     recomendedCotas = recomendedCotas <= 1 ? 2 : recomendedCotas;
 
                     //Any change in the formatings will probably break the code
                     var revenueTotal = String((priceCota * recomendedCotas));
-                    var taxPlatform = (priceCota * 0.13) * recomendedCotas;
+                    //19% do preço da cota
+                    var taxPlatform = (priceCota * 0.19) * recomendedCotas;
                     var profitBolao = String((revenueTotal - bolaoTotal - taxPlatform));
                     //var taxPlatform = profitBolao * 0.337;
-                    //19% do preço da cota
                     profitBolao = (new Intl.NumberFormat('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}).format(profitBolao));
                     costTotal = (new Intl.NumberFormat('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}).format(bolaoTotal));
                     revenueTotal = (new Intl.NumberFormat('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}).format(revenueTotal - taxPlatform));
@@ -169,7 +172,7 @@ $(function(){
 
             var updateConfirmationBolao = function(priceCota, numbersBet, numberCotas, total){
                 bolaoFinalize.find('.priceCota').text(priceCota);
-                bolaoFinalize.find('.numberBets').text(numbersBet + ' apostas');
+                bolaoFinalize.find('.numberBets').text(numbersBet + ' jogos');
                 bolaoFinalize.find('.numberCotas').text(numberCotas);
                 bolaoFinalize.find('.totalBolao').text(total);
 
@@ -187,7 +190,7 @@ $(function(){
                 if (bettingsSessionData && bettingsSessionData.length > 0){
                     var bolaoGames = Object.values(bettingsSessionData);
 
-                    bolaoFinalize.find('form .game').each(function(index, value){
+                    bolaoFinalize.find('form input.game').each(function(index, value){
                         $(this).remove();
                     });
                     
@@ -214,10 +217,10 @@ $(function(){
                     var formFinalize = bolaoFinalize.find('.formFinalize');
                     var bettingsSessionData = JSON.parse(sessionStorage.getItem('bettings'));
 
-                    $.each(Object.values(bettingsSessionData), function(index,value){
-                        var inputNew = '<input type="hidden" name="games[]" value="' + value.numbers.toString() + '" />';
-                        formFinalize.prepend(inputNew);
-                    });
+                    // $.each(Object.values(bettingsSessionData), function(index,value){
+                        // var inputNew = '<input type="hidden" name="games[]" value="' + value.numbers.toString() + '" />';
+                        // formFinalize.prepend(inputNew);
+                    // });
 
                     formFinalize.prepend("<input type='hidden' name='qtCotas' value='" + formFinalize.find('.cotasCt').text() + "' /> ");
 
@@ -321,7 +324,7 @@ $(function(){
                     total += cost;
                 });
 
-                if (total >= 45.00){
+                if (total >= 25.00){
                     bolaoBuilder.find('.finishButton .btn-submit').removeClass('disabled');
                     stepFinalize.attr('href', stepFinalize.attr('data-href'));
                 }
@@ -344,22 +347,14 @@ $(function(){
                 var bettingsSessionData = JSON.parse(sessionStorage.getItem('bettings'));
                 var wasRemoved = 0;
 
-                $.each(bettingsSessionData, function(index, value){                        
-                    if(index == idToRemove){
-                        delete bettingsSessionData[index];
+                //build new array
+                var bettingsSessionDataNew = [];
+                $.each(bettingsSessionData, function(index, value){      
+                    if(index != idToRemove){
+                        bettingsSessionDataNew.push(value);
                     }
                 });
                 
-                var bettingsSessionDataNew = {};
-                var i = 1;
-
-                if (Object.keys(bettingsSessionData).length > 0){
-                    //Re-order the array
-                    $.each(bettingsSessionData, function(index, value){                        
-                        bettingsSessionDataNew[i++] = value;
-                    });
-                }
-
                 sessionStorage.setItem('bettings', JSON.stringify(bettingsSessionDataNew));
 
                 buildGamesList();
@@ -426,8 +421,12 @@ $(function(){
                         numbersSelected.push($this.data('number'));
                     });
                     
-                    if (bettingsSessionData == undefined || ! bettingsSessionData){
-                        bettingsSessionData = {};
+                    if (bettingsSessionData == undefined || ! bettingsSessionData ){
+                        bettingsSessionData = Object.values([]);
+                    }
+                    else if (Array.isArray(bettingsSessionData) === false) {
+                        // Convert object to array if necessary
+                        bettingsSessionData = Object.values(bettingsSessionData);
                     }
 
                     var betsCount = Object.keys(bettingsSessionData).length;
@@ -435,7 +434,8 @@ $(function(){
                     var countNumbers = numbersSelected.length;
                     var betCost = costs[countNumbers];
                     var newBet = {numbers: numbersSelected, dozensSelected: countNumbers, cost: betCost};
-                    bettingsSessionData[(betsCount + 1)] = newBet;   
+                    // bettingsSessionData[(betsCount + 1)] = newBet;   
+                    bettingsSessionData.unshift(newBet);
 
                     sessionStorage.setItem('bettings', JSON.stringify(bettingsSessionData));
                     if (sessionStorage.getItem('lotoAlias') == undefined || ! sessionStorage.getItem('lotoAlias')){
@@ -456,7 +456,7 @@ $(function(){
                 sessionStorage.setItem('bettings', JSON.stringify({}));
 
                 buildGamesList();
-                handleAlert(bolaoBuilder.find('.listBets'), "Apostas removidas com sucesso", 'default', 'success'); 
+                handleAlert(bolaoBuilder.find('.listBets'), "Jogos removidos com sucesso", 'default', 'success'); 
                 measureQuality();
             })
 
@@ -518,6 +518,11 @@ $(function(){
                     $this.attr('disabled', 'disabled');
                     var numberDozens = generateNumbersCt.find('.numbersDozens option:selected').val();
                     var qtGames = generateNumbersCt.find('.slQtGames option:selected').val();
+
+                    if ($this.data('dozens')){
+                        numberDozens = $this.data('dozens');
+                        qtGames = 1;
+                    }
 
                     for(var i = 1; i <= qtGames; i++){
                         var generatedNumbers = generateNumbers(numberDozens);

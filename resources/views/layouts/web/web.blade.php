@@ -73,18 +73,19 @@
                 @else
                     <div class="topbar-item me-5 responsive-item">
                         <ul>
-                            <li class='mt-2'><a class='p-0' href='{{ route("web.cart") }}' class='text-primary'><i class='fa fa-shopping-cart me-3 text-primary'></i>Carrinho</a></li>
+                            <li class='mt-2'><a class='p-0' href='{{ route("web.cart") }}' class='text-primary'><i class='fa fa-user me-3 text-primary'></i>Seu saldo: <label class='bg-success p-2 badge'><b>{{ auth()->guard('web')->user()->getFormattedCredits() }}</b></label></a></li>
+                            <li class='mt-2'><a class='p-0' href='{{ route("web.cart") }}' class='text-primary'><i class='fa fa-shopping-cart me-2 text-primary'></i>Carrinho</a></li>
                             <li class='mt-2'><a class='p-0' href='{{ route("web.customers.logout") }}' class='text-primary'><i class='fa fa-sign-out-alt me-3 text-primary'></i>Sair</a></li>
                         </ul>
                     </div>
                 @endif
             </div>
         </div>
-        <div id="kt_header_mobile" class="header-mobile">
+        <div id="kt_header_mobile" class="header-mobile px-3">
             <div class='d-flex mt-3 justify-content-between align-items-center w-100'>
                 <a class='fa fa-bars menuMobileTrigger'></a>
                 <!--begin::Logo-->
-                <a href="/" class='d-flex flex-column align-self-center'>
+                <a href="/" class='ms-9 d-flex flex-column align-self-center'>
                     <img alt="Logo LotosFácil" title="LotosFácil" src="{{ asset('img/logo-lotos-online.png') }}" class="max-h-60px">
                 </a>
                 <!--end::Logo-->
@@ -102,7 +103,7 @@
                 <!--end::Header-->
 
                     <!--begin::Content-->
-                    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+                    <div class="content d-flex flex-column flex-column-fluid pb-0" id="kt_content">
 
                         @if (! in_array(Route::currentRouteName(), ['web.home.index']))
                             <!--begin::Subheader-->

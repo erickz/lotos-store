@@ -9,6 +9,7 @@ $(window).load(function(){
             let url = $this.attr('data-url');
             let redirect = $this.attr('redirect') ? $this.attr('redirect') : 0;
             let btnSend = $this.find('.btn-send');
+            let clearForm = $this.attr('data-clear') ? $this.attr('data-clear') == 'true' : true;
 
             if (btnSend.length > 0) {
 
@@ -44,11 +45,13 @@ $(window).load(function(){
                         if (response.error != undefined && response.error === 0){
                             var inputTxt = $this.find('input,textarea');
 
-                            inputTxt.each(function(index, value){
-                                var $this2 = $(this);
-                                $this2.val('');
-                                $this2.text('');
-                            });
+                            if (clearForm){
+                                inputTxt.each(function(index, value){
+                                    var $this2 = $(this);
+                                    $this2.val('');
+                                    $this2.text('');
+                                });
+                            }
 
                             if (redirect == 1){
                                 window.location = response.message;
@@ -122,24 +125,25 @@ $(window).load(function(){
             slHolder.find("select").on('change', function(){
                 var $this = $(this);
                 var intVal = parseInt($this.val());
-                var slHolderParent = $this.parent();
+                var slHolderParent = $this.parents('tr');
 
-                if (slHolderParent.is('td')){
-                    slHolderParent = slHolderParent.parent();
+                if (! $this.is('.isFromTable')){
+                    slHolderParent = $this.parent().parent();
                 }
-                else {
-                    slHolderParent = slHolderParent.parent().parent();
-                }
-                
+
+                var currentBtnBuyCotas = slHolderParent.find('.btnBuyCota');
+
                 if (intVal > 0){
-                    slHolderParent.find('.btnBuyCota').removeAttr('cotas').data('cotas', intVal);
-                    if (slHolderParent.find('.btnBuyCota').hasClass('disabled')){
-                        slHolderParent.find('.btnBuyCota').removeClass('disabled');
+                    currentBtnBuyCotas.removeAttr('data-cotas');
+                    currentBtnBuyCotas.data('cotas', intVal);
+
+                    if (currentBtnBuyCotas.hasClass('disabled')){
+                        currentBtnBuyCotas.removeClass('disabled');
                     }
                 }
                 else {
-                    if (! slHolderParent.find('.btnBuyCota').hasClass('disabled')){
-                        slHolderParent.find('.btnBuyCota').addClass('disabled');
+                    if (! currentBtnBuyCotas.hasClass('disabled')){
+                        currentBtnBuyCotas.addClass('disabled');
                     }
                 }
 
@@ -184,6 +188,7 @@ $(window).load(function(){
             var formData = { '_token': csrf, cotas: $this.data('cotas')};
             var bolaoUrl = $this.data('url');
 
+
             if (bolaoUrl){
                 //Ajax which retrieve the games
                 $.ajax({
@@ -194,7 +199,7 @@ $(window).load(function(){
                 })
                 .done(function(response){
                     if (response.error == 0){
-                        handleAlert($this.parents('.bt-containers'), response.message, 'success', 'success');
+                        // handleAlert($this.parents('.bt-containers'), response.message, 'success', 'success');
 
                         if (btnBuyBolao.is('.resetBuy')){
                             $this.parent().find('.slChooseCotas option:selected').removeAttr('selected');
@@ -208,6 +213,11 @@ $(window).load(function(){
                         resetSelect.find('option:selected').removeAttr('selected');
 
                         updateCartTooltip(response.cartItemsQt);
+
+                        if($this.is('.btnConfirmation')){
+                            $this.parent().find('.btn').show();
+                            $this.hide();
+                        }
                     }
                     else {
                         handleAlert($this.parents('.bt-containers'), response.message, 'warning', 'warning');   
@@ -494,9 +504,16 @@ $(window).load(function(){
     var getBolaoBuyConfirmation = function(){
         var buyConfirmation = $('#buyConfirmationModal');
         buyConfirmation.on('show.bs.modal', function(e){
-
             var buttonEl = $(e.relatedTarget);
-            var qtCotasSelected = buttonEl.parents("tr").find('.slHolder .slChooseCotas option:selected').val();
+            var qtCotasSelected = null;
+            
+            if (buttonEl.is('.isFromTable')){
+                qtCotasSelected = buttonEl.parents("tr").find('.slChooseCotas option:selected').val();
+            }
+            else {
+                qtCotasSelected = buttonEl.parents("div").find('.slChooseCotas option:selected').val();
+            }
+
             var bolaoUrl = buttonEl.data('gamesurl');
 
             var handleErrorConfirmationBuy = function(message){
@@ -555,7 +572,7 @@ $(window).load(function(){
             var valueSelected = $(this).data('value');
             var convertedValue = valueSelected.replace('.', '').replace(',', '.');
 
-            if (convertedValue !== undefined && convertedValue && convertedValue >= 45){
+            if (convertedValue !== undefined && convertedValue && convertedValue >= 20){
                 formCredits.prepend('<input type="hidden" name="credits" value="' + valueSelected + '" />')
                 formCredits.trigger('submit');
             }
@@ -563,6 +580,10 @@ $(window).load(function(){
                 handleAlert(formCredits, "Selecione um valor válido", 'info');
             }
         });
+    }
+
+    if($('.gamesList .btnBuyCota')){
+        buyBolaoDirect();
     }
 
     var maskMoney = $('.maskMoney');

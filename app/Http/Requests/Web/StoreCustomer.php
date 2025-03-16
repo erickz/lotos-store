@@ -30,6 +30,7 @@ class StoreCustomer extends FormRequest
             'terms' => 'required',
             'email' => 'required|unique:customers,email|email',
             'cpf' => 'sometimes|nullable|formato_cpf',
+            'profile_image' => 'sometimes|image|mimes:png,jpg,jpeg',
             // 'cnpj' => 'sometimes|nullable|formato_cnpj',
             // 'phone' => 'sometimes|nullable|celular_com_ddd',
             'password' => 'required|confirmed|min:6'

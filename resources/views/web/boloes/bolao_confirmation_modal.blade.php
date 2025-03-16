@@ -19,9 +19,9 @@
                                 <div class="alert-icon d-inline">
                                     <i class="fas fa-info-circle fa-fw fa-lg text-primary"></i>
                                 </div>
-                                <div class="text-primary d-inline">Confirme suas apostas e finalize o bolão</div>
+                                <div class="text-primary d-inline">Confirme seus jogos e finalize o bolão</div>
                             </div>
-                            <div class='d-flex mb-2'>
+                            {{--<div class='d-flex mb-2'>
                                 <div class='col-4'>
                                     <strong>Seu pássaro da sorte:</strong> 
                                 </div>
@@ -29,10 +29,10 @@
                                     <span class='label p-1 bg-success text-white luckyBird'><b>{{ $luckBird }}</b></span>
                                     <input type='hidden' name='luckBird' value='{{ $luckBird }}' />
                                 </div>
-                            </div>
+                            </div>--}}
                             <div class='d-flex mb-2'>
                                 <div class='col-4'>
-                                    <strong>Número de apostas:</strong>
+                                    <strong>Número de jogos:</strong>
                                 </div>    
                                 <div class='col-6'>
                                     <span class='numberBets'>0</span>

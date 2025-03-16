@@ -46,7 +46,7 @@
             </div>
             <div id="faq2" class="collapse" aria-labelledby="faqHeading1" data-parent="#faq" style="">
                 <div class="card-body text-dark-50 font-size-lg pl-12">
-                    As cotas não vendidas de um bolão irão para a pessoa que criou as apostas, e sendo assim, ao ser premiado ele irá
+                    As cotas não vendidas de um bolão irão para o criador dos jogos, e sendo assim, ao ser premiado ele irá
                     receber pela quantidade de cotas que possuir.
                 </div>
             </div>
@@ -71,7 +71,7 @@
             </div>
             <div id="faq3" class="collapse" aria-labelledby="faqHeading1" data-parent="#faq" style="">
                 <div class="card-body text-dark-50 font-size-lg pl-12">
-                    Não. Para a sua comodidade a plataforma registra por você as apostas na loteria da caixa federal.
+                    Não. Para a sua comodidade a plataforma registra por você os jogos na loteria da caixa federal.
                 </div>
             </div>
         </div>
@@ -95,7 +95,7 @@
             </div>
             <div id="faq4" class="collapse" aria-labelledby="faqHeading1" data-parent="#faq" style="">
                 <div class="card-body text-dark-50 font-size-lg pl-12">
-                    Após a verificação das apostas serem feitas automaticamente pela plataforma, você receberá uma notificação por email.
+                    Após a verificação dos jogos serem que são feitas automaticamente pela plataforma, você receberá uma notificação por email.
                     O rateio do prêmio é creditado automaticamente em créditos na conta do usuário (que pode <a href='{{ route("web.customers.rescue") }}'>solicitar o saque</a>)
                 </div>
             </div>

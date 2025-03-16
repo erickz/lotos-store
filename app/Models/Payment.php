@@ -18,7 +18,7 @@ class Payment extends BaseModel
      * @var array
      */
     protected $fillable = [
-        'customer_id', 'reference_id', 'completed', 'gateway', 'type', 'status', 'code', 'total', 'url'
+        'customer_id', 'transaction_id', 'email', 'name', 'completed', 'gateway', 'type', 'status', 'code', 'total', 'url'
     ];
 
     /**
@@ -37,5 +37,10 @@ class Payment extends BaseModel
     public function customer()
     {
         return $this->belongsTo('App\Models\Customer');
+    }
+
+    public function qrCode()
+    {
+        return $this->hasOne('App\Models\PaymentQrCode');
     }
 }

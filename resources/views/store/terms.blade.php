@@ -2,9 +2,7 @@
 
 @section('titlePage', 'Termos de Uso')
 @section('descriptionPage', 'Leia atentamente nossos termos de uso para compreender as diretrizes e condições 
-ao utilizar nossos serviços de apostas online e venda de bolões. Saiba mais sobre responsabilidades, privacidade, 
-segurança e regras de participação. Mantenha-se informado para aproveitar ao máximo nossa plataforma confiável e 
-transparente. Seja parte da comunidade de jogadores e vendedores de bolões e jogue com tranquilidade.')
+ao utilizar nossos serviços.')
 
 @section('content')
 

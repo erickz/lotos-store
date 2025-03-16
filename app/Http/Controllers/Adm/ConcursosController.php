@@ -363,7 +363,7 @@ class ConcursosController extends AdmBaseController
             return redirect()->back()->with(['message' => $e->getMessage(), 'error' => 1]);
         }
 
-        return redirect()->back()->with(['message' => "Código gerado (" . $qtGames . " apostas de <b>" . $qtBoloes . " bolões</b>): <br /> " . $code, 'type' => 'success', 'error' => 0]);
+        return redirect()->back()->with(['message' => "Código gerado (" . $qtGames . " jogos de <b>" . $qtBoloes . " bolões</b>): <br /> " . $code, 'type' => 'success', 'error' => 0]);
     }
 
     private function generateLineCodeForGame($code, $game, $bolao, &$qtGames = NULL, &$timeout, $timeoutIncrease = 400)

@@ -36,7 +36,7 @@ Route::post('boloes/finalizar/{lotoAlias?}', ['as' => 'web.boloes.finalize', 'us
 Route::post('boloes/criar/{lotoAlias?}', ['as' => 'web.boloes.store', 'uses' => 'BoloesController@store']);
 Route::get('boloes/{bolaoId}/games', ['as' => 'web.boloes.games', 'uses' => 'BoloesController@getGames']);
 Route::get('boloes/{suggestionId}/suggestions', ['as' => 'web.boloes.suggestions', 'uses' => 'BoloesController@getSuggestions']);
-Route::get('compartilhar-boloes/{customerId}/usuario', ['as' => 'web.boloes.customer', 'uses' => 'BoloesController@getFromCustomer']);
+Route::get('boloes/{customerId}/{alias?}/e', ['as' => 'web.boloes.customer', 'uses' => 'BoloesController@getFromCustomer']);
 
 Route::get('boloes/receive_invite/{token}', ['as' => 'web.customers.receiveInvite', 'uses' => 'BoloesController@receiveInvite']);
 
@@ -67,9 +67,6 @@ Route::post('meu-carrinho/remover-item', ['as' => 'web.cart.removeItem', 'uses' 
 Route::post('meu-carrinho/atualizar-quantidade', ['as' => 'web.cart.updateItem', 'uses' => 'CartController@updateItem']);
 Route::get('meu-carrinho/triagem', ['as' => 'web.cart.screening', 'uses' => 'CartController@screening']);
 
-//Creditos
-Route::get('creditos', ['as' => 'web.credits.index', 'uses' => 'CreditsController@index']);
-
 //Paginas estáticas
 Route::get('como-funciona', ['as' => 'web.staticPages.howItWorks', 'uses' => 'StaticPagesController@howItWorks']);
 Route::get('sobre-nos', ['as' => 'web.staticPages.about', 'uses' => 'StaticPagesController@about']);
@@ -93,7 +90,7 @@ Route::get('pagamentos/pagar', ['as' => 'web.payments.pay', 'uses' => 'PaymentsC
 Route::post('pagamentos', ['as' => 'web.payments.store', 'uses' => 'PaymentsController@doPayment']);
 Route::middleware('auth:web')->get('pagamentos/{paymentId}/finalizar', ['as' => 'web.payments.finish', 'uses' => 'PaymentsController@finish']);
 Route::middleware('auth:web')->get('pagamentos/compra_finalizada', ['as' => 'web.payments.finish_boloes', 'uses' => 'PaymentsController@finish_boloes']);
-Route::get('payments/notifications', ['as' => 'web.payments.notifications', 'uses' => 'PaymentsController@notifications']);
+Route::withoutMiddleware('web')->middleware('web-wtoken')->post('pagamentos/notificacoes', ['as' => 'web.payments.notifications', 'uses' => 'PaymentsController@notifications']);
 // Route::get('pagamentos/callback/{code}', ['as' => 'web.payments.callback', 'uses' => 'PaymentsController@callback']);
 
 //Login
@@ -104,11 +101,10 @@ Route::middleware('auth:web')->group(function(){
     Route::get('logout', ['as' => 'web.customers.logout', 'uses' => 'LoginController@logout']);
 
     Route::get('minhas-compras', ['as' => 'web.customers.mybuys', 'uses' => 'CustomersController@myBuys']);
-    Route::get('apostas', ['as' => 'web.customers.bets', 'uses' => 'CustomersController@myBets']);
+    Route::get('jogos', ['as' => 'web.customers.bets', 'uses' => 'CustomersController@myBets']);
 
     // Route::get('historico-de-creditos', ['as' => 'web.customers.creditsHistory', 'uses' => 'CustomersController@creditsHistory']);
     
-    //Todo: remove this line below
     Route::get('meu-perfil', ['as' => 'web.customers.profile', 'uses' => 'CustomersController@myPanel']);
 
     Route::get('boloes/{bolaoId}/stats', ['as' => 'web.boloes.stats', 'uses' => 'BoloesController@getStats']);
@@ -120,6 +116,8 @@ Route::middleware('auth:web')->group(function(){
     Route::get('meus-dados', ['as' => 'web.customers.edit', 'uses' => 'CustomersController@edit']);
     Route::post('meus-dados/editar', ['as' => 'web.customers.update', 'uses' => 'CustomersController@update']);
 
-    Route::get('resgatar-créditos', ['as' => 'web.customers.rescue', 'uses' => 'CustomersController@rescue']);
-    Route::post('resgatar-créditos', ['as' => 'web.customers.rescueSave', 'uses' => 'CustomersController@update_rescue']);
+    //Creditos
+    Route::get('creditos', ['as' => 'web.customers.rescue', 'uses' => 'CustomersController@rescue']);
+    Route::post('creditos', ['as' => 'web.credits.index', 'uses' => 'CreditsController@index']);
+    Route::post('resgatar-creditos', ['as' => 'web.customers.rescueSave', 'uses' => 'CustomersController@update_rescue']);
 });

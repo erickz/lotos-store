@@ -25,15 +25,15 @@
     <div class='container pe-4 ps-4 gamesList mt-4'>
         <div class='alert alert-secondary d-flex justify-content-center'>
             <div class='text-center me-9'>
-                <span>Nome</span> <br />
-                <strong class='font-larger'>{{ $bolao->name }}</strong>
+                <span>Criador</span> <br />
+                <strong class='font-larger'>{{ $bolao->customer->getProfileName() }}</strong>
             </div>
             <div class='text-center me-9'>
                 <span>Data do concurso</span> <br />
                 <strong class='font-larger'>{{ $bolao->concurso->getDrawDay() }}</strong>
             </div>
             <div class='text-center'>
-                <span>Quantidade de apostas</span> <br />
+                <span>Quantidade de jogos</span> <br />
                 <strong class='font-larger'>{{ $bolao->getQtGames() }}</strong>
             </div>
         </div><!-- /alert -->
@@ -45,6 +45,9 @@
 
         <div class='mb-2'>
             {!! $bolao->getLblChances() !!}
+        </div>
+        <div class='mb-2'>
+            {!! $bolao->description !!}
         </div>
         <div class='mb-4 ms-1'>
             <span>Prêmiação estimada:</span> <strong class='font-larger color-default position-relative'>{!! $bolao->concurso->getNextExpectedPrize() !!}</strong>

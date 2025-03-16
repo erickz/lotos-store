@@ -64,6 +64,13 @@ trait LoteryTrait
         return '<label class="p-2 rounded-circle border border-secondary min-w-35px text-white text-center bg-' . $color . '"><strong>' . $this->initials . '</strong></label>';
     }
 
+    public function getLabelName()
+    {
+        $color = $this->getColorClass();
+
+        return '<label class="p-2 border-radius border border-secondary min-w-35px text-white text-center bg-' . $color . '"><strong>' . $this->name . '</strong></label>';
+    }
+
     public function getColorClass($withAdditionals = true)
     {
         switch($this->initials){

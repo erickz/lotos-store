@@ -21,7 +21,7 @@
                 <strong class='font-larger'>{{ $bolao->concurso->getDrawDay() }}</strong>
             </div>
             <div class='text-center'>
-                <span>Quantidade de apostas</span> <br />
+                <span>Quantidade de jogos</span> <br />
                 <strong class='font-larger'>{{ $bolao->getQtGames() }}</strong>
             </div>
         </div><!-- /alert -->

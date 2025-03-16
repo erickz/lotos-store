@@ -9,7 +9,7 @@
         <div class="col-lg-12">
 
             <div class="clearfix">
-                <h1 class="pull-left"><span class="far fa-star"></span> Apostas do concurso Nº {{ $concurso->number }} da <b>{{ $concurso->lotery->name }}</b></h1>
+                <h1 class="pull-left"><span class="far fa-star"></span> Jogos do concurso Nº {{ $concurso->number }} da <b>{{ $concurso->lotery->name }}</b></h1>
             </div>
 
             @include('adm.elements.alert')
@@ -32,7 +32,7 @@
                         <a href='{{ route("adm.concursos.check", [$concurso->id]) }}' class='btn btn-primary'>Voltar</a>
                     </div>
                     
-                    <h2 class='mt-4'>Apostas</h2>
+                    <h2 class='mt-4'>Jogos</h2>
                     <table class='table table-bordered'>
                         <thead>
                             <tr>

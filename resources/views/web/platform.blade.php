@@ -36,7 +36,7 @@
                                 <div class="card-body d-flex flex-column align-items-center text-center">
                                     <i class="fas fa-tasks fa-4x mb-3 text-primary"></i>
                                     <h3 class="card-title mt-2">Gerenciador de Bolões</h3>
-                                    <p class="card-text mt-2">Organize seus concursos, monte as apostas dos seus Bolões, disponibilize aos seus clientes e verifique os jogos automaticamente. Tudo isso de forma rápida e segura.</p>
+                                    <p class="card-text mt-2">Organize seus concursos, monte os jogos dos seus Bolões, disponibilize aos seus clientes e verifique os jogos automaticamente. Tudo isso de forma rápida e segura.</p>
                                 </div>
                             </div>
                         </div>

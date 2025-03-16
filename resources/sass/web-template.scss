@@ -675,18 +675,31 @@ a.badge {
 }
 
 .shareButtons.onGamesModal {
-	#social-links {
-		ul {
-			flex-direction: row;
+	ul {
+		flex-direction: row;
+		justify-content: left;
+		
+		li {
+			padding: 0;
+			margin-right: 10px;
 
-			li {
-				padding: 0;
-				margin-right: 10px;
-				a {
-					font-size: 18px;
-				}
+			a {
+				font-size: 18px;
 			}
-		}	
+		}
+	}
+}
+
+.shareFromCustomerPage.shareButtons.onGamesModal {
+	ul {
+		justify-content: center;
+	}
+}
+
+.social-links {
+	.font-larger a {
+		font-size: 2em !important;
+		color: #FFF;
 	}
 }
 

@@ -17,10 +17,10 @@
                         <h1 class='ps-0 mb-0 text-secondary text-center mt-10'>Convite já efetivado ✅</h1>
                         
                         <div class='col-lg-12 finishCheckoutMessage mt-5 mb-10 h-180px text-center'>
-                            Este convite já foi efetivado e a as cotas já recebidas! <br /> Acesse e veja suas apostas no painel do cliente: <br />
+                            Este convite já foi efetivado e a as cotas já recebidas! <br /> Acesse e veja seus jogos no painel do cliente: <br />
 
                             <div class='d-flex justify-content-center mt-5'>
-                                <button class='btn btn-primary'><a href='{{ route("web.customers.mybuys") }}' class='text-white'><b>Minhas apostas</b></a></button>
+                                <button class='btn btn-primary'><a href='{{ route("web.customers.mybuys") }}' class='text-white'><b>Meus jogos</b></a></button>
                             </div>
                         </div><!-- /col-lg-12 -->
                     @else
@@ -38,7 +38,7 @@
                             </p>
 
                             <div class='d-flex justify-content-center mt-5'>
-                                <button class='btn btn-primary'><a href='{{ route("web.customers.mybuys") }}' class='text-white'><b>Veja suas apostas</b></a></button>
+                                <button class='btn btn-primary'><a href='{{ route("web.customers.mybuys") }}' class='text-white'><b>Veja seus jogos</b></a></button>
                                 <button class='btn btn-success ms-5'><a href='{{ route("web.boloes.create") }}' class='text-white'><b>Crie um bolão você mesmo!</b></a></button>
                             </div>
                         </div><!-- /col-lg-12 -->

@@ -1,7 +1,7 @@
 @extends('layouts.web.web')
 
-@section('titlePage', 'Como Funciona - Apostas Online e Venda de Bolões')
-@section('descriptionPage', 'Descubra como é simples e seguro participar das apostas online e vender seus bolões conosco. 
+@section('titlePage', 'Como Funciona - Venda de Bolões')
+@section('descriptionPage', 'Descubra como é simples e seguro participar e vender seus bolões conosco. 
 Conheça todo o processo, desde a escolha dos números até a distribuição dos prêmios. proveite nossa plataforma intuitiva e 
 comece a apostar ou vender seus bolões hoje mesmo!')
 

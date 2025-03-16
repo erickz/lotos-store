@@ -100,7 +100,7 @@
             @if ($lotery->costs->isNotEmpty())
                 <div class="col-lg-6">
                     <div class="main-box clearfix">
-                        <h2>Valor das apostas</h2>
+                        <h2>Valor dos Jogos</h2>
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
                                 <thead>

@@ -14,12 +14,12 @@
         @csrf
         <div class='p-5 bg-secondary border border-light rounded'>
             <div class='d-flex'>
-                <div class=''>Nome:</div>
-                <strong class='ms-auto'>{{ $bolao->name }}</strong>
-            </div>
-            <div class='d-flex'>
                 <div class=''>Número de jogos:</div>
                 <strong class='ms-auto font-larger'>{{ $bolao->getQtGames() }}</strong>
+            </div>
+            <div class='d-flex'>
+                <div class=''>Cotas selecionadas:</div>
+                <strong class='ms-auto font-larger'>{{ $cotasSelected }} {{ Str::plural('cota', $cotasSelected) }}</strong>
             </div>
             <div class='d-flex'>
                 <div class=''>Valor a pagar:</div>
@@ -35,7 +35,8 @@
             @endif
             <div class='alert d-none'></div>
             <div class='d-block'>
-                <div class='btn btnBuyCota btn-success' data-url='{{ route("web.boloes.finishbuy", [$bolao->id]) }}' data-cotas='{{ $cotasSelected }}'><i class='fa fa-shopping-cart'></i>Adicionar ao carrinho</div>
+                <div class='btn btnBuyCota btnConfirmation btn-success' data-url='{{ route("web.boloes.finishbuy", parameters: [$bolao->id]) }}' data-cotas='{{ $cotasSelected }}'><i class='fa fa-shopping-cart'></i><b>Adicionar ao carrinho</b></div>
+                <a href='{{ route("web.cart") }}' class='btn btn-primary' style="display: none"><i class='fa fa-check'></i><b>Ver carrinho</b></a>
             </div>
         </div>
     </form>

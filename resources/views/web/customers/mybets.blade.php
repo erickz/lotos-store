@@ -20,16 +20,16 @@
                 <div class="row mt-5 mybets">
                     @include('web.includes.alert')
 
-                    <div class='col-lg-12 p-0'>
+                    <div class='col-lg-12 px-4'>
                         <div class='d-flex align-items-left'>
-                            @if($boloes->count() > 0)
+                            {{-- @if($boloes->count() > 0)
                                 <a href='{{ route("web.boloes.customer", [ auth()->guard("web")->user()->id ]) }}' class="btn btn-info mt-2 mb-2 me-2 previewBoloesPage">
                                     <strong>
                                         <!-- <i class='fas fa-share'></i>  -->
                                         Compartilhar Bolões
                                     </strong>
                                 </a>
-                            @endif
+                            @endif --}}
                             <a href="{{ route('web.boloes.create') }}" class="{{ $boloes->count() <= 0 ? 'ms-auto' : '' }} mt-2 mb-2 me-2 btn btn-success createBolao"><strong>+ Criar Bolão</strong></a>
                         </div>
                         
@@ -41,7 +41,6 @@
                                             <!-- <td>#</td> -->
                                             <td>Loteria</td>
                                             <td>Concurso</td>
-                                            <td>Nome</td>
                                             <td>Cotas</td>
                                             <td>Preço</td>
                                             <td>Status</td>
@@ -63,7 +62,6 @@
                                                         <b>Nº {{ $bolao->concurso->number }}
                                                         - {{ $bolao->concurso->getDrawDay() }}</b>
                                                     </td>
-                                                    <td data-label='Nome' class="align-middle"><b>{{ $bolao->name }}</b></td>
                                                     <td data-label='Cotas' class="align-middle">{{ $bolao->cotas_available }} / {{ $bolao->cotas }}</td>
                                                     <td data-label='Preço' class="align-middle">{{ $bolao->getFormattedPrice() }}</td>
                                                     <td data-label='Status' class="align-middle"><strong class='text-warning'>{!! $bolao->getStatus() !!}</strong></td>

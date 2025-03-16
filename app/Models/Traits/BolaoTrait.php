@@ -262,7 +262,7 @@ trait BolaoTrait
         $url = url()->current() . '?bolao_id=' . $this->id;
         $shareButtons = \Share::page($url, '🎉🏆 Junte-se a Bolões vencedores e receba prêmios imperdíveis! 🏆
 
-        🔥 Confira as apostas do Bolão "' . $this->name . '", da ' . $this->lotery->name . '. Participe e ganhe até ' . $this->concurso->getNextExpectedPrize() . '! 💰🚀
+        🔥 Confira os jogos do Bolão "' . $this->name . '", da ' . $this->lotery->name . '. Participe e ganhe até ' . $this->concurso->getNextExpectedPrize() . '! 💰🚀
         
         👉 ' . $url)
             ->facebook()

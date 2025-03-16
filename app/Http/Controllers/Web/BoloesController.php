@@ -38,7 +38,7 @@ class BoloesController extends WebBaseController
         
         $loteries = NULL;
         $lotery = NULL;
-        // $followingConcursos = NULL;
+        $followingConcursos = Concurso::following()->orderBy('type', 'DESC')->get();
         $currentMenu = 1;
         
         if ($lotoAlias){
@@ -52,7 +52,7 @@ class BoloesController extends WebBaseController
 
         // $luckBird = $this->generateLuckBird();
 
-        return view('web.boloes.create', ['lotery' => $lotery, 'currentMenu' => $currentMenu, 'loteries' => $loteries]);
+        return view('web.boloes.create', ['lotery' => $lotery, 'followingConcursos' => $followingConcursos, 'currentMenu' => $currentMenu, 'loteries' => $loteries]);
     }
 
     public function configure(Request $request, $lotoAlias = '')
@@ -62,7 +62,7 @@ class BoloesController extends WebBaseController
         $currentMenu = 3;
         $luckBird = $this->generateLuckBird();
 
-        return view('web.boloes.wizard.configure', ['currentMenu' => $currentMenu, 'lotery' => $lotery, 'followingConcursos' => $followingConcursos, 'luckBird' => $luckBird]);   
+        return view('web.boloes.wizard.finalize', ['currentMenu' => $currentMenu, 'lotery' => $lotery, 'followingConcursos' => $followingConcursos, 'luckBird' => $luckBird]);   
     }
 
     public function finalize(Request $request, $lotoAlias = '')
@@ -198,11 +198,15 @@ class BoloesController extends WebBaseController
         // $followingConcursos = Concurso::following()->where('lotery_id', $lotery->id)->get();
         
         if (! $lotery ){
-            return redirect()->back()->with(['message' => 'Loteria não encontrada', 'error' => 1]);
+            return redirect()->route('web.boloes.config', [$lotoAlias])->with(['message' => 'Loteria não encontrada', 'error' => 1]);
         }
 
         if (! $request->has('games')){
-            return redirect()->back()->with(['message' => 'Erro ao enviar jogos', 'error' => 1]); 
+            return redirect()->route('web.boloes.config', [$lotoAlias])->with(['message' => 'Erro ao enviar jogos', 'error' => 1]); 
+        }
+
+        if (! $this->repository->priceIsValid($request->get('games'), $request->get('totalToPay'), $lotery)){
+            return redirect()->route('web.boloes.config', [$lotoAlias])->with(['message' => 'Valor total inválido, atualize seus jogos e caso o erro persista entre em contato.', 'error' => 1]); 
         }
 
         $customerId = auth()->guard('web')->check() ? auth()->guard('web')->user()->id : NULL;
@@ -218,12 +222,12 @@ class BoloesController extends WebBaseController
             'customer_id' => $customerId,
             'concurso_id' => $request->get('concurso_id'),
             'name' => $request->has('luckBird') ? $request->get('luckBird') : $this->generateLuckBird(),
-            'display_for_selling' => $request->has('display_for_selling') ? 1 : 0,
+            'display_for_selling' => 1,
             'price' => $request->get('price'),
             'keepCotas' => $keepCotas,
             'cotas' => $request->get('qtCotas'),
             'cotas_available' => $request->get('qtCotas') - $keepCotas,
-            'description' => '',
+            'description' => $request->get('description'),
             'games' => $games,
             'quantity_games' => $qtGames,
             'chances' => $chances,
@@ -247,7 +251,7 @@ class BoloesController extends WebBaseController
                 $this->repository->finalizeBolaoCreation($bolaoData);
             }
             catch (\Exception $e){
-                return redirect()->back()->with(['message' => 'Error occurred', 'error' => 1]); 
+                return redirect()->route('web.boloes.config', [$lotoAlias])->with(['message' => 'Error occurred', 'error' => 1]); 
             }
     
             return redirect()->route('web.payments.finish_boloes')->with(['message' => "Bolão criado com sucesso! Confira a <a href='" . route("web.boloes.listing") . "'>lista de bolões</a> para visualizá-lo!", 'error' => 0]);    
@@ -583,13 +587,20 @@ class BoloesController extends WebBaseController
 
         $shareButtons = $this->getShareButtons($customer->getFirstName());
 
-        return view('web.boloes.listing-customer', ['boloes' => $boloes, 'followingConcursos' => $followingConcursos, 'customer' => $customer, 'shareButtons' => $shareButtons]);
+        $bolaoFeatured = null;
+        if($boloes->count() > 0){
+            $bolaoFeatured = $boloes[0];
+
+            unset($boloes[0]);
+        }
+
+        return view('web.boloes.listing-customer', ['boloes' => $boloes, 'bolaoFeatured' => $bolaoFeatured, 'followingConcursos' => $followingConcursos, 'customer' => $customer, 'shareButtons' => $shareButtons]);
     }
     
     private function getShareButtons($customerName = NULL){
         $shareButtons = \Share::page(url()->current(), '🎉🏆 Junte-se a Bolões vencedores e receba prêmios imperdíveis! 🏆
 
-        🔥 Confira a lista dos melhores grupos de apostas ' . ($customerName ? 'de ' . $customerName : '') . 'e venha ganhar prêmios! 💰🚀
+        🔥 Confira a lista dos melhores grupos de jogos ' . ($customerName ? 'de ' . $customerName : '') . 'e venha ganhar prêmios! 💰🚀
         
         👉 ' . url()->current())
             ->facebook()
@@ -671,6 +682,6 @@ class BoloesController extends WebBaseController
         $plural = ($cotasSelected > 1 ? 's' : '');
 
 
-        return response()->json(['message' => "Cota" . ($plural) . " adicionada" . ($plural) . " ao carrinho e reservada" . ($plural) . " por 15 minutos. <a class='text-white' href='" . route('web.cart')  . "'><u>Clique aqui para visualizar</u></a>", 'error' => 0, 'cartItemsQt' => count(session()->get('cart.boloes')), 'redirectTo' => route('web.customers.bets')]);
+        return response()->json(['message' => "Cota" . ($plural) . " adicionada" . ($plural) . " ao carrinho e reservada" . ($plural) . " por 15 minutos. <a class='text-white' href='" . route('web.cart')  . "'><u>Clique aqui para visualizar</u></a> <button type='button' class='close pe-2 position-absolute top-0 right-0' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>", 'error' => 0, 'cartItemsQt' => count(session()->get('cart.boloes')), 'redirectTo' => route('web.customers.bets')]);
     }
 }

@@ -14,7 +14,59 @@
     <div class="container">
         <div class="col-lg-12">
             <div class="main-box clearfix">
-                <h1 class='ps-0 mb-8 text-primary'><b>Resgatar créditos</b></h1>
+                <h1 class='ps-0 mb-8 text-primary'><b>Comprar créditos</b></h1>
+                
+                <form id='formCredits' method='POST' action='{{ route("web.credits.index") }}' class='col-lg-12 mt-5 bg-white p-0'>
+                    <div class="alert d-none mb-5 ps-2"></div>
+                    
+                    <div class='d-flex d-flex-responsive'>
+                        <div class='col-md-6 ps-0'>
+                            <h3 class='ps-0 mb-0 border-0 mb-4'><b>Digite o valor desejado:</b></h3>
+                            <span class='text-gray d-block mt-3'><strong>Mínimo de: R$25,00</strong></span>
+
+                            <div id='customValueCredits' class='d-flex input-group'>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">R$</span>
+                                </div>
+                                <input type='text' class='form-control maskMoney' />
+                                <button type='submit' class='btn btn-primary tgForm' data-value='0'>Comprar</button>
+                            </div><!-- / -->
+                        </div><!-- /col-md-6 -->
+                        <div class='col-md-5 offset-md-1'>
+                            <h3 class='ps-0 mb-0 border-0 mb-10'><b>Ou selecione um valor padrão:</b></h3>
+                            <table id='listDefaultPrices' class='table w-100'>
+                                <tbody>
+                                    <tr>
+                                        <td class='w-75'><b>R$50,00</b></td>
+                                        <td class='w-25 text-center'><button type='submit' class='btn btn-primary tgForm' data-value='50,00'>Comprar</button></td>
+                                    </tr>  
+                                    <tr>
+                                        <td class='w-75'><b>R$100,00</b></td>
+                                        <td class='w-25 text-center'><button type='submit' class='btn btn-primary tgForm' data-value='100,00'>Comprar</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td class='w-75'><b>R$150,00</b></td>
+                                        <td class='w-25 text-center'><button type='submit' class='btn btn-primary tgForm' data-value='150,00'>Comprar</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td class='w-75'><b>R$200,00</b></td>
+                                        <td class='w-25 text-center'><button type='submit' class='btn btn-primary tgForm' data-value='200,00'>Comprar</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td class='w-75'><b>R$300,00</b></td>
+                                        <td class='w-25 text-center'><button type='submit' class='btn btn-primary tgForm' data-value='300,00'>Comprar</button></td>
+                                    </tr>  
+                                </tbody>  
+                            </table><!-- / -->
+                        </div>
+                    </div><!-- /d-flex -->
+                </form><!-- /col-lg-12 -->
+            </div><!-- /col-lg-12 -->
+        </div>
+
+        <div class="col-lg-12">
+            <div class="main-box clearfix">
+                <h2 class='ps-6 mb-8 text-primary border-0'><b>Resgatar créditos</b></h2>
 
                 {{-- @include('web.customers.menu') --}}
                 

@@ -223,6 +223,7 @@ class ConcursoRepository implements ConcursoRepositoryInterface
             throw new \Exception('Bolão not prized');
         }
 
+        //Reward Winners
         $totalCotas = $bolao->cotas;
         $prizePerCota = $bolao->prize / $totalCotas;
         $cotasRewarded = 0;
@@ -257,6 +258,7 @@ class ConcursoRepository implements ConcursoRepositoryInterface
         $ownerCustomer = $bolao->customer;
         $rewardOwner = $prizePerCota * $cotasLeft;
 
+        //Reward Bolão Owner with prize (if any) of the remaining cotas
         $reward = new Reward();
         $reward->customer_id = $ownerCustomer->id;
         $reward->bolao_id = $bolao->id;
@@ -278,9 +280,8 @@ class ConcursoRepository implements ConcursoRepositoryInterface
             throw new \Exception('Concurso já remunerado!');
         }
 
-        // $profitPercentage = 0.337;
-        //13% is the percentage of profit applied in the selling of each cota
-        $profitPercentage = 0.13;
+        //19% is the percentage of profit applied in the selling of each cota
+        $profitPercentage = 0.19;
 
         foreach($concurso->boloes as $bolao){
 

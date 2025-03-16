@@ -156,8 +156,8 @@ $(window).load(function(){
                 }
             }
             else {                        
-                if(! alert.is('.alert-info')){
-                    alert.addClass('alert-info');
+                if(! alert.is('.alert-warning')){
+                    alert.addClass('alert-warning');
                 }
 
                 alert.html('<i class="fa fa-exclamation-triangle text-white me-2"></i> Preencha todos os campos.');
@@ -261,6 +261,32 @@ $(window).load(function(){
             .fail(function(response){
                 handleAlert($this.parents('.cartListing'), response.message, 'warning');
             });
+        });
+    }
+
+    var tgPaymentWay = $('#tgPaymentWay');
+    if(tgPaymentWay.length > 0){
+        tgPaymentWay.find('.togglePaymentMethod').on('click', function(index, val){
+            var $this = $(this);
+            var target = $this.data('target');
+
+            // tgPaymentWay.find('.chosePaymentWay').animate({opacity: '0'}, 100);
+            // tgPaymentWay.find('.chosePaymentWay').hide(200);
+            
+            tgPaymentWay.find('.showPayment').fadeOut(100);
+
+            //tgPaymentWay.find('.' + target).animate({opacity: '1 !important'}, 100);
+            tgPaymentWay.find('.' + target).addClass('showPayment').fadeIn(300);
+
+            tgPaymentWay.find('.btn.active').removeClass('active');
+
+            if(target == 'tgCreditCard'){
+                $([document.documentElement, document.body]).animate({
+                    scrollTop: tgPaymentWay.find('.' + target).offset().top - 100,
+                }, 200);
+            }
+
+            $this.addClass("active");
         });
     }
 });

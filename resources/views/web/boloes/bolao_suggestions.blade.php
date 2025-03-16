@@ -43,7 +43,7 @@
                     </b>
                 </div>
                 <div class='mb-2'>
-                    <b>Quantidade de Jogos:</b> {{ $suggestion->qt_bets }} apostas
+                    <b>Quantidade de Jogos:</b> {{ $suggestion->qt_bets }} jogos
                 </div>
                 <div class='mb-2'>
                     <b>Descrição: </b>
@@ -99,7 +99,7 @@
                 <?php 
                 $num = sprintf("%04d", 1);
                 ?>
-                <h5 class='text-secondary ps-0'><b>{{ count($games) }} Apostas:</b></h5>
+                <h5 class='text-secondary ps-0'><b>{{ count($games) }} Jogos:</b></h5>
                 <ul class='list ps-1 max-h-150px overflow-auto'>
                     @foreach($games as $game)
                         <li class='mb-2 d-flex'>

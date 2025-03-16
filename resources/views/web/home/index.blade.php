@@ -29,10 +29,35 @@
                 </div>
             </section>
 
+            <section>
+                <div class="tabs">
+                    <button class="tab active" onclick="openTab('criadores')">Para Criadores</button>
+                    <button class="tab" onclick="openTab('compradores')">Para Apostadores</button>
+                    </div>
+
+                    <div id="criadores" class="tab-content active">
+                    <h3>Como Ganhar Dinheiro Criando Bolões</h3>
+                    <ol>
+                        <li>Crie seu bolão em 1 minuto.</li>
+                        <li>Divulgue e venda cotas.</li>
+                        <li>Receba até 60% do valor + comissão.</li>
+                    </ol>
+                    </div>
+
+                    <div id="compradores" class="tab-content">
+                    <h3>Como Apostar em Bolões</h3>
+                    <ol>
+                        <li>Escolha um bolão.</li>
+                        <li>Compre suas cotas.</li>
+                        <li>Acompanhe o sorteio e ganhe!</li>
+                    </ol>
+                </div>
+            </section>
+
             <section class="py-10" id="howItWorks">
                 <div class="container">
                     <div class="text-center mb-5">
-                        <h2 class="display-5 mb-3"><b>Funciona em 4 passos</b></h2>
+                        <h2 class="display-5 mb-3"><b>Funciona em 3 passos</b></h2>
                         <p class="lead">Simples e eficiente para começar a vender</p>
                     </div>
 
@@ -41,16 +66,13 @@
                         <div class="col-md-3">
                             <div class="step-card text-center p-4 position-relative">
                                 <div class="step-number bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center">1</div>
-                                <h3 class="h5 mt-4 text-primary"><b><i class="fas fa-trophy me-2 text-primary"></i>Criar</b></h3>
-                                <p>Selecione a loteria e monte seus jogos</p>
-                                <div class="step-arrow d-none d-md-block position-absolute top-50 end-0 translate-middle-y">
-                                    <i class="fas fa-arrow-right text-muted fa-2x"></i>
-                                </div>
+                                <h3 class="h5 mt-4 text-primary"><b><i class="fas fa-trophy me-2 text-primary"></i>Crie</b></h3>
+                                <b>Selecione a loteria e monte seus jogos</b>
                             </div>
                         </div>
 
                         <!-- Passo 2 -->
-                        <div class="col-md-3">
+                        {{-- <div class="col-md-3">
                             <div class="step-card text-center p-4 position-relative">
                                 <div class="step-number bg-danger text-white rounded-circle d-inline-flex align-items-center justify-content-center">2</div>
                                 <h3 class="h5 mt-4 text-danger"><b><i class="fas fa-rocket me-2 text-danger"></i>Lançamento</b></h3>
@@ -59,26 +81,23 @@
                                     <i class="fas fa-arrow-right text-muted fa-2x"></i>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <!-- Passo 3 -->
                         <div class="col-md-3">
                             <div class="step-card text-center p-4 position-relative">
-                                <div class="step-number bg-warning text-white rounded-circle d-inline-flex align-items-center justify-content-center">3</div>
-                                <h3 class="h5 mt-4 text-warning"><b><i class="fas fa-share-alt me-2 text-warning"></i>Divulgue</b></h3>
-                                <p>Compartilhe o Bolão e venda suas cotas</p>
-                                <div class="step-arrow d-none d-md-block position-absolute top-50 end-0 translate-middle-y">
-                                    <i class="fas fa-arrow-right text-muted fa-2x"></i>
-                                </div>
+                                <div class="step-number bg-danger text-white rounded-circle d-inline-flex align-items-center justify-content-center">2</div>
+                                <h3 class="h5 mt-4 text-danger"><b><i class="fas fa-share-alt me-2 text-danger"></i>Divulgue</b></h3>
+                                <b>Compartilhe o Bolão e venda suas cotas</b>
                             </div>
                         </div>
 
                         <!-- Passo 4 -->
                         <div class="col-md-3">
                             <div class="step-card text-center p-4">
-                                <div class="step-number bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center">4</div>
+                                <div class="step-number bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center">3</div>
                                 <h3 class="h5 mt-4 color-default"><b><i class="fas fa-money-bill me-2 color-default"></i>Receba</b></h3>
-                                <p>Receba em sua conta bancária</p>
+                                <b>Receba a receita de suas vendas</b>
                             </div>
                         </div>
                     </div>
@@ -155,8 +174,8 @@
                             <div class="card h-100 shadow-sm border-0">
                                 <div class="card-body text-center p-4">
                                     <i class="fas fa-brain fa-3x text-secondary mb-3"></i> <!-- Ícone -->
-                                    <h5 class="card-title"><b>Sistema Inteligente de Geração de Apostas</b></h5>
-                                    <p class="card-text text-muted">Gere apostas de forma rápida e inteligente.</p>
+                                    <h5 class="card-title"><b>Sistema Inteligente de Geração de Jogos</b></h5>
+                                    <p class="card-text text-muted">Gere jogos de forma rápida e inteligente.</p>
                                 </div>
                             </div>
                         </div>
@@ -493,7 +512,7 @@
 
                     <div class="row justify-content-center align-items-center">
                         <div class='text-center'>
-                            <a href="#" class="btn btn-danger btn-lg mt-3" data-toggle="modal" data-target="#registerModal"><b>Começar agora <i class="fas fa-rocket ms-2 text-white"></i></b></a>
+                            <a class="btn btn-danger btn-lg mt-3" data-toggle="modal" data-target="#registerModal"><b>Começar agora <i class="fas fa-rocket ms-2 text-white"></i></b></a>
                         </div>
                     </div>
                 </div>

@@ -31,7 +31,7 @@ class LoginController extends WebBaseController
                 return response()->json(['message' => $request->get('redirectTo'), 'error' => 0]);
             }
             else {
-                return response()->json(['message' => route('web.customers.mybuys'), 'error' => 0]);
+                return response()->json(['message' => route('web.customers.profile'), 'error' => 0]);
             }
         }
 

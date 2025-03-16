@@ -2,7 +2,7 @@
 
 @section('titlePage', 'Crie seu Próprio Bolão de Loteria aqui na ' . env('APP_NAME') . '!')
 @section('descriptionPage', 'Monte seu próprio bolão de loteria e aumente suas chances de vitória. 
-Compartilhe e venda suas apostas, maximize as possibilidades e celebre prêmios. Crie seu bolão agora!')
+Compartilhe e venda seus jogos, maximize as possibilidades e celebre prêmios. Crie seu bolão agora!')
 
 @section('content')
 
@@ -17,16 +17,32 @@ Compartilhe e venda suas apostas, maximize as possibilidades e celebre prêmios.
                     <form method='POST' action='{{ route("web.boloes.store", strtolower($lotery->initials)) }}' class='formFinalize'>
                         @csrf
                         <input type='hidden' name='totalToPay' class='inputHdTotalToPay' value='0' />
+
                         <div class='mt-3'>
-                            <div class="alert border mb-4 ps-2 pe-3" role="alert">
-                                <div class="alert-icon d-inline">
-                                    <i class="fas fa-info-circle fa-fw fa-lg text-primary"></i>
+                            @include('web.includes.alert')
+
+                            @if(! session()->has('message'))
+                                <div class="alert border mb-4 ps-2 pe-3" role="alert">
+                                    <div class="alert-icon d-inline">
+                                        <i class="fas fa-info-circle fa-fw fa-lg text-primary"></i>
+                                    </div>
+
+                                    <div class="text-primary d-inline">Confirme as opções desejadas e finalize o bolão</div>
                                 </div>
-                                <div class="text-primary d-inline">Confirme as opções desejadas e finalize o bolão</div>
+                            @endif
+                            <div class='mb-5 text-center'>
+                                <h2 class="border-0"><b>Confirme seu Bolão</b></h2>
                             </div>
-                            <div class='mb-5'>
-                                <h2><b>Resumo</b></h2>
-                            </div>
+                            {{--<div class='col-md-3 m-auto text-center mb-5'>
+                                <h3 class='bg-light p-2 rounded'>
+                                    <div class=''>
+                                        <b><span class='min-w-50px me-2'>Pague:</span> <span class='font-smaller costCt'></span></b>
+                                    </div>
+                                    <div class=''>
+                                        <b><span class='min-w-50px'>Ganhe até: </span> <u class='font-smaller revenueCt'></u></b>
+                                    </div>
+                                </h3>
+                            </div>--}}
                             <div class='d-flex align-items-center mb-5'>
                                 <div class='col-4 text-end me-5'>
                                     <strong>Loteria:</strong>
@@ -84,10 +100,32 @@ Compartilhe e venda suas apostas, maximize as possibilidades e celebre prêmios.
                                         <div class='alert alert-light mb-0 text-center'><i class='fas fa-info-circle me-2 text-primary'></i>Nenhum concurso cadastrado para a próxima semana, por favor tente mais tarde</div>
                                     @endif
                                 </div>
-                            </div><!-- /container -->
+                            </div>
+                            {{-- <div class='d-flex align-items-center mb-5'>
+                                <div class='col-4 text-end me-5'>
+                                    <strong class='d-inline'>Deseja tornar seu bolão público para venda?</strong>
+                                </div>
+                                <div class='col-6 ps-0'>
+                                    <div class='separator separator-primary'></div>
+                                    <span id='tgOpenSellBolao' class="switch switch-success switch-outline switch-icon switch-brand">
+                                        <label>
+                                            <input type="checkbox" name="display_for_selling" value='1'>
+                                            <span></span>
+                                        </label>
+                                    </span>
+                                </div><!-- /col -->
+                            </div><!-- /d-flex --> --}}
                             <div class='d-flex align-items-center mb-5'>
                                 <div class='col-4 text-end me-5'>
-                                    <strong class='d-inline'>Deseja listar o seu bolão no nosso site para venda?</strong>
+                                    <strong>Descrição do Bolão:</strong>
+                                </div>    
+                                <div class='col-6'>
+                                    <textarea class="form-control textarea" name="description" placeholder="Digite a descrição do Bolão"></textarea>
+                                </div>    
+                            </div>
+                            <div class='d-flex align-items-center mb-5'>
+                                <div class='col-4 text-end me-5'>
+                                    <strong class='d-inline'>Definir preço das cotas?</strong>
                                 </div>
                                 <div class='col-6 ps-0'>
                                     <div class='separator separator-primary'></div>
@@ -111,8 +149,9 @@ Compartilhe e venda suas apostas, maximize as possibilidades e celebre prêmios.
                                     </h3>
                                 </div>
                                 <div class='d-flex align-items-center mb-5'>
-                                    <div class='col-4 text-end me-5'>
+                                    <div class='col-4 text-end me-5 position-relative'>
                                         <strong class=''>Escolha o preço da cota:</strong> 
+                                        <i class='fa fa-question-circle font-smaller position-absolute start-100 translate-middle tooltips' data-toggle="tooltip" data-placement="top" data-html="true" title="Ao escolher valores maiores a quantidade total de cotas será menor"></i>
                                     </div>
                                     <div class='col-6 position-relative'>
                                         <div class='col-12 position-relative'>
@@ -121,7 +160,6 @@ Compartilhe e venda suas apostas, maximize as possibilidades e celebre prêmios.
                                                     <option value='{{ $value }}' {{ $value == 7.5 ? 'selected="selected"' : '' }}>R${{ str_replace('.', ',', $value) }}</option>
                                                 @endforeach
                                             </select>
-                                            <i class='fa fa-question-circle position-absolute top-0 start-100 translate-middle tooltips' data-toggle="tooltip" data-placement="top" data-html="true" title="Ao escolher valores maiores a quantidade total de cotas será menor"></i>
                                         </div>
                                         <!-- <div class='d-inline'>
                                             @foreach(['7.5', '15', '25', '35', '45'] as $index => $value)
@@ -131,15 +169,15 @@ Compartilhe e venda suas apostas, maximize as possibilidades e celebre prêmios.
                                     </div>
                                 </div>
                                 <div class='d-flex align-items-center mb-5'>
-                                    <div class='col-4 text-end me-5'>
+                                    <div class='col-4 text-end me-5 position-relative'>
                                         <strong>Ficar com cotas:</strong>
+                                        <i class='fa fa-question-circle font-smaller position-absolute start-100 translate-middle tooltips' data-toggle="tooltip" data-placement="top" data-html="true" title="Ao escolher nenhuma cota você disponibilizará <b>todas</b> para venda e portanto não será premiado pelas loteria (apenas pela venda das cotas)"></i>
                                     </div>    
                                     <div class='col-6'>
                                         <div class='col-12 position-relative'>
                                             <select name='keepCotas' class='form-control slKeepCotas'>
                                                 <option value='0'>0</option>
                                             </select>
-                                            <i class='fa fa-question-circle position-absolute top-0 start-100 translate-middle tooltips' data-toggle="tooltip" data-placement="top" data-html="true" title="Ao escolher nenhuma cota você disponibilizará <b>todas</b> para venda e portanto não será premiado pelas loteria (apenas pela venda das cotas)"></i>
                                         </div>
                                     </div>    
                                 </div>
@@ -155,7 +193,7 @@ Compartilhe e venda suas apostas, maximize as possibilidades e celebre prêmios.
                                     <div class='col-4 text-end me-5'>
                                         <strong class='position-relative'>
                                             Receita estimada:
-                                            <i class='fa fa-question-circle font-smaller position-absolute start-100 translate-middle tooltips' data-toggle="tooltip" data-placement="right" data-html="true" title="<b>A receita estimada é o valor que você vai ganhar ao vender todas as cotas</b>."></i>
+                                            <i class='fa fa-question-circle font-smaller position-absolute start-100 translate-middle tooltips' data-toggle="tooltip" data-placement="right" data-html="true" title="A receita estimada é o valor que você vai ganhar ao vender todas as cotas."></i>
                                         </strong>
                                     </div>    
                                     <div class='col-3'>
@@ -172,11 +210,11 @@ Compartilhe e venda suas apostas, maximize as possibilidades e celebre prêmios.
                         </div>
 
                         <div class='mt-5 listBets'>
-                            <h3 class='ps-0'><b>Apostas 
-                                (<label class=' '>0</label>)
+                            <h2 class='ps-4 border-0 text-center mb-2'><b>Jogos 
+                                (<label class='qtGames'>0</label>)
                                 </b>
-                            </h3>
-                            <div class='lblHolder mb-4'>
+                            </h2>
+                            <div class='lblHolder text-center mb-4'>
                                 <b class='text-primary'>SEU BOLÃO TEM <i class='label label-inline label-primary font-larger px-2 chancesTg'><b></b></i> DE GANHAR!</b>
                             </div>
                             <div class="alert d-none">
@@ -188,7 +226,7 @@ Compartilhe e venda suas apostas, maximize as possibilidades e celebre prêmios.
                                 </div>
                                 <div class='gamesListFooter text-end mt-2 me-4'>
                                     <div class='text-start'>
-                                        <div class='alert alert-light ms-0'><i class='fas fa-info-circle me-2 text-primary'></i> Nenhuma aposta adicionada. Escolha seus números da sorte e crie um conjunto de apostas para o seu bolão!</div>
+                                        <div class='alert alert-light ms-0'><i class='fas fa-info-circle me-2 text-primary'></i> Nenhuma aposta adicionada. Escolha seus números da sorte e crie um conjunto de jogos para o seu bolão!</div>
                                     </div>
                                 </div>
                             </div>
@@ -196,7 +234,11 @@ Compartilhe e venda suas apostas, maximize as possibilidades e celebre prêmios.
                         
                         <div class='col-md-12 p-4 mt-3 text-end'>
                             <button type="submit" class="btn-finalize btn btn-success ml-2" >
-                                <i class="fas fa-check fa-lg"></i> Finalizar
+                                @if(auth()->guard('web')->user()->credits <= 0)
+                                    <b>Comprar créditos</b>
+                                @else    
+                                    <b>Finalizar</b>
+                                @endif
                             </button>
                         </div>
                     </form>

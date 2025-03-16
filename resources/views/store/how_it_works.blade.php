@@ -1,7 +1,7 @@
 @extends('layouts.web.web')
 
-@section('titlePage', 'Como Funciona - Apostas Online e Venda de Bolões')
-@section('descriptionPage', 'Descubra como funciona apostar na {{ env("APP_NAME") }}! - é simples e seguro participar das apostas online e vender seus bolões conosco. 
+@section('titlePage', 'Como Funciona - Bolões Online')
+@section('descriptionPage', 'Descubra como funciona apostar na {{ env("APP_NAME") }}! - é simples e seguro participar e vender seus bolões conosco. 
 Aproveite nossa plataforma intuitiva e comece a apostar ou vender seus bolões hoje mesmo!')
 
 @section('content')
@@ -103,7 +103,7 @@ Aproveite nossa plataforma intuitiva e comece a apostar ou vender seus bolões h
                         <span class='titleName text-primary'><b>Conferência automática</b></span>
                     </div>
                     <div class='text-primary text-center'>
-                        Após o concurso ser realizado, a {{ env("APP_NAME") }} realiza a conferência de todas as apostas automaticamente - <b>de forma eficiente e segura</b>
+                        Após o concurso ser realizado, a {{ env("APP_NAME") }} realiza a conferência de todos os jogos automaticamente - <b>de forma eficiente e segura</b>
                     </div>
                 </div>
                 <div class='text-white p-5 pt-8 me-2 stepByStepHome shadow-sm rounded position-relative col'>

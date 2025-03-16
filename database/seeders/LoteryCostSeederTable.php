@@ -18,10 +18,10 @@ class LoteryCostSeederTable extends Seeder
     {
         $loteries = LoteryCosts::all();
 
-        //1.5x its own value and rount It
+        //40% its own value and rount It
         foreach($loteries as $index => $lotery){
             // $cost = $lotery->prize + ($lotery->prize * 0.5);
-            $cost = $lotery->prize + ($lotery->prize * 0.2);
+            $cost = $lotery->prize + ($lotery->prize * 0.40);
             $cost = round( $cost / 5, 1) * 5;
 
             $lotery->cost = $cost;

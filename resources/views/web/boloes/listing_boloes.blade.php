@@ -4,9 +4,8 @@
             <thead>
                 <tr>
                     <td class='p-3'>Loteria</td>
+                    <td class='p-3'></td>
                     <td class='p-3'>Concurso</td>
-                    <td class='p-3'>Destaque</td>
-                    <td class='p-3'>Nome</td>
                     <td class='p-3'>Prêmio estimado</td>
                     <td class='p-3'></td>
                     <td class='p-3'>Cotas</td>
@@ -20,14 +19,13 @@
                     @foreach($boloes as $bolao)
                         <tr>
                             <td data-label='Loteria' class='p-4 align-items-center'>
-                                {!! $bolao->lotery->getLabelInitials() !!}
+                                {!! $bolao->lotery->getLabelName() !!}
                             </td>
+                            <td data-label='Chances' class='p-4'><b>{!! $bolao->getLblChances(true) !!}</b></td>
                             <td data-label='Concurso' class='p-4'>
                                 <b>Nº {{ $bolao->concurso->number }} -
                                 {{ $bolao->concurso->getDrawDay() }}</b>
                             </td>
-                            <td data-label='Chances' class='p-4'><b>{!! $bolao->getLblChances(true) !!}</b></td>
-                            <td data-label='Nome' class='p-4'><b>{{ $bolao->name }}</b></td>
                             <td data-label='Prêmio Estimado' class='p-4 text-primary estimatedPrize'>
                                 <strong>{!! $bolao->concurso->getNextExpectedPrize() !!}</strong>
                             </td>
@@ -40,7 +38,7 @@
                             <td data-label='Preço' class='p-4'>{{ $bolao->getFormattedPrice() }}</td>
                             <td align='right' class='p-4'>
                                 <div class='slHolder'>
-                                    <select name='cotas' class='form-control slChooseCotas resetSelect'>
+                                    <select name='cotas' class='form-control isFromTable slChooseCotas resetSelect'>
                                         @for($i = 0; $i <= $bolao->getAvailableCotas(); $i++)
                                             <option value='{{ $i }}'>{{ $i }}</option>
                                         @endfor
@@ -48,7 +46,7 @@
                                 </div>
                             </td>
                             <td align='left' class='p-4'>
-                                <a class='cursor-p btn btn-success btn-sm text-center btnBuyCota disabled' href='' data-toggle="modal" data-target="#buyConfirmationModal" data-gamesurl='{{ route("web.boloes.buy", [$bolao->id]) }}'><i class='fa fa-shopping-cart'></i></a>
+                                <a class='cursor-p btn btn-success btn-sm text-center btnBuyCota isFromTable disabled' data-toggle="modal" data-target="#buyConfirmationModal" data-gamesurl='{{ route("web.boloes.buy", [$bolao->id]) }}'><i class='fa fa-shopping-cart'></i></a>
                             </td>
                         </tr>
                     @endforeach

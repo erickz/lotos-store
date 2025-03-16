@@ -23,9 +23,13 @@
                         <div class="alert d-none mb-5"></div>
 
                         <div class="form-group row p-1">
-                            <div class="col-lg-12">
+                            <div class="col-lg-6">
                                 <label><strong>Nome Completo*:</strong></label>
                                 <input type="text" name="full_name" class="form-control" value="{{ old('full_name') }}" />
+                            </div>
+                            <div class="col-lg-6">
+                                <label><strong>CPF*:</strong></label>
+                                <input type="text" name="cpf" class="form-control maskCpf" value="{{ old('cpf') }}" />
                             </div>
                         </div>
                         <div class="form-group row p-1">

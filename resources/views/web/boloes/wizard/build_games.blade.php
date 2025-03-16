@@ -3,12 +3,12 @@
 
     @csrf
 
-    <div class=''>
-        <div class='alert alert-light ms-0'><i class='fas fa-info-circle me-2 text-primary'></i> Selecione seus números da sorte e crie um Bolão <b>(o valor mínimo é R$45,00)</b></div>
+    <div class='justify-content-center'>
+        <div class='alert alert-light ms-0'><i class='fas fa-info-circle me-2 text-primary'></i> Selecione seus números da sorte e crie um Bolão <b>(o valor mínimo é R$25,00)</b></div>
 
-        <div class='d-flex d-flex-responsive justify-content-center mt-4'>
+        <div class='d-flex d-flex-responsive justify-content-between mt-4 col-md-11 m-auto'>
 
-            <div class='generateNumbersCt mt-4 border border-dash p-4 me-10'>
+            <div class='generateNumbersCt mt-4 border border-dash p-4'>
                 <h3 class='ps-0 border-0 mb-4 text-start'><b>Quero gerar jogos automáticamente</b></h3>
                 <div class='d-flex justify-content-start align-items-center'>
                     <div class='slHolder max-w-80px'>
@@ -36,7 +36,12 @@
                 </div>
                 <div class='text-start mt-2'>
                     <button class='btn btn-lg btn-primary btGenerate'>
-                        <i class='fas fa-dice'></i><b>Gerar apostas</b> 
+                        <i class='fas fa-dice'></i><b>Gerar jogos</b> 
+                    </button>
+                </div>
+                <div class='text-start mt-2'>
+                    <button class='btn btn-lg btn-warning btGenerate' data-dozens="{{ $lotery->costs->first()->number_matches + 1 }}">
+                        <i class='fas fa-star'></i><b>Gerar 1 aposta de {{ $lotery->costs->first()->number_matches + 1 }} dezenas</b> 
                     </button>
                 </div>
             </div>
@@ -96,7 +101,7 @@
                         <ul class="dropdown-menu" role="menu"></ul>
                     </div> -->
                 </div>
-                <div class='btCt mt-3 d-flex align-items-center'>
+                <div class='btCt mt-3 d-flex align-items-between'>
                     <div class="btn btn-success addBolao me-1">
                         <strong class='d-block'><i class="fas fa-plus-circle fa-lg"></i> Adicionar Números</strong>
                     </div>
@@ -109,7 +114,7 @@
     </div>
 
     <div class='mt-10 listBets'>
-        <h2 class='ps-4'><b>Apostas 
+        <h2 class='ps-4 border-0 mb-2'><b>Jogos 
             <span class='qtGames'>(0)</span>
             </b>
         </h2>
@@ -125,7 +130,7 @@
             </div>
             <div class='gamesListFooter text-end mt-2 me-4'>
                 <div class='text-start'>
-                    <div class='alert alert-light ms-0'><i class='fas fa-info-circle me-2 text-primary'></i> Nenhuma aposta adicionada. Escolha seus números da sorte e crie um conjunto de apostas para o seu bolão!</div>
+                    <div class='alert alert-light ms-0'><i class='fas fa-info-circle me-2 text-primary'></i> Nenhuma aposta adicionada. Escolha seus números da sorte e crie um conjunto de jogos para o seu bolão!</div>
                 </div>
             </div>
         </div>
@@ -135,7 +140,7 @@
                 @csrf
                 <input type='hidden' name='totalToPay' class='inputHdTotalToPay' value='0' />
 
-                <span class='me-3'><strong>Valor mínimo:</strong> R$45,00</span>
+                <span class='me-3'><strong>Valor mínimo:</strong> R$25,00</span>
                 <button type='submit' class="btn-submit btn btn-success ml-2">
                     <b>Finalizar <i class="fas fa-chevron-right fa-lg ms-2"></i></b>
                 </button>
