@@ -29,7 +29,6 @@
                                         <tr>
                                             <td>Loteria</td>
                                             <td>Concurso</td>
-                                            <td>Nome do Bolão</td>
                                             <td>Data da compra</td>
                                             <td>Cotas compradas</td>
                                             <td>Status</td>
@@ -52,7 +51,6 @@
                                                         <b>Nº {{ $bolaoBought->bolao->concurso->number }}
                                                         - {{ $bolaoBought->bolao->concurso->getDrawDay() }}</b>
                                                     </td>
-                                                    <td data-label='Nome' class="align-middle"><b>{{ $bolaoBought->bolao->name }}</b></td>
                                                     <td data-label='Prêmio Estimado' class="align-middle">{{ $bolaoBought->getCreatedAtFormatted() }}</td>
                                                     <td data-label='Cotas' class="align-middle">{{ $bolaoBought->cotas }}</td>
                                                     <td data-label='Status' class="align-middle"><strong class='text-warning'>{!! $bolaoBought->bolao->getStatus() !!}</strong></td>

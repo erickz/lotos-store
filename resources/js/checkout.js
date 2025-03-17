@@ -289,4 +289,20 @@ $(window).load(function(){
             $this.addClass("active");
         });
     }
+
+    var copyPixCode = $('#copyPixCode');
+    const unsecuredCopyToClipboard = (text) => { const textArea = document.createElement("textarea"); textArea.value=text; document.body.appendChild(textArea); textArea.select(); try{document.execCommand('copy')}catch(err){console.error('Unable to copy to clipboard',err)}document.body.removeChild(textArea);alert('Código PIX copiado!');};
+
+    if (copyPixCode.length > 0){
+        copyPixCode.on('click', function(){
+            if (window.isSecureContext && navigator.clipboard) {
+                navigator.clipboard.writeText(copyPixCode.data('code')).then(function () {
+                    alert('Código PIX copiado!')
+                });
+            } 
+            else {
+                unsecuredCopyToClipboard(copyPixCode.data('code'));
+            }
+        });
+    }
 });
