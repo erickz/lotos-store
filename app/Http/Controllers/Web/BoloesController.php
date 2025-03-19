@@ -216,25 +216,33 @@ class BoloesController extends WebBaseController
         $qtGames = count($games);
         $chances = $lotery->calculateChances($games, $lotery->id);
 
-        $bolaoData = [
-            'lotery_id' => $lotery->id,
-            'lotery_name' => $lotery->name,
-            'customer_id' => $customerId,
-            'concurso_id' => $request->get('concurso_id'),
-            'name' => $request->has('luckBird') ? $request->get('luckBird') : $this->generateLuckBird(),
-            'display_for_selling' => 1,
-            'price' => $request->get('price'),
-            'keepCotas' => $keepCotas,
-            'cotas' => $request->get('qtCotas'),
-            'cotas_available' => $request->get('qtCotas') - $keepCotas,
-            'description' => $request->get('description'),
-            'games' => $games,
-            'quantity_games' => $qtGames,
-            'chances' => $chances,
-            'total_value' => $request->get('totalToPay'),
-            //Used in sessions:
-            'totalToPay' => $request->get('totalToPay')
-        ];
+        try {
+            $newBolao = $this->repository->finalizeBolaoCreation([
+                'lotery_id' => $lotery->id,
+                'lotery_name' => $lotery->name,
+                'customer_id' => $customerId,
+                'concurso_id' => $request->get('concurso_id'),
+                'active' => 0,
+                'name' => $request->has('luckBird') ? $request->get('luckBird') : $this->generateLuckBird(),
+                'display_for_selling' => 1,
+                'price' => $request->get('price'),
+                'keepCotas' => $keepCotas,
+                'cotas' => $request->get('qtCotas'),
+                'cotas_available' => $request->get('qtCotas') - $keepCotas,
+                'description' => $request->get('description'),
+                'games' => $games,
+                'quantity_games' => $qtGames,
+                'chances' => $chances,
+                'total_value' => $request->get('totalToPay'),
+                //Used in sessions:
+                'totalToPay' => $request->get('totalToPay')
+            ]);
+        }
+        catch (\Exception $e){
+            return redirect()->route('web.boloes.config', [$lotoAlias])->with(['message' => 'Error ocurred', 'error' => 1]); 
+        }
+
+        $bolaoData = ['bolao_id' => $newBolao->id];
 
         if (! auth()->guard('web')->check() || auth()->guard('web')->user()->credits < $request->get('totalToPay')){
             session()->put('payment.total', $request->get('totalToPay'));
@@ -246,13 +254,6 @@ class BoloesController extends WebBaseController
         else {
             session()->put('cart.customBolao', $bolaoData);
             session()->forget('payment.onlyCredits');
-            
-            try {
-                $this->repository->finalizeBolaoCreation($bolaoData);
-            }
-            catch (\Exception $e){
-                return redirect()->route('web.boloes.config', [$lotoAlias])->with(['message' => 'Error occurred', 'error' => 1]); 
-            }
     
             return redirect()->route('web.payments.finish_boloes')->with(['message' => "Bolão criado com sucesso! Confira a <a href='" . route("web.boloes.listing") . "'>lista de bolões</a> para visualizá-lo!", 'error' => 0]);    
         }
@@ -558,6 +559,45 @@ class BoloesController extends WebBaseController
         $followingConcursos = Concurso::following()->whereIn('lotery_id', [1, 2, 3, 4])->get();
 
         return view('web.boloes.listing_all', ['followingConcursos' => $followingConcursos, 'boloes' => $boloes]);
+    }
+
+    public function activate(Request $request, $bolaoId = NULL)
+    {
+        if( ! auth()->guard('web')->check()){
+            return back();
+        }
+
+        $bolao = $this->repository->find($bolaoId);
+
+        if( ! $bolao){
+            return back();
+        }
+
+        if (! $bolao->customer_id = auth()->guard('web')->user()->id){
+            return back();
+        }
+
+        if (auth()->guard('web')->user()->credits < $bolao->total_value){
+            $totalToPay = $bolao->total_value;
+
+            session()->put('payment.total', $totalToPay);
+            session()->put('cart.customBolao', ['bolao_id' => $bolao->id]);
+            session()->forget('payment.onlyCredits');
+
+            return redirect()->route('web.payments.index');
+        }
+        else {
+            try{
+                $bolao = $this->repository->activateBolao($bolao->id);
+
+                auth()->guard('web')->user()->remove_credits($bolao->total_value);
+            }
+            catch(\Exception $e){
+                return back()->with(['message' => $e->getMessage()]);
+            }
+        }
+
+        return back()->with(['message' => 'Bolão ativado com sucesso!']);
     }
 
     public function getFromCustomer(Request $request, $customerId = NULL)

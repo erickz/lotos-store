@@ -1,5 +1,6 @@
 $(window).load(function(){
     var paymentForm = $('#paymentForm');
+    
     if (paymentForm.length > 0){
         var card = new Card({
             // a selector or DOM element for the form where users will
@@ -10,10 +11,10 @@ $(window).load(function(){
             container: '.card-wrapper', // *required*
         
             formSelectors: {
-                // numberInput: 'input#number', // optional — default input[name="number"]
-                // expiryInput: 'input#expiry', // optional — default input[name="expiry"]
-                // cvcInput: 'input#cvc', // optional — default input[name="cvc"]
-                // nameInput: 'input#name' // optional - defaults input[name="name"]
+                nameInput: 'input[name="full_name"]' // optional - defaults input[name="full_name"]
+            },
+            cardSelectors: {
+                nameInput: 'input[name="full_name"]' // optional - defaults input[name="full_name"]
             },
         
             width: 250,
@@ -28,7 +29,7 @@ $(window).load(function(){
             // Default placeholders for rendered fields - optional
             placeholders: {
                 number: '•••• •••• •••• ••••',
-                name: 'Nome Sobrenome',
+                full_name: 'Nome Sobrenome',
                 expiry: '••/••',
                 cvc: '•••'
             },
@@ -38,7 +39,7 @@ $(window).load(function(){
             },
         
             // if true, will log helpful messages for setting up Card
-            debug: false // optional - default false
+            debug: true // optional - default false
         });
 
         var publicKey = null;
@@ -119,48 +120,52 @@ $(window).load(function(){
             var cardHolder = paymentForm.find(".cardFullname").val();
             var cardExpiration = paymentForm.find('.cardExpiration').val();
             var cardExpAr = cardExpiration.split('/');
+            var passwordVal = paymentForm.find(".passwordField").val();
 
             var alert = paymentForm.find('.alert');
 
             alert.html('');
-            // if (! cardBrand){
-            //     if(! alert.is('.alert-info')){
-            //         alert.addClass('alert-info');
-            //     }
 
-            //     alert.html('<i class="fa fa-exclamation-triangle text-white me-2"></i> Cartão de crédito não identificado.');
-            // }
-            if (cardCcv && cardExpiration && publicKey){
-
-                var encryptedCard = PagSeguro.encryptCard({
-                    publicKey: publicKey,
-                    holder: cardHolder,
-                    number: cardNumber,
-                    expMonth: cardExpAr[0].replace(' ', ''),
-                    expYear: cardExpAr[1].replace(' ', ''),
-                    securityCode: cardCcv
-                });
-
-                if(encryptedCard.hasErrors){
-                    if(! alert.is('.alert-warning')){
-                        alert.addClass('alert-warning');
-                    }
-    
-                    alert.html('<i class="fa fa-exclamation-triangle text-white me-2"></i> Os dados do cartão são inválidos.');
-                }
-                else {
-                    var inputCardToken = "<input type='hidden' name='cardToken' value='" + encryptedCard.encryptedCard + "' />";
-                    paymentForm.prepend(inputCardToken);
-
-                    paymentForm.trigger('submit');
-                }
-            }
-            else {                        
+            if (paymentForm.find(".passwordField").length > 0 && ! passwordVal && passwordVal.length < 6){
                 if(! alert.is('.alert-warning')){
-                    alert.addClass('alert-warning');
+                    alert.addClass('alert-secondary');
                 }
+                
+                alert.html('<i class="fa fa-exclamation-triangle me-2"></i> O campo senha precisa ter no mínimo 6 characteres.');
+            }
+            else {
+                if (cardCcv && cardExpiration && publicKey ){
 
-                alert.html('<i class="fa fa-exclamation-triangle text-white me-2"></i> Preencha todos os campos.');
+                    var encryptedCard = PagSeguro.encryptCard({
+                        publicKey: publicKey,
+                        holder: cardHolder,
+                        number: cardNumber,
+                        expMonth: cardExpAr[0].replace(' ', ''),
+                        expYear: cardExpAr[1].replace(' ', ''),
+                        securityCode: cardCcv
+                    });
+    
+                    if(encryptedCard.hasErrors){
+                        if(! alert.is('.alert-warning')){
+                            alert.addClass('alert-warning');
+                        }
+        
+                        alert.html('<i class="fa fa-exclamation-triangle text-white me-2"></i> Os dados do cartão são inválidos.');
+                    }
+                    else {
+                        var inputCardToken = "<input type='hidden' name='cardToken' value='" + encryptedCard.encryptedCard + "' />";
+                        paymentForm.prepend(inputCardToken);
+    
+                        paymentForm.trigger('submit');
+                    }
+                }
+                else {                        
+                    if(! alert.is('.alert-warning')){
+                        alert.addClass('alert-secondary');
+                    }
+                    
+                    alert.html('<i class="fa fa-exclamation-triangle me-2"></i> Preencha todos os campos.');
+                }
             }
         });
     }
@@ -172,7 +177,7 @@ $(window).load(function(){
         var closeBt = '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
 
         if (type == undefined || ! type ){
-            type = 'warning';
+            type = 'secondary';
         }
 
         if (disableClose != undefined && disableClose ){

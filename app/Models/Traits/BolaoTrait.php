@@ -205,8 +205,11 @@ trait BolaoTrait
             top-0 start-100 translate-middle tooltips font-smaller" data-toggle="tooltip" data-placement="top" 
             data-html="true" title="<b>NOTA:</b> Este bolão foi cancelado devido a circunstâncias imprevistas que impossibilitaram a realização do jogo. Lamentamos qualquer inconveniente e estamos à disposição para auxiliá-lo em qualquer dúvida ou problema. Seus créditos foram devidamente reembolsados de acordo com nossa política de reembolso."></i></label>';
         }
+        else if (! $this->active){
+            return '<label><b class="text-warning">Aguardando pagamento</b></label>';
+        }
         else if ($now <= $contestTime){
-            return '<label><b class="text-warning">Aguardando concurso</b></label>';
+            return '<label><b class="text-success">Ativo</b></label>';
         }
         else {
             if ($this->checked && $this->prize > 0){
@@ -220,10 +223,10 @@ trait BolaoTrait
                 }
             }
             else if($this->checked) {
-                return '<label><b class="text-primary">Verificado</b></label>';
+                return '<label><b class="text-success">Verificado</b></label>';
             }
 
-            return '<label><b class="text-primary">Aguardando verificação</b></label>';
+            return '<label><b class="text-primary">Aguardando conferência</b></label>';
         }
     }
 
@@ -282,6 +285,10 @@ trait BolaoTrait
         }
 
         if ($this->repayed){
+            return false;
+        }
+
+        if (! $this->active){
             return false;
         }
 

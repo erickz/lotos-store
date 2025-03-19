@@ -67,14 +67,19 @@
                                                     <td data-label='Status' class="align-middle"><strong class='text-warning'>{!! $bolao->getStatus() !!}</strong></td>
                                                     <td data-label='Premiação' class="align-middle">{{ $bolao->getFormattedPrize() }}</td>
                                                     <td data-label='Ações' class="align-middle">
-                                                        <div class='d-flex justify-content-end'>
-                                                            <a data-toggle="modal" data-target="#bolaoInfosModal" data-id='{{ $bolao->id }}' data-gamesurl='{{ route("web.boloes.games", [$bolao->id]) }}' class='me-2 gamesTrigger bolao_{{ $bolao->id }}'>
+                                                        <div class='d-flex justify-content-center'>
+                                                            @if(! $bolao->active)
+                                                                <a href="{{ route('web.boloes.activate', [$bolao->id]) }}"><i class="fas fa-dollar-sign ms-2 me-2 text-light rounded bg-success py-2 px-3" title='Pagar e ativar Bolão' role='button'></i></a>
+
+                                                                <a data-toggle="modal" data-target="#bolaoInfosModal" data-gamesurl='{{ route("web.boloes.stats", [$bolao->id]) }}'><i class="fas fa-chart-bar text-light rounded bg-warning p-2" title='Relatório do Bolão' role='button'></i></a>
+                                                            @endif
+
+                                                            <a data-toggle="modal" data-target="#bolaoInfosModal" data-id='{{ $bolao->id }}' data-gamesurl='{{ route("web.boloes.games", [$bolao->id]) }}' class='ms-2 me-2 gamesTrigger bolao_{{ $bolao->id }}'>
                                                                 <i class="fas fa-search text-light rounded bg-info p-2" title='Visualizar Jogos' role='button'></i>
                                                             </a>
-                                                            <a data-toggle="modal" data-target="#bolaoInfosModal" data-gamesurl='{{ route("web.boloes.stats", [$bolao->id]) }}'><i class="fas fa-chart-bar text-light rounded bg-warning p-2" title='Relatório do Bolão' role='button'></i></a>
 
                                                             @if ($bolao->canTransactionCotas())
-                                                                <a data-toggle="modal" data-target="#bolaoInfosModal" data-gamesurl='{{ route("web.boloes.invite", [$bolao->id]) }}'><i class="fas fa-envelope ms-2 text-light rounded bg-success p-2" title='Convidar amigos' role='button'></i></a>
+                                                                <a data-toggle="modal" data-target="#bolaoInfosModal" data-gamesurl='{{ route("web.boloes.invite", [$bolao->id]) }}'><i class="fas fa-envelope ms-2 text-light rounded bg-success p-2" title='Presentar cotas' role='button'></i></a>
                                                             @endif
                                                             <!-- <a><i class="fas fa-plus text-light rounded bg-success p-2" title='Re-Criar Bolão' role='button'></i></a> -->
                                                         </div>

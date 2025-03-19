@@ -33,18 +33,19 @@ class WebBaseController extends BaseController
         }
     }
 
-    public function calculateTheCreditsDiffToPay(){
-        if(auth()->guard('web')->check() && session()->get('payment.total') > auth()->guard('web')->user()->credits){
-            $toPayDiff = session()->get('payment.total') - auth()->guard('web')->user()->credits;
+    public function calculateTheCreditsDiffToPay($totalToPay = 0, $credits = 0){
+        if($totalToPay > $credits){
+            $toPayDiff = $totalToPay - $credits;
 
             //The payment gateways have a minimum value, this ensure this is not broke
             if($toPayDiff < 5){
-                session()->put('payment.isMinimum', true);
+                session()->put('payment.isMinimum', value: true);
                 $toPayDiff = 6;
             }
 
-            session()->put('payment.toPayDiff', $toPayDiff);
-            session()->put('payment.toPay', $toPayDiff);
+            return $toPayDiff;
         }
+
+        return $totalToPay;
     }
 }

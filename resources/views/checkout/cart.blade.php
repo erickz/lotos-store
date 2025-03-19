@@ -81,7 +81,7 @@
                             </table><!-- /bolaoCart -->
                         </div>
                         <div class='bg-white shadow-sm p-4 rounded-bottom mt-5'>
-                            <h2 class='ps-0 pt-0'>Resumo</h2>
+                            <h3 class='ps-0 pt-0'>Resumo do pedido</h3>
 
                             <div class='d-flex flex-column'>
                                 <table class='bolaoResume w-100'>
@@ -96,14 +96,14 @@
                                                 </th>
                                             </tr>
                                         @endif
-                                        <tr class='totalResume border-bottom border-secondary'>
+                                        {{--<tr class='totalResume border-bottom border-secondary'>
                                             <td class='pb-2'>
                                                 Sua compra
                                             </td>
                                             <th class='totalToPay' data-total='{{ session()->get("payment.total") }}'>
                                                 <b>{{ 'R$' . number_format(session()->get("payment.total"), 2, ',', '.') }}</b>
                                             </th>
-                                        </tr>
+                                        </tr>--}}
                                         <tr class='totalResume'>
                                             <td class='pt-2 pe-1'>
                                                 Total a pagar
@@ -128,11 +128,11 @@
                                 <div class='text-center'>
                                     <a href='{{ route("web.cart.screening") }}' class='btn btn-success mt-5'>
                                         @if(! auth()->guard('web')->check())
-                                            <b>Prosseguir</b>
+                                            <b>Ir para Pagamento</b>
                                         @elseif( auth()->guard('web')->user()->credits >= session()->get("payment.total") )
                                             <b>Finalizar compra</b>
                                         @else
-                                            <b>Comprar créditos</b>
+                                            <b>Ir para Pagamento</b>
                                         @endif
                                     </a>
                                 </div>

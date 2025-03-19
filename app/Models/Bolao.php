@@ -18,7 +18,7 @@ class Bolao extends BaseModel
      * @var array
      */
     protected $fillable = [
-        'lotery_id', 'customer_id', 'chances', 'concurso_id', 'active', 'display_for_selling', 'featured', 'name', 'cotas', 'cotas_available', 'price', 'prize', 'description', 'quantity_games', 'visits', 'total_value'
+        'lotery_id', 'customer_id', 'chances', 'done', 'concurso_id', 'active', 'display_for_selling', 'featured', 'name', 'cotas', 'cotas_available', 'price', 'prize', 'description', 'quantity_games', 'visits', 'total_value'
     ];
 
     /**

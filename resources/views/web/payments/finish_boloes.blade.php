@@ -47,14 +47,14 @@
                         </div>
 
                         <div class='d-flex justify-content-center mt-5'>
-                            <button class='btn btn-primary'><a href='{{ route("web.customers.mybuys") }}' class='text-white'><b>Veja suas compras</b></a></button>
+                        @if($customBolao)
+                                <button class='btn btn-primary'><a href='{{ route("web.customers.bets") }}' class='text-white'><b>Veja seus Bolões</b></a></button>
+                            @else
+                                <button class='btn btn-primary'><a href='{{ route("web.customers.mybuys") }}' class='text-white'><b>Veja suas compras</b></a></button>
+                            @endif
                             <button class='btn btn-success ms-5'><a href='{{ route("web.boloes.create") }}' class='text-white'><b>Crie um novo bolão</b></a></button>
                         </div>
                     </div>
-                    <script type='text/javascript'>
-                        sessionStorage.setItem('bettings', JSON.stringify([]));
-                        sessionStorage.setItem('lotoAlias', '');
-                    </script>
                 @else
                     @if (isset($error) && $error)
                         <h1 class='ps-0 mb-0 text-secondary text-center mt-10'>Houve algo inesperado durante a realização da compra</h1>
@@ -68,15 +68,14 @@
                         @else
                             Sua compra foi realizada com sucesso! <br />
                             Agradecemos a participação e desejamos muita sorte 🍀
-
-                            <script type='text/javascript'>
-                                sessionStorage.setItem('bettings', JSON.stringify([]));
-                                sessionStorage.setItem('lotoAlias', '');
-                            </script>
                         @endif
 
                         <div class='d-flex justify-content-center mt-5'>
-                            <button class='btn btn-primary'><a href='{{ route("web.customers.mybuys") }}' class='text-white'><b>Veja suas compras</b></a></button>
+                            @if($customBolao)
+                                <button class='btn btn-primary'><a href='{{ route("web.customers.bets") }}' class='text-white'><b>Veja seus Bolões</b></a></button>
+                            @else
+                                <button class='btn btn-primary'><a href='{{ route("web.customers.mybuys") }}' class='text-white'><b>Veja suas compras</b></a></button>
+                            @endif
                             <button class='btn btn-success ms-5'><a href='{{ route("web.boloes.create") }}' class='text-white'><b>Crie um novo bolão</b></a></button>
                         </div>
                     </div>

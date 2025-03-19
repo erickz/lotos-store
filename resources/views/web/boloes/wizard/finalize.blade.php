@@ -235,7 +235,7 @@ Compartilhe e venda seus jogos, maximize as possibilidades e celebre prêmios. C
                         <div class='col-md-12 p-4 mt-3 text-end'>
                             <button type="submit" class="btn-finalize btn btn-success ml-2" >
                                 @if(auth()->guard('web')->user()->credits <= 0)
-                                    <b>Comprar créditos</b>
+                                    <b>Pagar Bolão</b>
                                 @else    
                                     <b>Finalizar</b>
                                 @endif

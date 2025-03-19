@@ -128,7 +128,7 @@ $(window).load(function(){
                 var slHolderParent = $this.parents('tr');
 
                 if (! $this.is('.isFromTable')){
-                    slHolderParent = $this.parent().parent();
+                    slHolderParent = $this.parent().parent().parent();
                 }
 
                 var currentBtnBuyCotas = slHolderParent.find('.btnBuyCota');
@@ -157,7 +157,7 @@ $(window).load(function(){
                     var classColorText = '';
 
                     if (creditsUserCt.length > 0 && creditsUser < totalPrice){
-                        classColorText = 'text-danger';
+                        classColorText = '';
                     }
 
                     calculateTotal.html('<span class="' +  classColorText + '">R$' + totalPriceFormatted + '</span>');

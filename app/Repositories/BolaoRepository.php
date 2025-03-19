@@ -328,9 +328,9 @@ class BolaoRepository implements BolaoRepositoryInterface
             throw new \Exception('Bolão data not found');
         }
 
-        if (! $runByCommand && auth()->guard('web')->user()->credits < $bolaoData['totalToPay']){
-            throw new \Exception('Not enough credits');
-        }
+        // if (! $runByCommand && auth()->guard('web')->user()->credits < $bolaoData['totalToPay']){
+        //     throw new \Exception('Not enough credits');
+        // }
         
         $bolao = $this->store($bolaoData);
         $this->storeGames($bolao->id, $bolaoData['games']);
@@ -343,7 +343,7 @@ class BolaoRepository implements BolaoRepositoryInterface
         }
 
         if (! $runByCommand){
-            auth()->guard('web')->user()->remove_credits($bolaoData['totalToPay']);
+            // auth()->guard('web')->user()->remove_credits($bolaoData['totalToPay']);
         }
 
         return $bolao;
@@ -380,6 +380,16 @@ class BolaoRepository implements BolaoRepositoryInterface
         Mail::to($customer->email)->send(new CotasBoughtMail($customer->getFirstName(), $bolao->name, $cotas));
 
         $bolao->cotas_available = $bolao->cotas_available - $cotas;
+        $bolao->save();
+
+        return $bolao;
+    }
+
+    public function activateBolao($bolaoId = NULL)
+    {
+        $bolao = $this->model->find($bolaoId);
+
+        $bolao->active = 1;
         $bolao->save();
 
         return $bolao;

@@ -18,7 +18,7 @@ class Payment extends BaseModel
      * @var array
      */
     protected $fillable = [
-        'customer_id', 'transaction_id', 'email', 'name', 'completed', 'gateway', 'type', 'status', 'code', 'total', 'url'
+        'customer_id', 'transaction_id', 'email', 'name', 'items', 'completed', 'gateway', 'type', 'status', 'code', 'total', 'url'
     ];
 
     /**
@@ -31,7 +31,7 @@ class Payment extends BaseModel
     ];
 
     protected $casts = [
-        'type', 'completed'
+        'type', 'completed', 'items' => 'array'
     ];
 
     public function customer()

@@ -10,13 +10,13 @@ loterias. Garanta sua participação nos sorteios e aumente suas chances de ganh
 <!--begin::Entry-->
 <div class="mt-5">
     <div class='col-md-12'>
-        @include('web.payments.menu')
+        {{-- @include('web.payments.menu') --}}
         
         <div class='d-flex justify-content-between d-flex-responsive mt-5'>
             <div class='ps-0 col me-2 mt-4'>
                 <h1 class='ps-0 text-secondary'><b>Escolha a forma de pagamento:</b></h1>
-                @include('web.includes.alert')
                 <div id='tgPaymentWay' class='bg-white p-5 border-radius min-h-150px'>
+                    @include('web.includes.alert')
                     <div class='chosePaymentWay d-flex justify-content-between align-items-center'>
                         <div class='col text-center me-2'>
                             <button type='button' class='btn btn-outline-primary togglePaymentMethod w-100 min-h-100px {{ ! $isPix ? 'active' : '' }}' data-target='tgCreditCard'>
@@ -54,9 +54,6 @@ loterias. Garanta sua participação nos sorteios e aumente suas chances de ganh
                             <div class='col-md-12 mb-2'>
                                 <input placeholder="Número do cartão" type="tel" name="number" class='form-control cardNumber' required>
                             </div>
-                            <div class='col-md-12 mb-2'>
-                                <input placeholder="Nome e Sobrenome" type="text" name="name" class='form-control cardFullname' required>
-                            </div>
                             <div class='col-md-12 mb-2 d-flex'>
                                 <div class='col-md-6 ps-0 me-2'>
                                     <input placeholder="MM/YYYY" type="tel" name="expiry" class='form-control cardExpiration' required>
@@ -65,12 +62,30 @@ loterias. Garanta sua participação nos sorteios e aumente suas chances de ganh
                                     <input placeholder="CVC" type="number" name="cvc" class='form-control cardCcv' required>
                                 </div>
                             </div>
+                            @if(! auth()->guard('web')->check())
+                                <div class='col-md-12 mb-2 mt-8'>
+                                    <h3 class="ps-0"><b>Identificação do Comprador</b></h3>
+                                    <input placeholder="Nome Completo*" type="text" name="full_name" class='form-control cardFullname' required>
+                                </div>
+                                <div class='col-md-12 mb-2'>
+                                    <input placeholder="CPF*" type="text" name="cpf" class='form-control maskCpf' required>
+                                </div>
+                                <div class='col-md-12 mb-2 d-flex'>
+                                    <div class='col-md-6 ps-0 me-2'>
+                                        <input placeholder="Email*" type="text" name="email" class='form-control' required>
+                                    </div>
+                                    <div class='col-md-6 ps-0'>
+                                        <input placeholder="Senha*" minlength="6" type="password" name="password" class='form-control passwordField' required>
+                                    </div>
+                                </div>
+                            @else
                             <div class='col-md-12 mb-2'>
-                                <input placeholder="CPF" type="text" name="document" class='form-control maskCpf' required>
-                            </div>
-                            <!-- <div class='col-md-12'>
-                                <input placeholder="Email" type="text" name="email" class='form-control' required>
-                            </div> -->
+                                    <input placeholder="Nome Completo*" type="text" name="full_name" class='form-control cardFullname' required>
+                                </div>
+                                <div class='col-md-12 mb-2'>
+                                    <input placeholder="CPF*" type="text" name="cpf" class='form-control maskCpf' required>
+                                </div>
+                            @endif
                             
                             <div class='col-md-12 mt-4 text-end'>
                                 <button class='btn btn-primary btnSubmitForm'><b>Pagar com Cartão</b></button>
@@ -78,20 +93,49 @@ loterias. Garanta sua participação nos sorteios e aumente suas chances de ganh
                         </form>
                     </div>
                     <div class='tgPixWay mt-2 {{ ! $isPix ? '' : 'showPayment' }}' style='{{ ! $isPix ? 'display: none;' : '' }}'>
-                        <div class='col-md-12 min-h-100px d-flex flex-direction-column justify-content-center align-items-center'>
-                            <form id='paymentForm' action='{{ route("web.payments.store") }}' method="POST" class=''>
+                        <div class='col-md-12 min-h-100px d-flex flex-direction-column justify-content-center align-items-center my-10'>
+                            <form action='{{ route("web.payments.store") }}' method="POST" class='col-md-12'>
                                 @csrf
 
                                 <input type='hidden' name='paymentType' value='pix' />
 
-                                {{--<div class='col-md-12 mb-2'>
-                                    <input placeholder="Nome" type="text" name="name" class='form-control' required>
-                                </div>
-                                <div class='col-md-12 mb-2'>
-                                    <input placeholder="Email" type="text" name="email" class='form-control' required>
-                                </div>--}}
+                                @if(auth()->guard('web')->check())
+                                    <h3 class="ps-0"><b>Identificação do comprador</b></h3>
+                                    <div class="col-md-12 d-flex ps-0">
+                                        <div class='col-md-6 mb-4 ps-0 mt-2'>
+                                            <p>
+                                                <b>Nome:</b> {{ auth()->guard('web')->user()->full_name }}
+                                            </p>
+                                            <p>
+                                                <b>CPF:</b> {{ auth()->guard('web')->user()->cpf }}
+                                            </p>
+                                            <p>
+                                                <b>Email:</b> {{ auth()->guard('web')->user()->email }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                @else
+                                    <h3 class="ps-0"><b>Identificação do comprador</b></h3>
+                                    <div class="col-md-12 d-flex ps-0">
+                                        <div class='col-md-6 mb-4 ps-0'>
+                                            <input placeholder="Nome Completo*" type="text" name="full_name" class='form-control' required value="{{ old('name') }}">
+                                        </div>
+                                        <div class='col-md-6 mb-4'>
+                                            <input placeholder="CPF*" type="text" name="cpf" class='form-control maskCpf' required value="{{ old(key: 'document') }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 d-flex ps-0">
+                                        <div class='col-md-6 mb-4 ps-0'>
+                                            <input placeholder="Email*" type="email" name="email" class='form-control' required value="{{ old('email') }}">
+                                        </div>
+                                        <div class='col-md-6 mb-4'>
+                                            <input placeholder="Senha*" minlength="6" type="password" name="password" class='form-control passwordField' required>
+                                        </div>
+                                    </div>
+                                @endif
+
                                 
-                                <div class='col-md-12 text-center'>
+                                <div class='col-md-12 text-center mt-4'>
                                     <button class='btn btn-primary btnSubmitForm btn-lg'><b>Pagar com PIX</b></button>
                                 </div>
                             </form>
@@ -101,8 +145,8 @@ loterias. Garanta sua participação nos sorteios e aumente suas chances de ganh
             </div><!-- /col-md-3 -->
 
             <div class='mt-15 sidebarCheckout'>
-                <div class='bg-white p-4 ps-2 border-radius text-center min-h-300px d-flex flex-column justify-content-between'>
-                    <h3 class='text-secondary text-start'><b>Resumo do pedido:</b></h3>
+                <div class='bg-white p-4 ps-2 border-radius text-center d-flex flex-column justify-content-between'>
+                    <h3 class='text-secondary text-start mb-4'><b>Resumo do pedido:</b></h3>
 
                     @if (auth()->guard('web')->check())
                         <div class='col-md-12'>
@@ -112,20 +156,17 @@ loterias. Garanta sua participação nos sorteios e aumente suas chances de ganh
                             <strong>Crédito atual:</strong> {{ auth()->guard('web')->user()->getFormattedCredits() }}
                         </div><!-- /col-md-12 -->
                     @endif
-                    <div class='col-md-12'>
-                        <strong>Sua compra:</strong> <span class=''>R${{ number_format(session()->get('payment.total'), 2, ',', '.') }}</span>
-                    </div><!-- /col-md-12 -->
-                    @if(session()->has('cart.customBolao'))
+                    @if(session()->has('cart.customBolao') && $totalCotasReserved <= 0)
                         <div class='col-md-12'>
                             <span class='position-relative'>
-                                <b>Qt. de jogos:</b> {{ session()->get('cart.customBolao.quantity_games') }} jogos
+                                <b>Qt. de jogos:</b> {{ $bolaoToPay->quantity_games }} jogos
                             </span>
                         </div><!-- /col-md-12 -->
                         <div class='col-md-12 text-center my-4'>
                             <b class='color-default'>
                                 BOLÃO COM <br />
                                 <i class='label label-inline bg-default font-larger px-2 py-1 chancesTg'>
-                                    <b>{{ session()->get('cart.customBolao.chances') }}x MAIS CHANCES</b>
+                                    <b>{{ $bolaoToPay->chances }}x MAIS CHANCES</b>
                                 </i><br />
                                 DE GANHAR!
                             </b>
@@ -151,10 +192,10 @@ loterias. Garanta sua participação nos sorteios e aumente suas chances de ganh
                                 DE GANHAR!
                             </b>
                         </div><!-- /col-md-12 -->
+                        <div class='col-md-12 text-center'>
+                            <div class='border border-bottom mt-3 mb-3'></div>
+                        </div><!-- /col-md-12 -->
                     @endif
-                    <div class='col-md-12 text-center'>
-                        <div class='border border-bottom mt-3 mb-3'></div>
-                    </div><!-- /col-md-12 -->
                     @if(session()->has('payment.isMinimum'))
                         <div class='col-md-12'>
                             <strong class='position-relative'>
@@ -163,8 +204,8 @@ loterias. Garanta sua participação nos sorteios e aumente suas chances de ganh
                             </strong>
                         </div><!-- /col-md-12 -->
                     @else
-                        <div class='col-md-12'>
-                            <strong>Total a pagar: R${{ number_format(session()->get('payment.toPay'), 2, ',', '.') }} </strong> 
+                        <div class='col-md-12 d-flex'>                            
+                            <strong>Total a pagar: R${{ number_format(session()->get('payment.toPay'), 2, ',', '.') }} </strong> <br />
                         </div><!-- /col-md-12 -->
                     @endif
                 </div><!-- /bg-white -->

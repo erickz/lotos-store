@@ -224,6 +224,10 @@ $(function(){
 
                     formFinalize.prepend("<input type='hidden' name='qtCotas' value='" + formFinalize.find('.cotasCt').text() + "' /> ");
 
+                    //Clear Sessions
+                    sessionStorage.setItem('bettings', JSON.stringify([]));
+                    sessionStorage.setItem('lotoAlias', '');
+                    
                     formFinalize.trigger('submit');
                 }));
             };

@@ -27,4 +27,11 @@ trait BolaoReserveTrait
 
         return $this->expiration_date > $now && $this->processed == 0 && $this->bolao->cotas_available > 0 ? true : false;
     }
+
+    public function getExpirationDateFormatted()
+    {
+        $format = 'd/m/Y H\hi';
+
+        return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $this->expiration_date)->format($format);
+    }
 }

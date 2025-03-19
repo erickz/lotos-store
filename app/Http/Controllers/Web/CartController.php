@@ -46,10 +46,10 @@ class CartController extends WebBaseController
 
     public function screening()
     {
-        if (! auth()->guard('web')->check()){
-            return redirect()->route('web.cart.customer');
-        }
-        else if (auth()->guard('web')->user()->credits >= session()->get("payment.total")){
+        // if (! auth()->guard('web')->check()){
+        //     return redirect()->route('web.cart.customer');
+        // }
+        if (auth()->guard('web')->check() && auth()->guard('web')->user()->credits >= session()->get("payment.total")){
             return redirect()->route('web.payments.pay');
         }
         else {

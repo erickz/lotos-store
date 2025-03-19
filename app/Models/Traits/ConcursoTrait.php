@@ -151,6 +151,15 @@ trait ConcursoTrait
         return 'R$' . number_format($this->next_expected_prize, 2, ',', '.');
     }
 
+    public function getValueAccumulated()
+    {
+        if (! $this->value_accumulated){
+            return '<span class="position-relative"> >R$100.000,00 </span>';
+        }
+
+        return 'R$' . number_format($this->value_accumulated, 2, ',', '.');
+    }
+
     public function getFormattedNextExpectedPrize()
     {
         $nextExpectedPrize = $this->next_expected_prize;

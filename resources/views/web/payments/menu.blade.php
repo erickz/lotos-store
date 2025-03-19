@@ -1,6 +1,6 @@
 <div class="wizard-nav border-bottom m-auto">
     <div class="wizard-steps d-flex justify-content-center px-4 border border-secondary rounded py-2">
-        <div class="wizard-step me-10 d-flex align-items-center text-center" data-wizard-type="step" data-wizard-state="current">
+        {{--<div class="wizard-step me-10 d-flex align-items-center text-center" data-wizard-type="step" data-wizard-state="current">
             <div class="wizard-label">
                 <span class="svg-icon svg-icon-4x wizard-icon {{ request()->routeIs('web.cart.customer') ? 'svg-icon-primary' : '' }}"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo2\dist/../src/media/svg/icons\General\User.svg-->
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -13,7 +13,7 @@
                 </span>
                 <h3 class="wizard-title {{ request()->routeIs('web.cart.customer') ? 'text-primary' : '' }}"><b>1. Identificação</b></h3>
             </div>
-        </div>
+        </div>--}}
         <div class="wizard-step me-10 d-flex align-items-center text-center" data-wizard-type="step" data-wizard-state="pending">
             <div class="wizard-label">
                 <span class="svg-icon svg-icon-4x wizard-icon {{ request()->routeIs('web.payments.index') ? 'svg-icon-primary' : '' }}"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo2\dist/../src/media/svg/icons\Shopping\Credit-card.svg-->
@@ -26,7 +26,7 @@
                         </g>
                     </svg><!--end::Svg Icon-->
                 </span>
-                <h3 class="wizard-title {{ request()->routeIs('web.payments.index') ? 'text-primary' : '' }}"><b>2. Pagamento</b></h3>
+                <h3 class="wizard-title {{ request()->routeIs('web.payments.index') ? 'text-primary' : '' }}"><b>1. Pagamento</b></h3>
             </div>
         </div>
         <div class="wizard-step d-flex align-items-center text-center" data-wizard-type="step" data-wizard-state="pending">
@@ -40,7 +40,7 @@
                         </g>
                     </svg><!--end::Svg Icon-->
                 </span>
-                <h3 class="wizard-title {{ request()->routeIs('web.payments.finish') || request()->routeIs('web.payments.finish_boloes') ? 'text-primary' : '' }}"><b>3. Sucesso</b></h3>
+                <h3 class="wizard-title {{ request()->routeIs('web.payments.finish') || request()->routeIs('web.payments.finish_boloes') ? 'text-primary' : '' }}"><b>2. Sucesso</b></h3>
             </div>
         </div>
     </div>

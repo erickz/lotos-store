@@ -123,7 +123,7 @@ class PaymentRepository implements PaymentRepositoryInterface
         ];
 
         //CPF
-        $documentData = str_replace(['.', '-', '/'], "", $paymentData['document']);
+        $documentData = str_replace(['.', '-', '/'], "", $paymentData['cpf']);
 
         $response = \Http::withHeaders([
             'accept' => 'application/json',
@@ -181,7 +181,7 @@ class PaymentRepository implements PaymentRepositoryInterface
         ];
 
         //CPF
-        $documentData = str_replace(['.', '-', '/'], "", $paymentData['document']);
+        $documentData = str_replace(['.', '-', '/'], "", $paymentData['cpf']);
 
         $response = \Http::withHeaders([
             'accept' => 'application/json',

@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Web\WebBaseController;
 use App\Repositories\Contracts\PaymentRepositoryInterface;
 use App\Repositories\Contracts\BolaoRepositoryInterface;
+use App\Repositories\Contracts\CustomerRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Validator;
 
 use App\Models\Payment;
 use App\Models\PaymentQrCode;
@@ -31,10 +33,11 @@ class PaymentsController extends WebBaseController
      *
      * @return void
      */
-    public function __construct(PaymentRepositoryInterface $repository, BolaoRepositoryInterface $bolaoRepo)
+    public function __construct(PaymentRepositoryInterface $repository, BolaoRepositoryInterface $bolaoRepo, CustomerRepositoryInterface $customerRepo)
     {
         $this->repository = $repository;
         $this->bolaoRepo = $bolaoRepo;
+        $this->customerRepo = $customerRepo;
 
         parent::__construct();
     }
@@ -42,9 +45,9 @@ class PaymentsController extends WebBaseController
     
     public function index(Request $request)
     {
-        if (! auth()->guard('web')->check()){
-            return redirect()->route('web.cart.customer');
-        }
+        // if (! auth()->guard('web')->check()){
+        //     return redirect()->route('web.cart.customer');
+        // }
 
         //Centralizing the toPay value, when the user comes to buy credits only this is the value to pay
         session()->put('payment.toPay', session()->get('payment.total'));
@@ -71,8 +74,6 @@ class PaymentsController extends WebBaseController
                     }
                 }
             }
-
-            $this->calculateTheCreditsDiffToPay();
 
             //In order to execute the payment, It's important to keep this execution after the cotas are claimed
             if (auth()->guard('web')->check() && auth()->guard('web')->user()->credits >= session()->get('payment.total')){
@@ -127,8 +128,14 @@ class PaymentsController extends WebBaseController
                 $totalChances += $reserve->bolao->chances;
             }
         }
+
+        $bolaoToPay = NULL;
+        if (session()->has('cart.customBolao')){
+            $customBolao = session()->get('cart.customBolao');
+            $bolaoToPay = $this->bolaoRepo->find($customBolao['bolao_id']);
+        }
         
-        return view('web.payments.index', ['sessionId' => $sessionId, 'isPix' => $isPix, 'reserves' => $reserves, 'totalGames' => $totalGames, 'totalChances' => $totalChances, 'totalCotasReserved' => $totalCotasReserved]);
+        return view('web.payments.index', ['sessionId' => $sessionId, 'bolaoToPay' => $bolaoToPay, 'isPix' => $isPix, 'reserves' => $reserves, 'totalGames' => $totalGames, 'totalChances' => $totalChances, 'totalCotasReserved' => $totalCotasReserved]);
     }
 
     /**
@@ -136,21 +143,67 @@ class PaymentsController extends WebBaseController
      */
     public function doPayment(Request $request)
     {
+        $storedCustomer = 0;
+        $customer = auth()->guard('web')->user();
+        if(! auth()->guard('web')->check())
+        {
+            // Define your custom validation rules
+            $rules = [
+                'full_name' => 'sometimes',
+                'email' => 'sometimes|unique:customers,email|email',
+                'cpf' => 'sometimes|formato_cpf',
+                'password' => 'sometimes|min:6'
+            ];
+
+            // Create a validator instance
+            $validator = Validator::make($request->all(), $rules);
+
+            // Check if the validation fails
+            if ($validator->fails()) {
+                return redirect()->route('web.payments.index')->with(['message' => $validator->errors()->first()])->with(['paymentType' => $request->get('paymentType')]);
+            }
+
+            // If validation passes, proceed with storing the customer
+            try {
+                $customer = $this->customerRepo->store($request->except('csrf'));
+                $storedCustomer = 1;
+            } catch (\Exception $e) {
+                return redirect()->route('web.payments.index')->with(['message' => 'Não foi possível salvar o registro, tente novamente mais tarde'])->with(['paymentType' => $request->get('paymentType')])->withInput();
+            }
+        }
+
         try
         {
+            $reserves = [];
+            if (session()->has('cart.boloes')){
+                $reserves = $this->bolaoRepo->getReservesByIds(session()->get('cart.boloes'));
+
+                if (! $reserves ){
+                    throw new \Exception('As cotas selecionadas foram expiradas, selecione outras cotas');
+                }
+            }
+
             $referenceId = \Str::random(9);
             $descriptionBuy = session()->get('payment.toPay') . " reais em créditos para " . $request->get('name');
-            $amountValue = intval(round(session()->get('payment.toPay')*100));
+
+            $toPay = session()->get('payment.toPay');
+            $discountFromCredits = 0;
+            if (auth()->guard('web')->user()->credits > 0 && auth()->guard('web')->user()->credits < session()->get('payment.toPay')){
+                $discountFromCredits = auth()->guard('web')->user()->credits;
+                $toPay = $this->calculateTheCreditsDiffToPay(session()->get('payment.toPay'), auth()->guard('web')->user()->credits);
+            }
+
+            $amountValue = intval(round($toPay*100));
 
             if($request->has('paymentType') && $request->get('paymentType') == 'pix'){
                 $paymentData = [
                     'referenceId' => $referenceId,
                     'descriptionBuy' => $descriptionBuy,
                     'amountValue' => $amountValue,
-                    'customerId' => auth()->guard('web')->check() ? auth()->guard('web')->user()->id : NULL,
-                    'document' => auth()->guard('web')->check() && auth()->guard('web')->user()->cpf ? auth()->guard('web')->user()->cpf : $request->get('document'),
-                    'customerFullName' => auth()->guard('web')->check() ? auth()->guard('web')->user()->full_name : $request->get('name'),
-                    'customerEmail' => auth()->guard('web')->check() ? auth()->guard('web')->user()->email : $request->get('email'),
+                    'customerId' => $customer->id,
+                    'cpf' => $customer->cpf,
+                    'customerFullName' => $customer->full_name,
+                    'customerEmail' => $customer->email,
                 ];
     
                 $paymentResults = $this->repository->pixPayment($paymentData);
@@ -158,11 +211,12 @@ class PaymentsController extends WebBaseController
                 $valueBought = $paymentResults['qr_codes'][0]['amount']['value'];
     
                 $payment = Payment::create([
-                    'customer_id' => auth()->guard('web')->user()->id,
+                    'customer_id' => $customer->id,
                     'transaction_id' => $paymentResults['reference_id'],
                     'completed' => 0,
-                    'name' => auth()->guard('web')->check() ? auth()->guard('web')->user()->full_name : $request->get('name'),
-                    'email' => auth()->guard('web')->check() ? auth()->guard('web')->user()->email : $request->get('email'),
+                    'name' => $customer->full_name,
+                    'email' => $customer->email,
+                    'items' => [],
                     'gateway'   => 'pagseguro',
                     'type'      => 'pix',
                     'status'    => 'WAITING',
@@ -190,10 +244,10 @@ class PaymentsController extends WebBaseController
                     'descriptionBuy' => $descriptionBuy,
                     'amountValue' => $amountValue,
                     'cardToken' => $request->get('cardToken'),
-                    'customerId' => auth()->guard('web')->check() ? auth()->guard('web')->user()->id : NULL,
-                    'document' => auth()->guard('web')->check() && auth()->guard('web')->user()->cpf ? auth()->guard('web')->user()->cpf : $request->get('document'),
-                    'customerFullName' => auth()->guard('web')->check() ? auth()->guard('web')->user()->full_name : $request->get('name'),
-                    'customerEmail' => auth()->guard('web')->check() ? auth()->guard('web')->user()->email : $request->get('email'),
+                    'customerId' => $customer->id,
+                    'cpf' => $customer->cpf,
+                    'customerFullName' => $customer->full_name,
+                    'customerEmail' => $customer->email,
                 ];
     
                 $paymentResults = $this->repository->creditCardPayment($paymentData);
@@ -201,13 +255,14 @@ class PaymentsController extends WebBaseController
                 $valueBought = $paymentResults['charges'][0]['amount']['value'];
     
                 $payment = Payment::create([
-                    'customer_id' => auth()->guard('web')->check() ? auth()->guard('web')->user()->id : NULL,
+                    'customer_id' => $customer->id,
                     'transaction_id' => $paymentResults['reference_id'],
                     'completed' => $paymentResults['charges'][0]['status'] == 'PAID' ? 1 : 0,
-                    'name' => auth()->guard('web')->check() ? auth()->guard('web')->user()->full_name : $request->get('name'),
-                    'email' => auth()->guard('web')->check() ? auth()->guard('web')->user()->email : $request->get('email'),
+                    'name' => $customer->full_name,
+                    'email' => $customer->email,
                     'gateway'   => 'pagseguro',
                     'type'      => 'credit_card',
+                    'items' => [],
                     'status'    => $paymentResults['charges'][0]['status'],
                     'code'      => $paymentResults['id'],
                     'total'     => $valueBought,
@@ -217,35 +272,12 @@ class PaymentsController extends WebBaseController
                 //Add the correspondent credit
                 if ($paymentResults['charges'][0]['status'] == 'PAID'){
                     $paidValue = $valueBought/100;
-                    //Convert the value to insert
+                    
                     if (auth()->guard('web')->check()){
-                        auth()->guard('web')->user()->add_credits($paidValue);
+                        $customer->add_credits($paidValue);
                     }
 
-                    //Check when to do this
-                    if ((session()->has('cart.boloes') || session()->has('cart.customBolao')) && ! session()->has('payment.onlyCredits')){
-        
-                        if(session()->has('cart.boloes') && ! session()->has('payment.onlyCredits')){
-                            $reserves = [];
-                            if (session()->has('cart.boloes')){
-                                $reserves = $this->bolaoRepo->getReservesByIds(session()->get('cart.boloes'));
-                            }
-                
-                            if (! $reserves ){
-                                throw new \Exception('Os bolões selecionados foram expirados');
-                            }
-                
-                            foreach($reserves as $reserve){
-                                $this->bolaoRepo->finishBolaoBuy($reserve->bolao_id, $reserve->cotas);
-                            }
-
-                            if (auth()->guard('web')->check()){
-                                auth()->guard('web')->user()->remove_credits(session()->get('payment.total'));
-                            }
-                        }
-                    }
-                    //Else if the buy is only of credits
-                    else {
+                    if (session()->has('payment.onlyCredits')){
                         Mail::to($payment->email)->send(new CreditsBoughtMail($request->name, $valueBought, \Carbon\Carbon::now()->format('d/m/Y H:i')));
                     }
                 }
@@ -253,6 +285,10 @@ class PaymentsController extends WebBaseController
         }
         catch(\Exception $e){
             return redirect()->route('web.payments.index')->with(['message' => $e->getMessage()])->with(['paymentType' => $request->get('paymentType')]);
+        }
+
+        if($storedCustomer){
+            $logged = auth()->guard('web')->login($customer);
         }
 
         return redirect()->route('web.payments.finish', [$payment->id]);
@@ -281,11 +317,14 @@ class PaymentsController extends WebBaseController
 
                     $customBolao = true;
                     try {
-                        $this->bolaoRepo->finalizeBolaoCreation(session()->get('cart.customBolao'));
+                        $customBolaoData = session()->get('cart.customBolao');
+                        $bolao = $this->bolaoRepo->activateBolao($customBolaoData['bolao_id']);
                     }
                     catch(\Exception $e){
                         $error = true;
                     }
+
+                    auth()->guard('web')->user()->remove_credits($toPay);
                 }
                 else if(session()->has('cart.boloes')){
                     if (empty(session()->get('cart.boloes'))){
@@ -301,7 +340,7 @@ class PaymentsController extends WebBaseController
                     foreach($reserves as $reserve){
                         $this->bolaoRepo->finishBolaoBuy($reserve->bolao_id, $reserve->cotas, auth()->guard('web')->user());
                     }
-
+                    
                     auth()->guard('web')->user()->remove_credits($toPay);
                 }
             }
@@ -313,6 +352,7 @@ class PaymentsController extends WebBaseController
         return redirect()->route('web.payments.finish_boloes');
     }
 
+    //Not used anymore
     public function finish(Request $request, $paymentId = NULL)
     {
         if ( !$paymentId){
@@ -327,18 +367,35 @@ class PaymentsController extends WebBaseController
 
         $error = false;
         $customBolao = false;
+        $toPay = $this->calculateTheCreditsDiffToPay(session()->get('payment.toPay'), auth()->guard('web')->user()->credits);
 
-        if ($payment->status != 'DECLINED'){
-            if (session()->has('cart.customBolao') && !session()->has('cart.boloes')){
+        if ($payment->status == 'PAID'){
+            if (session()->has(key: 'cart.customBolao') && !session()->has('cart.boloes') && auth()->guard('web')->user()->credits >= $toPay){
                 session()->put('cart.customBolao.customer_id', auth()->guard('web')->user()->id);
 
                 $customBolao = true;
                 try {
-                    $this->bolaoRepo->finalizeBolaoCreation(session()->get('cart.customBolao'));
+                    $customBolaoData = session()->get('cart.customBolao');
+                    $this->bolaoRepo->activateBolao($customBolaoData['bolao_id']);
+
+                    auth()->guard('web')->user()->remove_credits($toPay);
                 }
                 catch(\Exception $e){
                     $error = true;
                 }
+            }
+            else if (session()->has('cart.boloes') && ! empty(session()->get('cart.boloes')) && auth()->guard('web')->user()->credits >= $toPay){    
+                $reserves = $this->bolaoRepo->getReservesByIds(session()->get('cart.boloes'));
+    
+                if (! $reserves ){
+                    throw new \Exception('Os bolões selecionados foram expirados');
+                }
+    
+                foreach($reserves as $reserve){
+                    $this->bolaoRepo->finishBolaoBuy($reserve->bolao_id, $reserve->cotas, auth()->guard('web')->user());
+                }
+
+                auth()->guard('web')->user()->remove_credits($toPay);   
             }
         }
 

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Repositories\Contracts\CustomerRepositoryInterface;
 use App\Http\Requests\Web\StoreCustomer;
 use App\Http\Requests\Web\UpdateCustomer;
+use App\Models\BolaoReserve;
+use App\Models\Bolao;
 
 use Intervention\Image\ImageManagerStatic as Image;
 
@@ -35,14 +37,18 @@ class CustomersController extends WebBaseController
     {
         $customer = auth()->guard('web')->user();
 
-        return view('web.customers.mybets', ['customer' => $customer, 'boloes' => $customer->boloes()->orderBy('id', 'DESC')->get()]);
+        return view('web.customers.mybets', ['customer' => $customer, 'boloes' => $customer->boloes()->orderBy('updated_at', 'DESC')->orderBy('id', 'DESC')->get()]);
     }
 
     public function myBuys(Request $request)
     {
         $customer = auth()->guard('web')->user();
 
-        return view('web.customers.mybuys', ['customer' => $customer, 'boloesBought' => $customer->boloesBuyer()->orderBy('id', 'DESC')->paginate()]);
+        return view('web.customers.mybuys', [
+            'customer' => $customer, 
+            'boloesBought' => $customer->boloesBuyer()->orderBy('updated_at', 'DESC')->orderBy('id', 'DESC')->paginate(),
+            'reserves' => BolaoReserve::where('expiration_date', '>=', \Carbon\Carbon::now()->subHours(1))->where('customer_id' , $customer->id)->where('processed', 0)->take(50)->orderBy('id', 'DESC')->get(),
+        ]);
     }
 
     public function register()

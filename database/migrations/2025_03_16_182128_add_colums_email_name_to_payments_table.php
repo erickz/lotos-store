@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::table('payments', function (Blueprint $table) {
             $table->string('name')->nullable()->after('code');
             $table->string('email')->nullable()->after('name');
+            $table->json('items')->nullable()->after('email');
         });
     }
 
@@ -29,6 +30,7 @@ return new class extends Migration
         Schema::table('payments', function (Blueprint $table) {
             $table->dropColumn('name');
             $table->dropColumn('email');
+            $table->dropColumn('items');
         });
     }
 };

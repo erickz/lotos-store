@@ -102,6 +102,7 @@ Route::middleware('auth:web')->group(function(){
 
     Route::get('minhas-compras', ['as' => 'web.customers.mybuys', 'uses' => 'CustomersController@myBuys']);
     Route::get('jogos', ['as' => 'web.customers.bets', 'uses' => 'CustomersController@myBets']);
+    Route::get('{bolaoId}/ativar-bolao', ['as' => 'web.boloes.activate', 'uses' => 'BoloesController@activate']);
 
     // Route::get('historico-de-creditos', ['as' => 'web.customers.creditsHistory', 'uses' => 'CustomersController@creditsHistory']);
     
