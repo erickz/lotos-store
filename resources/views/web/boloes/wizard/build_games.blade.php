@@ -4,12 +4,52 @@
     @csrf
 
     <div class='justify-content-center'>
-        <div class='alert alert-light ms-0'><i class='fas fa-info-circle me-2 text-primary'></i> Selecione seus números da sorte e crie um Bolão <b>(o valor mínimo é R$25,00)</b></div>
+        <div class='alert alert-light ms-0 mb-0'><i class='fas fa-info-circle me-2 text-primary'></i> Selecione seus números da sorte e crie um Bolão <b>(o valor mínimo é R$25,00)</b></div>
 
-        <div class='d-flex d-flex-responsive justify-content-between mt-4 col-md-11 m-auto'>
+        {{--<h2 class="border-0 text-start mb-0 mt-3"><b>Modelos pré-prontos</b></h2>
+        <div class="d-flex justify-content-between align-items-start d-flex-responsive m-auto">
+            @foreach($suggestions->slice(0,4) as $index => $suggestion)
+                <div class='bg-white {{ $index < 3 ? 'me-4' : '' }} col py-4 rounded mt-2 border border-secondary'>
+                    <h3 class='m-0 p-0 pb-1 border-0 text-center mb-2'><b>{{ $suggestion->name }}</b></h3>
 
-            <div class='generateNumbersCt mt-4 border border-dash p-4'>
-                <h3 class='ps-0 border-0 mb-4 text-start'><b>Quero gerar jogos automáticamente</b></h3>
+                    <div class='mt-2'>
+                        <div class='mb-4'>
+                            <ol class='ps-0 w-75 d-flex flex-column m-auto min-h-50px'>
+                                @foreach( $suggestion->getBets() as $index => $bet )
+                                    <li class='w-75 m-auto d-flex justify-content-center'><span>{!! '<b>' . $bet . '</b> aposta' . ($bet > 1 ? 's ' : ' ') . 'de ' !!}</span>  <b class='ms-1'>{!! $index . ' dezenas' !!}</b></li>
+                                @endforeach
+                            </ol>
+                        </div>
+                        <div class='text-center mb-4'>
+                            <b>Preço:</b> <label class='label label-inline bg-success text-white label-lg'><b>{{ $suggestion->getPrice() }}</b></label>
+                        </div>
+                        <div class='text-center mb-4'>
+                            <b class='text-success'>
+                                <i class='label label-inline label-success font-larger px-2'>
+                                    <b>{{ $suggestion->chances }}x MAIS CHANCES</b>
+                                </i>
+                                <br /> 
+                                DE GANHAR!
+                            </b>
+                        </div>
+                    </div>
+
+                    <div class='footerBox mt-2 text-center'>
+                        <button class='btn btn-lg btn-success px-5 font-larger' href='' data-toggle="modal" data-target="#bolaoSuggestionModal" data-id='{{ $suggestion->id }}' data-url='{{ route("web.boloes.suggestions", [$suggestion->id]) }}'><b>SIMULAR BOLÃO</b></button>
+                    </div>
+                </div>
+            @endforeach
+        </div>--}}
+    </div>
+
+    <!-- <div class="border mt-6 p-0"></div> -->
+
+    <div class='justify-content-center'>
+
+        <div class='d-flex d-flex-responsive justify-content-center m-auto'>
+
+            <div class='col-7 generateNumbersCt mt-4 border rounded border-dash p-4'>
+                <h3 class='ps-0 border-0 mb-4 text-start'><b>Gerar jogos</b></h3>
                 <div class='d-flex justify-content-start align-items-center'>
                     <div class='slHolder max-w-80px'>
                         <select class='form-control numbersDozens'>
@@ -36,18 +76,18 @@
                 </div>
                 <div class='text-start mt-2'>
                     <button class='btn btn-lg btn-primary btGenerate'>
-                        <i class='fas fa-dice'></i><b>Gerar jogos</b> 
+                        <i class='fas fa-dice'></i><b>Criar jogos</b> 
                     </button>
                 </div>
                 <div class='text-start mt-2'>
                     <button class='btn btn-lg btn-warning btGenerate' data-dozens="{{ $lotery->costs->first()->number_matches + 1 }}">
-                        <i class='fas fa-star'></i><b>Gerar 1 aposta de {{ $lotery->costs->first()->number_matches + 1 }} dezenas</b> 
+                        <i class='fas fa-star'></i><b>Criar 1 aposta de {{ $lotery->costs->first()->number_matches + 1 }} dezenas</b> 
                     </button>
                 </div>
             </div>
 
-            <div class="numberPicker col-md-5 text-center mt-4 mb-2 border border-dash p-4">
-                <h3 class='ps-0 border-0 mb-4 text-start'><b>Quero selecionar meus números</b></h3>
+            <div class="col ms-2 numberPicker col-md-5 text-center mt-4 mb-2 border rounded border-dash p-4">
+                <h3 class='ps-0 border-0 mb-4 text-start'><b>Selecionar meus números</b></h3>
                 <div class="statsCt chosenNumbersCt p-0 mt-8 mb-5 pb-2">
                     <div class='container ps-0 pe-0 mb-3'>
                         <div class='row'>

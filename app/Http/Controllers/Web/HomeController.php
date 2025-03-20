@@ -29,14 +29,14 @@ class HomeController extends WebBaseController
         $boloesSelected = [];
 
         $mostPopulars = $this->repository->getSpecialBoloes($boloesSelected);
-        // array_merge($boloesSelected, $mostPopulars->pluck('id')->toArray());
+        array_merge($boloesSelected, $mostPopulars->pluck('id')->toArray());
 
-        // $biggestChances = $this->repository->getBiggestChances($boloesSelected);
-        // array_merge($boloesSelected, $biggestChances->pluck('id')->toArray());
+        $biggestChances = $this->repository->getBiggestChances($boloesSelected);
+        array_merge($boloesSelected, $biggestChances->pluck('id')->toArray());
 
-        // $mostEconomics = $this->repository->getMostEconomics($boloesSelected);        
+        // $mostEconomics = $this->repository->getMostEconomics($boloesSelected); 
 
-        return view('web.home.index', ['mostPopulars' => $mostPopulars]);
+        return view('web.home.index', ['boloes' => $boloesSelected]);
     }
 
     public function notfound()

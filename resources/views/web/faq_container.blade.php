@@ -54,8 +54,8 @@
         --}}
         <!--begin::Item-->
         <div class="card">
-            <div class="card-header" id="faqHeading1">
-                <a class="card-title text-dark d-flex collapsed" data-toggle="collapse" href="#faq3" aria-expanded="false" aria-controls="faq3" role="button">
+            <div class="card-header" id="faqHeading2">
+                <a class="card-title text-dark d-flex collapsed" data-toggle="collapse" href="#faq2" aria-expanded="false" aria-controls="faq3" role="button">
                     <span class="svg-icon svg-icon-primary">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Angle-double-right.svg-->
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -70,7 +70,7 @@
                     <div class="card-label text-dark pl-4">Posso criar Bolões de quais loterias?</div>
                 </a>
             </div>
-            <div id="faq3" class="collapse" aria-labelledby="faqHeading1" data-parent="#faq" style="">
+            <div id="faq2" class="collapse" aria-labelledby="faqHeading2" data-parent="#faq" style="">
                 <div class="card-body text-dark-50 font-size-lg pl-12">
                     A {{ env('APP_NAME') }} oferece suporte para criação de bolão das seguintes loterias: <b>Mega sena, Dupla sena, Lotofacil e Quina</b>
                 </div>
@@ -79,7 +79,7 @@
         <!--end::Item-->
         <!--begin::Item-->
         <div class="card">
-            <div class="card-header" id="faqHeading1">
+            <div class="card-header" id="faqHeading3">
                 <a class="card-title text-dark d-flex collapsed" data-toggle="collapse" href="#faq3" aria-expanded="false" aria-controls="faq3" role="button">
                     <span class="svg-icon svg-icon-primary">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Angle-double-right.svg-->
@@ -95,7 +95,7 @@
                     <div class="card-label text-dark pl-4">Após criar um Bolão no site, devo fazer os jogos na loteria?</div>
                 </a>
             </div>
-            <div id="faq3" class="collapse" aria-labelledby="faqHeading1" data-parent="#faq" style="">
+            <div id="faq3" class="collapse" aria-labelledby="faqHeading3" data-parent="#faq" style="">
                 <div class="card-body text-dark-50 font-size-lg pl-12">
                     Não, para a sua comodidade a plataforma registrar e media os jogos na loteria da caixa federal por você.
                 </div>
@@ -104,8 +104,8 @@
         <!--end::Item-->
         <!--begin::Item-->
         <div class="card">
-            <div class="card-header" id="faqHeading1">
-                <a class="card-title text-dark d-flex collapsed" data-toggle="collapse" href="#faq3" aria-expanded="false" aria-controls="faq3" role="button">
+            <div class="card-header" id="faqHeading4">
+                <a class="card-title text-dark d-flex collapsed" data-toggle="collapse" href="#faq4" aria-expanded="false" aria-controls="faq3" role="button">
                     <span class="svg-icon svg-icon-primary">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Angle-double-right.svg-->
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -120,7 +120,7 @@
                     <div class="card-label text-dark pl-4">Posso escolher o preço e quantidade de cotas do meu Bolão?</div>
                 </a>
             </div>
-            <div id="faq3" class="collapse" aria-labelledby="faqHeading1" data-parent="#faq" style="">
+            <div id="faq4" class="collapse" aria-labelledby="faqHeading4" data-parent="#faq" style="">
                 <div class="card-body text-dark-50 font-size-lg pl-12">
                     Oferecemos opções pré-definidas para o valor das cotas e a quantidade de bolões é calculada automaticamente com base no valor total do seus jogos, visando simplificar a sua experiência e garantir que todos os bolões sejam financeiramente viáveis.
                 </div>
@@ -129,8 +129,8 @@
         <!--end::Item-->
         <!--begin::Item-->
         <div class="card">
-            <div class="card-header" id="faqHeading1">
-                <a class="card-title text-dark d-flex collapsed" data-toggle="collapse" href="#faq4" aria-expanded="false" aria-controls="faq4" role="button">
+            <div class="card-header" id="faqHeading5">
+                <a class="card-title text-dark d-flex collapsed" data-toggle="collapse" href="#faq5" aria-expanded="false" aria-controls="faq4" role="button">
                     <span class="svg-icon svg-icon-primary">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Angle-double-right.svg-->
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -145,7 +145,7 @@
                     <div class="card-label text-dark pl-4">Como os compradores recebem o prêmio?</div>
                 </a>
             </div>
-            <div id="faq4" class="collapse" aria-labelledby="faqHeading1" data-parent="#faq" style="">
+            <div id="faq5" class="collapse" aria-labelledby="faqHeading5" data-parent="#faq" style="">
                 <div class="card-body text-dark-50 font-size-lg pl-12">
                     Após a verificação dos jogos serem feitas, o cliente receberá uma notificação por email. O rateio do prêmio é transferido em créditos na conta do comprador - que pode solicitar o saque quando quiser.
                 </div>
@@ -153,8 +153,8 @@
         </div>
         <!--begin::Item-->
         <div class="card">
-            <div class="card-header" id="faqHeading1">
-                <a class="card-title text-dark d-flex collapsed" data-toggle="collapse" href="#faq4" aria-expanded="false" aria-controls="faq4" role="button">
+            <div class="card-header" id="faqHeading6">
+                <a class="card-title text-dark d-flex collapsed" data-toggle="collapse" href="#faq6" aria-expanded="false" aria-controls="faq4" role="button">
                     <span class="svg-icon svg-icon-primary">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Angle-double-right.svg-->
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -169,7 +169,7 @@
                     <div class="card-label text-dark pl-4">Quem faz a verificação dos jogos?</div>
                 </a>
             </div>
-            <div id="faq4" class="collapse" aria-labelledby="faqHeading1" data-parent="#faq" style="">
+            <div id="faq6" class="collapse" aria-labelledby="faqHeading6" data-parent="#faq" style="">
                 <div class="card-body text-dark-50 font-size-lg pl-12">
                     A verificação é realizada automaticamente pela nossa plataforma.
                 </div>
@@ -177,8 +177,8 @@
         </div>
         <!--begin::Item-->
         <div class="card">
-            <div class="card-header" id="faqHeading1">
-                <a class="card-title text-dark d-flex collapsed" data-toggle="collapse" href="#faq4" aria-expanded="false" aria-controls="faq4" role="button">
+            <div class="card-header" id="faqHeading7">
+                <a class="card-title text-dark d-flex collapsed" data-toggle="collapse" href="#faq7" aria-expanded="false" aria-controls="faq4" role="button">
                     <span class="svg-icon svg-icon-primary">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Angle-double-right.svg-->
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -193,7 +193,7 @@
                     <div class="card-label text-dark pl-4">Quero comprar cotas de bolões, como faço?</div>
                 </a>
             </div>
-            <div id="faq4" class="collapse" aria-labelledby="faqHeading1" data-parent="#faq" style="">
+            <div id="faq7" class="collapse" aria-labelledby="faqHeading7" data-parent="#faq" style="">
                 <div class="card-body text-dark-50 font-size-lg pl-12">
                     Acesse a página de <a href='{{ route('web.boloes.listing') }}'>Ver Bolões</a> e escolha o bolão desejado
                 </div>
@@ -202,8 +202,8 @@
         <!--begin::Item-->
         <div class="card border-top-0">
             <!--begin::Header-->
-            <div class="card-header" id="faqHeading2">
-                <a class="card-title text-dark d-flex collapsed" data-toggle="collapse" href="#faq5" aria-expanded="false" aria-controls="faq5" role="button">
+            <div class="card-header" id="faqHeading8">
+                <a class="card-title text-dark d-flex collapsed" data-toggle="collapse" href="#faq8" aria-expanded="false" aria-controls="faq5" role="button">
                     <span class="svg-icon svg-icon-primary">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Angle-double-right.svg-->
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -220,7 +220,7 @@
             </div>
             <!--end::Header-->
             <!--begin::Body-->
-            <div id="faq5" class="collapse" aria-labelledby="faqHeading2" data-parent="#faq" style="">
+            <div id="faq8" class="collapse" aria-labelledby="faqHeading8" data-parent="#faq" style="">
                 <div class="card-body text-dark-50 font-size-lg pl-12">
                     Para fazer o resgate basta logar na sua conta do {{ env('APP_NAME') }}, acessar a página de <a href='{{ route("web.customers.rescue") }}'>Resgate de créditos</a>.
                     Preencha corretamente todas as informações solicitadas e em seguida envie a solicitação de saque. 
@@ -233,8 +233,8 @@
         <!--begin::Item-->
         <div class="card border-top-0">
             <!--begin::Header-->
-            <div class="card-header" id="faqHeading3">
-                <div class="card-title text-dark d-flex collapsed" data-toggle="collapse" data-target="#faq7" aria-expanded="false" aria-controls="faq7" role="button">
+            <div class="card-header" id="faqHeading9">
+                <div class="card-title text-dark d-flex collapsed" data-toggle="collapse" data-target="#faq9" aria-expanded="false" aria-controls="faq7" role="button">
                     <span class="svg-icon svg-icon-primary">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Angle-double-right.svg-->
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -251,7 +251,7 @@
             </div>
             <!--end::Header-->
             <!--begin::Body-->
-            <div id="faq7" class="collapse" aria-labelledby="faqHeading3" data-parent="#faq" style="">
+            <div id="faq9" class="collapse" aria-labelledby="faqHeading9" data-parent="#faq" style="">
                 <div class="card-body text-dark-50 font-size-lg pl-12">
                     O criador do bolão possui propriedade sobre as cotas, sendo assim ao ser premiado ele irá receber pela quantidade de cotas que possuir.
                 </div>

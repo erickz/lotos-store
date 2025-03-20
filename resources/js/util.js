@@ -667,4 +667,46 @@ $(window).load(function(){
     }
 
     tgSellPanel();
+
+    var tgHolder = $('.tgHolder');
+
+    if(tgHolder && tgHolder.length > 0){
+        var switchHolder = tgHolder.find('.switchHolder');
+        var howItWorks = $('#howItWorks');
+
+        tgHolder.find('.tgBuyCotas').on('mouseenter', () => {
+            var $this = $(this);
+            switchHolder.addClass('tgDiagonalAfter');
+        }).on('mouseleave', () => {
+            var $this = $(this);
+            switchHolder.removeClass('tgDiagonalAfter'); 
+        });
+
+        tgHolder.find('.tgCreateBolao').on('mouseenter', () => {
+            var $this = $(this);
+            switchHolder.addClass('tgDiagonalBefore');
+        }).on('mouseleave', () => {
+            var $this = $(this);
+            switchHolder.removeClass('tgDiagonalBefore'); 
+        });
+
+        switchHolder.find('input').on('change', (e) => {
+            var $target = $(e.target);
+
+            if($target.is(':checked')){
+                switchHolder.find(".switch").removeClass('switch-info').addClass('switch-primary');
+                howItWorks.removeClass('bg-info2').addClass('bg-primary');
+                
+                howItWorks.find(".container-bolao").hide();
+                howItWorks.find(".container-cotas").show();
+            }
+            else {
+                switchHolder.find(".switch").removeClass('switch-primary').addClass('switch-info');
+                howItWorks.removeClass('bg-primary').addClass('bg-info2');
+
+                howItWorks.find(".container-bolao").show();
+                howItWorks.find(".container-cotas").hide();
+            }
+        });
+    }
 });

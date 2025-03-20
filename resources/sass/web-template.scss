@@ -923,3 +923,33 @@ a.badge {
     font-size: 1.5rem;
     font-weight: bold;
 }
+
+#howItWorks {
+	.switchHolder{
+		&::after {
+			height: 70px;
+		}
+
+		.switch {
+			z-index: 99;
+		}
+
+		.border::after {
+			opacity: 1 !important;
+		}
+	}
+	
+	.tgCreateBolao:hover, 
+	.tgBuyCotas:hover {
+		filter: brightness(90%);
+		cursor: pointer;
+	}
+
+	.tgDiagonalAfter.switchHolder::after{
+		filter: brightness(90%);
+	}
+
+	.tgDiagonalBefore.switchHolder::before{
+		filter: brightness(90%);
+	}
+}

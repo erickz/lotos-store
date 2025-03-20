@@ -15,94 +15,116 @@
             <section class="py-30 bg-white" id="home">
                 <div class="container">
                     <div class="text-center mb-5">
-                        <h1 class="display-5 text-center mb-3"><b>Crie um Bolão e venda suas cotas online 🤑</b></h1>
-                        <p class="lead">Com nossas ferramentas exclusivas e intuitivas, você terá tudo o que precisa para vender seus bolões online de forma segura, eficiente e lucrativa</p>
+                        <!-- <h1 class="display-5 text-center mb-3"><b>Crie um Bolão e venda suas cotas online 🤑</b></h1> -->
+                        <h1 class="display-5 text-center mb-3"><b>Monte seus jogos ou compre cotas online! 🤑</b></h1>
+                        <p class="lead">Crie bolões lucrativos ou compre cotas e concorra a prêmios das loterias, tudo com segurança e praticidade!</p>
                     </div>
 
                     <div class="row g-4 justify-content-center">
                         <div class='text-center'>
                             <button class='btn btn-lg bg-info text-white text-center' data-toggle="modal" data-target="#registerModal">
-                                <b>Começar agora</b>
+                                <b>Começar agora <i class="fas fa-rocket ms-2 text-white"></i></b>
                             </button>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section>
-                <div class="tabs">
-                    <button class="tab active" onclick="openTab('criadores')">Para Criadores</button>
-                    <button class="tab" onclick="openTab('compradores')">Para Apostadores</button>
+            <section class="py-10 bg-info2 text-white" id="howItWorks">
+                <div class="d-flex justify-content-center text-center mb-4">
+                    <div class="d-flex justify-content-center text-center tgHolder">
+                        <label class="col-form-label tgCreateBolao rounded rounded-right-0 bg-info2 border border-end-0 pt-3 px-2 text-white" style="border-color: #FFF !Important;"><b>Quero criar um Bolão</b></label>
+                        <div class="switchHolder border-top border-bottom bg-diagonal bg-diagonal-info bg-diagonal-r-primary overflow">
+                            <span class="switch switch-info mt-1 position-relative">
+                                <label>
+                                    <input type="checkbox" name="select">
+                                    <span class="border"></span>
+                                </label>
+                            </span>
+                        </div>
+                        <label class="col-form-label tgBuyCotas rounded rounded-left-0 bg-primary border border-start-0 pt-3 px-2 text-white"><b>Quero comprar cotas</b></label>
                     </div>
-
-                    <div id="criadores" class="tab-content active">
-                    <h3>Como Ganhar Dinheiro Criando Bolões</h3>
-                    <ol>
-                        <li>Crie seu bolão em 1 minuto.</li>
-                        <li>Divulgue e venda cotas.</li>
-                        <li>Receba até 60% do valor + comissão.</li>
-                    </ol>
-                    </div>
-
-                    <div id="compradores" class="tab-content">
-                    <h3>Como Apostar em Bolões</h3>
-                    <ol>
-                        <li>Escolha um bolão.</li>
-                        <li>Compre suas cotas.</li>
-                        <li>Acompanhe o sorteio e ganhe!</li>
-                    </ol>
                 </div>
-            </section>
 
-            <section class="py-10" id="howItWorks">
-                <div class="container">
+                <div class="container container-bolao">
                     <div class="text-center mb-5">
-                        <h2 class="display-5 mb-3"><b>Funciona em 3 passos</b></h2>
-                        <p class="lead">Simples e eficiente para começar a vender</p>
+                        <h2 class="display-5 mb-1"><b>Como criar um Bolão e vender as cotas online</b></h2>
+                        <p class="lead">Ganhe dinheiro vendendo seus bolões da loteria online!</p>
                     </div>
 
                     <div class="row g-4 justify-content-center">
                         <!-- Passo 1 -->
                         <div class="col-md-3">
                             <div class="step-card text-center p-4 position-relative">
-                                <div class="step-number bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center">1</div>
-                                <h3 class="h5 mt-4 text-primary"><b><i class="fas fa-trophy me-2 text-primary"></i>Crie</b></h3>
-                                <b>Selecione a loteria e monte seus jogos</b>
+                                <div class="step-number border border-white text-white rounded-circle d-inline-flex align-items-center justify-content-center">1</div>
+                                <h3 class="h5 mt-4"><b><i class="fas fa-list-ol me-2 text-white"></i>Crie</b></h3>
+                                <b>Monte seus jogos e crie o seu bolão da loteria</b>
                             </div>
                         </div>
 
                         <!-- Passo 2 -->
-                        {{-- <div class="col-md-3">
-                            <div class="step-card text-center p-4 position-relative">
-                                <div class="step-number bg-danger text-white rounded-circle d-inline-flex align-items-center justify-content-center">2</div>
-                                <h3 class="h5 mt-4 text-danger"><b><i class="fas fa-rocket me-2 text-danger"></i>Lançamento</b></h3>
-                                <p>Registre e ative o seu Bolão</p>
-                                <div class="step-arrow d-none d-md-block position-absolute top-50 end-0 translate-middle-y">
-                                    <i class="fas fa-arrow-right text-muted fa-2x"></i>
-                                </div>
-                            </div>
-                        </div> --}}
-
-                        <!-- Passo 3 -->
                         <div class="col-md-3">
                             <div class="step-card text-center p-4 position-relative">
-                                <div class="step-number bg-danger text-white rounded-circle d-inline-flex align-items-center justify-content-center">2</div>
-                                <h3 class="h5 mt-4 text-danger"><b><i class="fas fa-share-alt me-2 text-danger"></i>Divulgue</b></h3>
-                                <b>Compartilhe o Bolão e venda suas cotas</b>
+                                <div class="step-number border border-white text-white rounded-circle d-inline-flex align-items-center justify-content-center">2</div>
+                                <h3 class="h5 mt-4"><b><i class="fas fa-share-alt me-2 text-white"></i>Divulgue</b></h3>
+                                <b>Compartilhe seu bolão e venda as cotas</b>
                             </div>
                         </div>
 
-                        <!-- Passo 4 -->
+                        <!-- Passo 3 -->
                         <div class="col-md-3">
                             <div class="step-card text-center p-4">
-                                <div class="step-number bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center">3</div>
-                                <h3 class="h5 mt-4 color-default"><b><i class="fas fa-money-bill me-2 color-default"></i>Receba</b></h3>
+                                <div class="step-number border border-white text-white rounded-circle d-inline-flex align-items-center justify-content-center">3</div>
+                                <h3 class="h5 mt-4"><b><i class="fas fa-money-bill me-2 text-white"></i>Receba</b></h3>
                                 <b>Receba a receita de suas vendas</b>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="container container-cotas" style="display: none;">
+                    <div class="text-center mb-5">
+                        <h2 class="display-5 mb-1"><b>Como comprar cotas online e concorrer a loteria</b></h2>
+                        <p class="lead">Concorra com muito mais chances a prêmios milionários</p>
+                    </div>
+
+                    <div class="row g-4 justify-content-center">
+                        <!-- Passo 1 -->
+                        <div class="col-md-3">
+                            <div class="step-card text-center p-4 position-relative">
+                                <div class="step-number border border-white text-white rounded-circle d-inline-flex align-items-center justify-content-center">1</div>
+                                <h3 class="h5 mt-4"><b><i class="fas fa-shopping-cart me-2 text-white"></i>Selecione</b></h3>
+                                <b><a href="{{ route('web.boloes.listing') }}" class="text-white"><u>Veja os bolões disponíveis</u></a> e escolha quantas cotas quiser</b>
+                            </div>
+                        </div>
+
+                        <!-- Passo 2 -->
+                        <div class="col-md-3">
+                            <div class="step-card text-center p-4 position-relative">
+                                <div class="step-number border border-white text-white rounded-circle d-inline-flex align-items-center justify-content-center">2</div>
+                                <h3 class="h5 mt-4"><b><i class="fas fa-shopping-bag me-2 text-white"></i>Pague</b></h3>
+                                <b>Pague as cotas do seu carrinho para efetuar a compra</b>
+                            </div>
+                        </div>
+
+                        <!-- Passo 3 -->
+                        <div class="col-md-3">
+                            <div class="step-card text-center p-4">
+                                <div class="step-number border border-white text-white rounded-circle d-inline-flex align-items-center justify-content-center">3</div>
+                                <h3 class="h5 mt-4"><b><i class="fas fa-trophy me-2 text-white"></i>Concorra</b></h3>
+                                <b>Concorra com muito mais chances aos prêmios milionários da Loteria</b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
+
+            @if (count($boloes) > 0)
+                <div class='boloesListing mt-5'>
+                    <h2 class='ps-0 color-default'><b class='d-flex'><i class='iconMg me-2'></i> <span>Top Bolões</span></b></h2>
+                    @include('web.boloes.listing_boloes', ['boloes' => $boloes])
+                </div>
+            @endif
 
             <section class="py-20 bg-light" id="advantages">
                 <div class="container">
@@ -512,7 +534,8 @@
 
                     <div class="row justify-content-center align-items-center">
                         <div class='text-center'>
-                            <a class="btn btn-danger btn-lg mt-3" data-toggle="modal" data-target="#registerModal"><b>Começar agora <i class="fas fa-rocket ms-2 text-white"></i></b></a>
+                            <a class="btn btn-success btn-lg mt-3" data-toggle="modal" data-target="#registerModal"><b>Criar um bolão</b></a>
+                            <a class="btn btn-primary btn-lg mt-3" href="{{ route('web.boloes.listing') }}"><b>Comprar cotas</b></a>
                         </div>
                     </div>
                 </div>

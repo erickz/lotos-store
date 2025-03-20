@@ -10,8 +10,8 @@ use App\Models\LoteryCosts;
 
 class generateBoloesSuggestionsMg extends Seeder
 {
-    //This is the general tax of the platform for each cota selled, which is 13% for now
-    protected $taxPlatform = 0.13;
+    //This is the general tax of the platform for each cota selled, which is 19% for now
+    protected $taxPlatform = 0.19;
 
     /**
      * Run the database seeds.

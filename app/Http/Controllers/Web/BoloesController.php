@@ -52,7 +52,9 @@ class BoloesController extends WebBaseController
 
         // $luckBird = $this->generateLuckBird();
 
-        return view('web.boloes.create', ['lotery' => $lotery, 'followingConcursos' => $followingConcursos, 'currentMenu' => $currentMenu, 'loteries' => $loteries]);
+        $suggestions = BolaoSuggestion::where('lotery_id', $lotery->id)->get();
+
+        return view('web.boloes.create', ['lotery' => $lotery, 'suggestions' => $suggestions, 'followingConcursos' => $followingConcursos, 'currentMenu' => $currentMenu, 'loteries' => $loteries]);
     }
 
     public function configure(Request $request, $lotoAlias = '')

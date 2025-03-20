@@ -8,7 +8,7 @@
 @section('content')
 
 <!--begin::Entry-->
-<div class="d-flex flex-column-fluid mt-5">
+<div class="d-flex flex-column-fluid mt-5 mb-4">
     <!--begin::Container-->
     <div class="container">
         <div class="row boloesListing">
