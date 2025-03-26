@@ -62,7 +62,7 @@ class LaratrustSeeder extends Seeder
                 if (! $user){
                     $user = \App\Models\User::create([
                         'name'  => 'admin'
-                        ,'store_id' => 1
+                        ,'store_id' => NULL
                         ,'active' => 1
                         ,'email' => 'erickcmiguel@gmail.com'
                         ,'email_verified_at' => now()
