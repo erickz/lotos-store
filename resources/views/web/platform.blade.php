@@ -232,7 +232,7 @@
 <div class="modal fade" id="requestPlatformModal" data-backdrop="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="card card-custom gutter-b example example-compact">
+            <div class="card card-custom gutter-b example example-compact mb-0">
                 <div class="card-header ps-0 pe-0">
                     <h4 class="card-title ms-5"><img src="{{ asset('img/lotos-online-icon.png') }}" class='me-2' />Solicitar plataforma</h4>
                     <button type="button" class="close ms-auto me-4" data-dismiss="modal" aria-label="Close">

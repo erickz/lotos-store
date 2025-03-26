@@ -48,69 +48,76 @@
     </head>
     <body id="kt_body" class="quick-panel-right offcanvas-right header-fixed subheader-enabled">        
 
-        <div class='menu-mobile'>
-            <div class='p-5 pb-0'>
-                <div class='menuMobileTriggerHolder cursor-pointer pb-3'>
-                    <a class='menuMobileTrigger' data-event='close'><i class='fa fa-times me-4 text-primary'></i>Fechar</a>
+        @if(! isset($disableMenu) || $disableMenu = FALSE)
+            <div class='menu-mobile'>
+                <div class='p-5 pb-0'>
+                    <div class='menuMobileTriggerHolder cursor-pointer pb-3'>
+                        <a class='menuMobileTrigger' data-event='close'><i class='fa fa-times me-4 text-primary'></i>Fechar</a>
+                    </div>
+                </div>
+
+                <div class='border border-bottom border-secondary2'>
+                    @include('layouts.web.menu')
+                </div>
+
+                <div class='additonalMobileMenu p-5'>
+                    @if(! Auth::guard('web')->check())
+                        <div class="d-flex flex-column">
+                            <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#loginModal">
+                                <b>Login</b>
+                            </button>
+
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">
+                                <b>Cadastre-se!</b>
+                            </button>
+                        </div>
+                    @else
+                        <div class="topbar-item me-5 responsive-item">
+                            <ul>
+                                <li class='mt-2'><a class='p-0' href='{{ route("web.cart") }}' class='text-primary'><i class='fa fa-user me-3 text-primary'></i>Seu saldo: <label class='bg-success p-2 badge'><b>{{ auth()->guard('web')->user()->getFormattedCredits() }}</b></label></a></li>
+                                <li class='mt-2'><a class='p-0' href='{{ route("web.cart") }}' class='text-primary'><i class='fa fa-shopping-cart me-2 text-primary'></i>Carrinho</a></li>
+                                <li class='mt-2'><a class='p-0' href='{{ route("web.customers.logout") }}' class='text-primary'><i class='fa fa-sign-out-alt me-3 text-primary'></i>Sair</a></li>
+                            </ul>
+                        </div>
+                    @endif
                 </div>
             </div>
-
-            <div class='border border-bottom border-secondary2'>
-                @include('layouts.web.menu')
+            <div id="kt_header_mobile" class="header-mobile px-3">
+                <div class='d-flex mt-3 justify-content-between align-items-center w-100'>
+                    <a class='fa fa-bars menuMobileTrigger'></a>
+                    <!--begin::Logo-->
+                    <a href="/" class='ms-9 d-flex flex-column align-self-center'>
+                        <img alt="Logo LotosFácil" title="LotosFácil" src="{{ asset('img/logo-lotos-online.png') }}" class="max-h-60px">
+                    </a>
+                    <!--end::Logo-->
+                    @include('layouts.web.header-toolbar')
+                </div>
             </div>
+        @endif
 
-            <div class='additonalMobileMenu p-5'>
-                @if(! Auth::guard('web')->check())
-                    <div class="d-flex flex-column">
-                        <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#loginModal">
-                            <b>Login</b>
-                        </button>
-
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">
-                            <b>Cadastre-se!</b>
-                        </button>
-                    </div>
-                @else
-                    <div class="topbar-item me-5 responsive-item">
-                        <ul>
-                            <li class='mt-2'><a class='p-0' href='{{ route("web.cart") }}' class='text-primary'><i class='fa fa-user me-3 text-primary'></i>Seu saldo: <label class='bg-success p-2 badge'><b>{{ auth()->guard('web')->user()->getFormattedCredits() }}</b></label></a></li>
-                            <li class='mt-2'><a class='p-0' href='{{ route("web.cart") }}' class='text-primary'><i class='fa fa-shopping-cart me-2 text-primary'></i>Carrinho</a></li>
-                            <li class='mt-2'><a class='p-0' href='{{ route("web.customers.logout") }}' class='text-primary'><i class='fa fa-sign-out-alt me-3 text-primary'></i>Sair</a></li>
-                        </ul>
-                    </div>
-                @endif
-            </div>
-        </div>
-        <div id="kt_header_mobile" class="header-mobile px-3">
-            <div class='d-flex mt-3 justify-content-between align-items-center w-100'>
-                <a class='fa fa-bars menuMobileTrigger'></a>
-                <!--begin::Logo-->
-                <a href="/" class='ms-9 d-flex flex-column align-self-center'>
-                    <img alt="Logo LotosFácil" title="LotosFácil" src="{{ asset('img/logo-lotos-online.png') }}" class="max-h-60px">
-                </a>
-                <!--end::Logo-->
-                @include('layouts.web.header-toolbar')
-            </div>
-        </div>
         <div class="d-flex flex-column flex-root">
             <!--begin::Page-->
             <div class="d-flex flex-row flex-column-fluid page">
                 <!--begin::Wrapper-->
                 <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
 
-                <!--begin::Header-->
-                @include('layouts.web.header-top')
-                <!--end::Header-->
+                    @if(! isset($disableMenu) || $disableMenu = FALSE)
+                        <!--begin::Header-->
+                        @include('layouts.web.header-top')
+                        <!--end::Header-->
+                    @endif
 
                     <!--begin::Content-->
                     <div class="content d-flex flex-column flex-column-fluid pb-0" id="kt_content">
 
-                        @if (! in_array(Route::currentRouteName(), ['web.home.index']))
-                            <!--begin::Subheader-->
-                            @include('layouts.web.header-bottom')
-                            <!--end::Subheader-->
+                        @if(! isset($disableMenu) || $disableMenu = FALSE)
+                            @if (! in_array(Route::currentRouteName(), ['web.home.index']))
+                                <!--begin::Subheader-->
+                                @include('layouts.web.header-bottom')
+                                <!--end::Subheader-->
+                            @endif
                         @endif
-                        
+                            
                         @include('web.customers.register_modal')
                         @include('web.customers.login_modal')
 

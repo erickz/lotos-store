@@ -34,13 +34,13 @@
                 <i class="menu-arrow"></i>
             </a>
         </li>
-        {{--<li class="menu-item menu-item-submenu menu-item-rel {{ request()->routeIs('web.staticPages.contact') ? 'menu-item-open menu-item-here' : '' }}" data-menu-toggle="click" aria-haspopup="true">
-            <a href="#contact" class="menu-link">
-                <span class="menu-text"><b>Contato</b></span>
+        <li class="menu-item menu-item-submenu menu-item-rel {{ request()->routeIs('web.staticPages.partners') ? 'menu-item-open menu-item-here' : '' }}" data-menu-toggle="click" aria-haspopup="true">
+            <a href="{{ route('web.staticPages.partners') }}" class="menu-link">
+                <span class="menu-text"><b>Seja um parceiro</b></span>
                 <span class="menu-desc"></span>
                 <i class="menu-arrow"></i>
             </a>
-        </li>--}}
+        </li>
     </ul>
 @else
 <ul class="menu-nav">

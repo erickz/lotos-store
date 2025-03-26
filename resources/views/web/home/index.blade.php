@@ -5,7 +5,6 @@
 
 @section('content')
 
-
 <!--begin::Entry-->
 <div class="">
     <!--begin::Container-->
@@ -141,7 +140,7 @@
                             <div class="card h-100 shadow-sm border-0">
                                 <div class="card-body text-center p-4">
                                     <i class="fas fa-trophy fa-3x text-primary mb-3"></i> <!-- Ícone -->
-                                    <h5 class="card-title"><b>Gerenciamento de Concursos e Grupos de Bolões</b></h5>
+                                    <h5 class="card-title"><b>Gerenciamento de Bolões</b></h5>
                                     <p class="card-text text-muted">Organize e gerencie seus bolões de forma simples e eficaz.</p>
                                 </div>
                             </div>

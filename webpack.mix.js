@@ -88,9 +88,11 @@ mix
         ,'resources/vendor/metronic-template/theme-2/js/layout/base/footer.js'
         ,'resources/vendor/metronic-template/theme-2/js/layout/initialize.js'
         ,'resources/vendor/metronic-template/theme-2/js/components/image-input.js'
+        ,'resources/vendor/metronic-template/theme-2/js/components/touchspin.js'
         ,'resources/vendor/adm-template/js/jquery.print.js'
         ,'resources/vendor/adm-template/js/jquery.maskMoney.min.js'
         ,'resources/vendor/metronic-template/theme-2/js/vendors/plugins/jquery.unveil.js'
+        ,'resources/vendor/adm-template/js/select2.min.js'
 
         //Custom
         ,'resources/js/bolaoBuilder.js'

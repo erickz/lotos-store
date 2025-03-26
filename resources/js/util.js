@@ -680,6 +680,10 @@ $(window).load(function(){
         }).on('mouseleave', () => {
             var $this = $(this);
             switchHolder.removeClass('tgDiagonalAfter'); 
+        }).on('click', () => {
+            if(howItWorks.find(".container-bolao").is(':visible')){
+                switchHolder.find('input').trigger('click');
+            }
         });
 
         tgHolder.find('.tgCreateBolao').on('mouseenter', () => {
@@ -688,6 +692,10 @@ $(window).load(function(){
         }).on('mouseleave', () => {
             var $this = $(this);
             switchHolder.removeClass('tgDiagonalBefore'); 
+        }).on('click', () => {
+            if(howItWorks.find(".container-cotas").is(':visible')){
+                switchHolder.find('input').trigger('click');
+            }
         });
 
         switchHolder.find('input').on('change', (e) => {
@@ -708,5 +716,163 @@ $(window).load(function(){
                 howItWorks.find(".container-cotas").hide();
             }
         });
+    }
+
+    var calculatorProfits = $('.calculatorProfits'); 
+
+    if (calculatorProfits.length > 0){
+        var slLotery = calculatorProfits.find('.slLotery');
+        var slGames = calculatorProfits.find('.slGames');
+        var slPrices = calculatorProfits.find('.slPrices');
+        var touchSpin = calculatorProfits.find(".bootstrap-touchspin input");
+        var btnAddGame = calculatorProfits.find('.btnAddGame');
+        var inputNumberGames = calculatorProfits.find('.inputNumberGames');
+        var bolaoGamesList = calculatorProfits.find('.bolaoGamesList');
+        var bolaoTotalCost = calculatorProfits.find('.totalCost');
+        var bolaoTotalProfit = calculatorProfits.find('.totalProfit');
+        var bolaoTotalChances = calculatorProfits.find('.totalChances');
+        var nBoloesCreated = calculatorProfits.find('.nBoloesCreated');
+        var arCosts = slGames.data('costs');
+        var arGamesSelected = [];
+        var totalCost = 0;
+        var totalProfit = 0;
+        var totalRevenue = 0;
+
+        touchSpin.TouchSpin({
+            min: 1,
+            max: 1000,
+            step: 1,
+            buttondown_class: 'btn btn-secondary',
+            buttonup_class: 'btn btn-secondary'
+        });
+
+        var calculateTotalCost = () => {
+            totalCost = 0;
+            totalChances = 0;
+            var applyDiscount = 0.40;
+            
+            $.each(arGamesSelected, (index, value) => {
+                totalCost += (value.cost - (value.cost * applyDiscount)) * value.quantity
+                totalChances += value.chances * value.quantity;
+            });
+
+            totalCost = totalCost * nBoloesCreated.val();
+
+            console.log(totalChances);
+
+            var totalCostFormatted = new Intl.NumberFormat('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}).format(totalCost);
+            bolaoTotalCost.html('R$' + totalCostFormatted);
+            bolaoTotalChances.html('<b>' + totalChances + 'x mais chances de ganhar na Loteria' + '</b>');
+        };calculateTotalCost();
+
+        var calculateProfit = () => {
+            totalRevenue = 0;
+
+            if (totalCost > 0){
+                var priceCota = 7.5;
+                var revenue = Math.ceil(totalCost * 2);
+                var recomendedCotas = Math.round((revenue / priceCota));
+                recomendedCotas = recomendedCotas <= 1 ? 2 : recomendedCotas;
+
+                var revenueTotal = String((priceCota * recomendedCotas));
+                //19% do preço da cota
+                var taxPlatform = (priceCota * 0.19) * recomendedCotas;
+                
+                totalProfit = String((revenueTotal - totalCost - taxPlatform));
+                totalRevenue = (revenueTotal - taxPlatform);
+            }
+
+            var profitFormatted = (new Intl.NumberFormat('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}).format(totalRevenue));
+            bolaoTotalProfit.html('<b>R$' + profitFormatted + '</b>');
+        };calculateProfit();
+
+        var resetGames = () => {
+            bolaoGamesList.html('');
+            arGamesSelected = [];
+
+            calculateTotalCost();
+            calculateProfit();
+            buildGamesList();
+        }
+
+        var bindRemoveGameEvent = () => {
+            bolaoGamesList.find('.delete').off('click').on('click', (e) => {
+                var $this = $(e.target);
+                var currentIndex = $this.parents('li').data('index');
+                
+                var newArGames = [];
+                $.each(arGamesSelected, (index, value) => {
+                    if(index != currentIndex){
+                        newArGames.push(value);
+                    }
+                });
+
+                arGamesSelected = newArGames;
+                buildGamesList();
+            });
+        }
+
+        var buildGamesList = () => {
+            bolaoGamesList.html('');
+
+            if(arGamesSelected.length <= 0){
+                bolaoGamesList.prepend('<ul><li class="display-4 text-warning text-center mt-10 d-flex"><b><i class="fas fa-info-circle me-1 fa-1x text-warning"></i>Adicione jogos para simular seus lucros</b></li></ul>')
+            }
+            else {
+                $.each(arGamesSelected, (index, val) => {
+                    bolaoGamesList.prepend('<li data-index="' + index + '" class="list-group-item list_' + index + ' d-flex justify-content-between align-items-center"><span>' + val.quantity + ' jogo' + (val.quantity > 1 ? 's' : '') + ' de ' + val.dozens + ' dezenas</span><span label="Apagar" class="delete p-1 px-2 mt-1 me-2 cursor-pointer"><i class="fas fa-times text-danger"></i></span></li>');
+                });
+                
+                bindRemoveGameEvent();
+            }
+
+            calculateTotalCost();
+            calculateProfit();
+        }
+
+        slLotery.on('change', (e) => {
+            var arCosts = slGames.data('costs');
+            var $this = $(e.target);
+            var costsSelectedLotery = arCosts[$this.val()];
+
+            var newOptions = '';
+            $.each(costsSelectedLotery, (index, val) => {
+                newOptions += '<option data-chances="' + val.chances + '" data-cost="' + val.cost + '" value="' + val.number_matches + '" ' + (index == 1 ? 'selected="selected"' : '') + '>Jogo de ' + val.number_matches + ' dezenas</option>';
+            });
+
+            slGames.html(newOptions);
+            resetGames();
+        }).trigger('change');
+        //Add a bet by default
+
+        btnAddGame.on('click', (e) => {
+            var dozensSelected = slGames.val();
+            var numberGamesSelected = inputNumberGames.val();
+            var currentCost = slGames.find('option:selected').data('cost');
+            var chances = slGames.find('option:selected').data('chances');
+
+            var newGame = { cost: currentCost, dozens: dozensSelected, quantity: numberGamesSelected, chances: chances };
+            arGamesSelected.push(newGame);
+
+            buildGamesList();
+        }).trigger('click');
+        
+        nBoloesCreated.on("change", () => {
+            calculateTotalCost();
+            calculateProfit();
+        });
+
+        //Add another set of default games (the first one is done by triggering the chance event)
+        var setDefaultGames = function(){
+            var newGame = { cost: 7, dozens: 6, quantity: 10, chances: 1 };
+            arGamesSelected.push(newGame);
+            buildGamesList();
+        }();
+    }
+
+    var select2 = $('.select2');
+
+    if (select2.length > 0){
+        select2.select2();
     }
 });

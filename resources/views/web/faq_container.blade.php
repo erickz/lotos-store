@@ -97,7 +97,7 @@
             </div>
             <div id="faq3" class="collapse" aria-labelledby="faqHeading3" data-parent="#faq" style="">
                 <div class="card-body text-dark-50 font-size-lg pl-12">
-                    Não, para a sua comodidade a plataforma registrar e media os jogos na loteria da caixa federal por você.
+                    Não, para a sua comodidade a plataforma registra e media os jogos na loteria da caixa federal por você.
                 </div>
             </div>
         </div>
@@ -195,7 +195,7 @@
             </div>
             <div id="faq7" class="collapse" aria-labelledby="faqHeading7" data-parent="#faq" style="">
                 <div class="card-body text-dark-50 font-size-lg pl-12">
-                    Acesse a página de <a href='{{ route('web.boloes.listing') }}'>Ver Bolões</a> e escolha o bolão desejado
+                    Acesse a página de <a href='{{ route('web.boloes.listing') }}'>Ver Bolões</a>, escolha o bolão desejado, adicione no carrinho e finalize e a compra.
                 </div>
             </div>
         </div>

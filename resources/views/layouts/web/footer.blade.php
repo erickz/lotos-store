@@ -9,8 +9,9 @@
                 </div>
             </a>
         </div>
-        <div class="nav nav-dark order-1 order-md-2">
+        <div class="nav nav-dark order-1 order-md-2 font-weight-bold">
             <a href="{{ route('web.staticPages.faq') }}" class="nav-link pr-3 pl-0">Ajuda</a>
+            <a href="{{ route('web.staticPages.partners') }}" class="nav-link pr-3 pl-0">Parceiros</a>
             <a href="{{ route('web.staticPages.about') }}" class="nav-link pr-3 pl-0">Sobre nós</a>
             <a href="{{ route('web.staticPages.contact') }}" class="nav-link pr-3 pl-0">Contato</a>
         </div>

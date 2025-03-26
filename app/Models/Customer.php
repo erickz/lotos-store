@@ -28,7 +28,7 @@ class Customer extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'active', 'newsletter', 'genre', 'full_name', 'profile_name', 'profile_image', 'birthday_date', 'cpf', 'cnpj', 'phone', 'email', 'password',
+        'active', 'newsletter', 'genre', 'partner', 'full_name', 'profile_name', 'profile_image', 'birthday_date', 'cpf', 'cnpj', 'phone', 'email', 'password',
     ];
 
     /**

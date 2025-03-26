@@ -77,6 +77,8 @@ Route::post('contato', ['as' => 'web.staticPages.contactPost', 'uses' => 'Static
 Route::get('adquire-sua-propria-plataforma', ['as' => 'web.staticPages.platform', 'uses' => 'StaticPagesController@platform']);
 Route::post('adquire-sua-propria-plataforma', ['as' => 'web.staticPages.postPlatform', 'uses' => 'StaticPagesController@sendEmailPlatform']);
 
+Route::get('parceiros', ['as' => 'web.staticPages.partners', 'uses' => 'StaticPagesController@partners']);
+
 //
 Route::get('blog', ['as' => 'web.blog.index', 'uses' => 'BlogController@index']);
 

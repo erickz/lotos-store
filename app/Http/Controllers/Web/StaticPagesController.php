@@ -11,6 +11,7 @@ use Mail;
 use App\Mail\ContactMail;
 use App\Mail\PlatformRequestMail;
 use App\Models\Lotery;
+use App\Models\LoteryCosts;
 use App\Models\Blog;
 use App\Models\BolaoSuggestion;
 
@@ -111,6 +112,23 @@ class StaticPagesController extends WebBaseController
     public function platform()
     {
         return view('web.platform');
+    }
+
+    public function partners()
+    {
+        $loteries = Lotery::where('active', 1)->get();
+        $costs = LoteryCosts::select(['lotery_id', 'number_matches', 'cost', 'chances'])->whereIn('lotery_id', [1,2,3,4])->get();
+        $arCosts = [];
+
+        foreach($costs as $cost){
+            if(! isset($arCosts[$cost->lotery_id])){
+                $arCosts[$cost->lotery_id] = [];
+            }
+
+            $arCosts[$cost->lotery_id][] = $cost;
+        }
+
+        return view('web.partners', ['loteries' => $loteries, 'costs' => $arCosts]);
     }
 
     public function sendEmailPlatform(Request $request)
