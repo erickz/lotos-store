@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('payment_id');
             $table->foreign('payment_id')->references('id')->on('payments');
             $table->string('source_id')->nullable();
-            $table->datettime('expiration_date')->nullable();
+            $table->timestamp('expiration_date')->nullable();
             $table->double('amount', 15,2)->nullable();
             $table->text('codeText')->nullable();
             $table->string('imageLink')->nullable();
