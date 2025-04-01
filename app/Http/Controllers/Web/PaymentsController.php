@@ -195,17 +195,24 @@ class PaymentsController extends WebBaseController
 
             $amountValue = intval(round($toPay*100));
 
-            if($request->has('paymentType') && $request->get('paymentType') == 'pix'){
-                $paymentData = [
-                    'referenceId' => $referenceId,
-                    'descriptionBuy' => $descriptionBuy,
-                    'amountValue' => $amountValue,
-                    'customerId' => $customer->id,
-                    'cpf' => $customer->cpf,
-                    'customerFullName' => $customer->full_name,
-                    'customerEmail' => $customer->email,
-                ];
-    
+            if(session()->has('cart.customBolao')) {
+                $descriptionBuy = 'create_bolao:' . session()->get('cart.customBolao')['bolao_id'];
+            }
+            elseif (session()->has('cart.boloes')){
+                $descriptionBuy = 'buy_bolao:' . implode(',', session()->get('cart.boloes'));
+            }
+
+            $paymentData = [
+                'referenceId' => $referenceId,
+                'descriptionBuy' => $descriptionBuy,
+                'amountValue' => $amountValue,
+                'customerId' => $customer->id,
+                'cpf' => $customer->cpf,
+                'customerFullName' => $customer->full_name,
+                'customerEmail' => $customer->email,
+            ];
+
+            if($request->has('paymentType') && $request->get('paymentType') == 'pix'){    
                 $paymentResults = $this->repository->pixPayment($paymentData);
     
                 $valueBought = $paymentResults['qr_codes'][0]['amount']['value'];
@@ -239,16 +246,7 @@ class PaymentsController extends WebBaseController
                 ]);
             }
             else {
-                $paymentData = [
-                    'referenceId' => $referenceId,
-                    'descriptionBuy' => $descriptionBuy,
-                    'amountValue' => $amountValue,
-                    'cardToken' => $request->get('cardToken'),
-                    'customerId' => $customer->id,
-                    'cpf' => $customer->cpf,
-                    'customerFullName' => $customer->full_name,
-                    'customerEmail' => $customer->email,
-                ];
+                $paymentData['cardToken'] = $request->get('cardToken');
     
                 $paymentResults = $this->repository->creditCardPayment($paymentData);
     
@@ -262,7 +260,7 @@ class PaymentsController extends WebBaseController
                     'email' => $customer->email,
                     'gateway'   => 'pagseguro',
                     'type'      => 'credit_card',
-                    'items' => [],
+                    'items' =>  $descriptionBuy,
                     'status'    => $paymentResults['charges'][0]['status'],
                     'code'      => $paymentResults['id'],
                     'total'     => $valueBought,
@@ -271,14 +269,29 @@ class PaymentsController extends WebBaseController
 
                 //Add the correspondent credit
                 if ($paymentResults['charges'][0]['status'] == 'PAID'){
-                    $paidValue = $valueBought/100;
-                    
-                    if (auth()->guard('web')->check()){
-                        $customer->add_credits($paidValue);
-                    }
 
-                    if (session()->has('payment.onlyCredits')){
-                        Mail::to($payment->email)->send(new CreditsBoughtMail($request->name, $valueBought, \Carbon\Carbon::now()->format('d/m/Y H:i')));
+                    if(str_contains($descriptionBuy, 'create_bolao')){
+                        $arDescription = explode(':', $descriptionBuy);
+
+                        $this->bolaoRepo->activateBolao($arDescription[1]);
+                    }
+                    elseif(str_contains($descriptionBuy, 'buy_bolao')){
+                        $arDescription = explode(':', $descriptionBuy);
+
+                        foreach($reserves as $reserve){
+                            $this->bolaoRepo->finishBolaoBuy($reserve->bolao_id, $reserve->cotas, auth()->guard('web')->user(), false);
+                        }
+                    }
+                    else {
+                        $paidValue = $valueBought/100;
+                    
+                        if (auth()->guard('web')->check()){
+                            $customer->add_credits($paidValue);
+                        }
+
+                        if (session()->has('payment.onlyCredits')){
+                            Mail::to($payment->email)->send(new CreditsBoughtMail($request->name, $valueBought, \Carbon\Carbon::now()->format('d/m/Y H:i')));
+                        }
                     }
                 }
             }
@@ -366,38 +379,8 @@ class PaymentsController extends WebBaseController
         }
 
         $error = false;
-        $customBolao = false;
         $toPay = $this->calculateTheCreditsDiffToPay(session()->get('payment.toPay'), auth()->guard('web')->user()->credits);
-
-        if ($payment->status == 'PAID'){
-            if (session()->has(key: 'cart.customBolao') && !session()->has('cart.boloes') && auth()->guard('web')->user()->credits >= $toPay){
-                session()->put('cart.customBolao.customer_id', auth()->guard('web')->user()->id);
-
-                $customBolao = true;
-                try {
-                    $customBolaoData = session()->get('cart.customBolao');
-                    $this->bolaoRepo->activateBolao($customBolaoData['bolao_id']);
-
-                    auth()->guard('web')->user()->remove_credits($toPay);
-                }
-                catch(\Exception $e){
-                    $error = true;
-                }
-            }
-            else if (session()->has('cart.boloes') && ! empty(session()->get('cart.boloes')) && auth()->guard('web')->user()->credits >= $toPay){    
-                $reserves = $this->bolaoRepo->getReservesByIds(session()->get('cart.boloes'));
-    
-                if (! $reserves ){
-                    throw new \Exception('Os bolões selecionados foram expirados');
-                }
-    
-                foreach($reserves as $reserve){
-                    $this->bolaoRepo->finishBolaoBuy($reserve->bolao_id, $reserve->cotas, auth()->guard('web')->user());
-                }
-
-                auth()->guard('web')->user()->remove_credits($toPay);   
-            }
-        }
+        $customBolao = session()->has(key: 'cart.customBolao') && !session()->has('cart.boloes') && auth()->guard('web')->user()->credits >= $toPay ? session()->get('cart.customBolao') : false;
 
         \LaravelFacebookPixel::createEvent('Purchase', ["content_ids" => $payment->id,"content_name" => $payment->code,"content_type" => $payment->status,"contents" => "Made via " . $payment->gateway,"num_items" => '0', "currency" => "BRL","value" => $payment->total]);
         $this->_cleanUpSessions();
@@ -442,44 +425,64 @@ class PaymentsController extends WebBaseController
         session()->forget('payment.isMinimum');
     }
 
-    public function notifications(Request $request, $transactionId = '')
+    public function notifications(Request $request)
     {
         try {
-            $payloadNotifications = $request->all();
+            $payload = $request->all();
+            $notificationCode = $payload['notificationCode'];
 
-            $transactionCode = $payloadNotifications['response']['body']['id'];
-
-            if (! $transactionCode){
-                return response('Error', 401);
+            if (! $notificationCode){
+                throw new \Exception('Not notification code sent');
             }
 
-            $payment = Payment::where('code', $transactionCode)->first();
+            $response = \Http::get(env('PAGSEGURO_HOST') . 'v3/transactions/notifications/' . $notificationCode, [
+                'email' => env('PAGSEGURO_EMAIL'),
+                'token' => env('PAGSEGURO_TOKEN')
+            ]);
+            
+            $xmlContent = simplexml_load_string($response->getBody(),'SimpleXMLElement',LIBXML_NOCDATA);
+
+            if ($xmlContent->count() == 0){
+                throw new \Exception('Error');
+            }
+
+            $referenceCode = $xmlContent->reference;
+
+            $payment = Payment::where('transaction_id', $referenceCode)->first();
 
             if ( ! $payment){
-                return response('Not found', 403);
+                throw new \Exception('No payment found');
             }
 
             $isPaymentCompleted = $payment->completed;
 
-            if ($payment->type == 'pix'){
-                $payment->completed = $payloadNotifications['response']['body']['qr_code'][0]['status'] == 'PAID' ? 1 : 0;
-                $payment->status = $payloadNotifications['response']['body']['qr_code'][0]['status'];
+            if ($isPaymentCompleted){
+                throw new \Exception('Payment completed');
             }
-            else {
-                $payment->completed = $payloadNotifications['response']['body']['charges'][0]['status'] == 'PAID' ? 1 : 0;    
-                $payment->status = $payloadNotifications['response']['body']['charges'][0]['status'];
+
+            $status = ["3" => 'Pago', '4' => 'Finalizado'];
+            if(in_array($xmlContent->status, ["3","4"])){
+                $payment->completed = 1;
+                $payment->status = $status[$xmlContent->status];
+                $descriptionBuy = $payment->items;
+
+                if(str_contains($descriptionBuy, 'create_bolao')){
+                    $arDescription = explode(':', $descriptionBuy);
+
+                    $this->bolaoRepo->activateBolao($arDescription[1]);
+                }
+                elseif(str_contains($descriptionBuy, 'buy_bolao')){
+                    $arDescription = explode(':', $descriptionBuy);
+                    $reservesIds = explode(',', $arDescription[1]);
+                    $reserves = $this->bolaoRepo->getReservesByIds($reservesIds);
+
+                    foreach($reserves as $reserve){
+                        $this->bolaoRepo->finishBolaoBuy($reserve->bolao_id, $reserve->cotas, auth()->guard('web')->user(), false);
+                    }
+                }
             }
 
             $payment->save();
-
-            //Add the correspondent credit
-            if ($payment->status == 'PAID'){
-                $customer = Customer::find($payment->customer_id);
-
-                if ($customer && ! $isPaymentCompleted){
-                    $customer->add_credits($payment->total);
-                }
-            }
         }
         catch(\Exception $e){
             return response('Error', 401);

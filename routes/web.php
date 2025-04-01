@@ -18,7 +18,7 @@ Route::get('sitemap.xml', ['as' => 'web.sitemap', 'uses' => 'StaticPagesControll
 
 //--Pagseguro
 Route::get('pagamentos/callback', ['as' => 'web.pagseguro.callback', 'uses' => 'PaymentsController@callback']);
-Route::get('pagamentos/notificacoes', ['as' => 'web.pagseguro.notifications', 'uses' => 'PaymentsController@notifications']);
+// Route::get('pagamentos/notificacoes', ['as' => 'web.pagseguro.notifications', 'uses' => 'PaymentsController@notifications']);
 
 Route::post('/newsletter', [ 'as' => 'web.newsletter.store', 'uses' => [NewsletterController::class, 'store']]);
 
