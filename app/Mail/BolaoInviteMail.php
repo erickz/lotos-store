@@ -24,7 +24,7 @@ class BolaoInviteMail extends Mailable
     {
         $this->data = $data;
 
-        $this->replyTo('contato@lotosfacil.com.br', env('APP_NAME'));
+        $this->replyTo('contato@lotosonline.com.br', env('APP_NAME'));
     }
 
     /**

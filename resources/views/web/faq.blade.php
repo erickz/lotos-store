@@ -1,7 +1,7 @@
 @extends('layouts.web.web')
 
-@section('titlePage', 'Perguntas Frequentes - Encontre Respostas Rápidas')
-@section('descriptionPage', 'Descubra informações sobre nossos serviços, como comprar cotas, vender bolões online e muito mais. Confira agora!')
+@section('titlePage', 'Perguntas Frequentes - ' . env('APP_NAME') . '| Tire suas dúvidas!')
+@section('descriptionPage', 'Perguntas rápidas sobre Bolões, pagamentos, premiações e segurança. Confira nosso FAQ e aposte com mais tranquilidade!')
 
 @section('content')
 

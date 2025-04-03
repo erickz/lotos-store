@@ -1,6 +1,7 @@
 @extends('layouts.checkout.checkout')
 
-@section('titlePage', 'Meu Carrinho')
+@section('titlePage', 'Carrinho ' . env('APP_NAME') . ' | Pagamento seguro em poucos passos')
+@section('descriptionPage',  'Finalize suas compras com Pix ou Cartão de crédito. Ambiente prático e seguro!')
 
 @section('content')
 
@@ -126,7 +127,7 @@
                                     </tbody>
                                 </table>
                                 <div class='text-center'>
-                                    <a href='{{ route("web.cart.screening") }}' class='btn btn-success mt-5'>
+                                    <a href='{{ route("web.cart.screening") }}' class='btn btn-success mt-5' >
                                         @if(! auth()->guard('web')->check())
                                             <b>Ir para Pagamento</b>
                                         @elseif( auth()->guard('web')->user()->credits >= session()->get("payment.total") )

@@ -1,7 +1,7 @@
 @extends('layouts.web.web')
 
-@section('titlePage', 'Bem vindo a ' . env("APP_NAME") . '!')
-@section('descriptionPage', 'Cadastre-se, compre cotas ou faça e venda seus próprios bolões online agora mesmo!')
+@section('titlePage', env("APP_NAME") . ' | Bolões da Mega Sena, Lotofácil e Mais | Aposte, Venda e Ganhe!')
+@section('descriptionPage', 'Crie ou participe de Bolões das loterias com segurança! Maiores ganhos, pagamento rápido e suporte especializado. Comece agora!')
 
 @section('content')
 
@@ -15,7 +15,7 @@
                 <div class="container">
                     <div class="text-center mb-5">
                         <!-- <h1 class="display-5 text-center mb-3"><b>Crie um Bolão e venda suas cotas online 🤑</b></h1> -->
-                        <h1 class="display-5 text-center mb-3"><b>Monte seus jogos ou compre cotas online! 🤑</b></h1>
+                        <h2 class="display-5 text-center mb-3"><b>Monte seus jogos ou compre cotas online! 🤑</b></h2>
                         <p class="lead">Crie bolões lucrativos ou compre cotas e concorra a prêmios das loterias, tudo com segurança e praticidade!</p>
                     </div>
 

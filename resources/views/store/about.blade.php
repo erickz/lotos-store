@@ -1,8 +1,7 @@
 @extends('layouts.web.web')
 
-@section('titlePage', 'Conheça mais sobre o ' . env('APP_NAME') . '! Aqui você faz e compartilha os bolões')
-@section('descriptionPage', 'Saiba mais sobre a nossa empresa e a paixão que temos por proporcionar oportunidades. 
-Focados em oferecer transparência, segurança e a melhor experiência para nossos clientes!')
+@section('titlePage', 'Sobre a ' . env('APP_NAME') . ' | Segurança e transparência em Bolões Online')
+@section('descriptionPage', 'Conheça nossa história e compromisso com apostas seguras. Equipe e tecnologia de ponta para você ganhar mais!')
 
 @section('content')
 

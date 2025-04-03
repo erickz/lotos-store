@@ -1,6 +1,7 @@
 @extends('layouts.web.web')
 
-@section('titlePage', 'Alterar dados')
+@section('titlePage', 'Alterar Dados | ' . env('APP_NAME'))
+@section('descriptionPage', 'Acesse sua conta para alterar seus dados.')
 
 @section('content')
 

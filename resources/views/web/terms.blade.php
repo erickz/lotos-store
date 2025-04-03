@@ -1,7 +1,7 @@
 @extends('layouts.web.web')
 
-@section('titlePage', 'Termos de Uso')
-@section('descriptionPage', 'Leia atentamente nossos termos de uso para compreender as diretrizes e condições ao utilizar nossos serviços.')
+@section('titlePage', 'Termos de Uso | ' . env('APP_NAME'))
+@section('descriptionPage', 'Confira nossos termos de uso para compreender as diretrizes e condições ao utilizar nossos serviços.')
 
 @section('content')
 

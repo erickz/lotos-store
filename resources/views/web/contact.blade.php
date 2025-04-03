@@ -1,6 +1,6 @@
 @extends('layouts.web.web')
 
-@section('titlePage', 'Entre em Contato Conosco!')
+@section('titlePage', 'Entre em Contato Conosco | ' . env('APP_NAME'))
 @section('descriptionPage', 'Tem dúvidas, sugestões ou precisa de suporte? Entre em contato conosco e nossa equipe estará 
 pronta para atender você.')
 

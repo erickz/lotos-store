@@ -1,6 +1,7 @@
 @extends('layouts.web.web')
 
-@section('titlePage', 'Meu Painel')
+@section('titlePage', 'Meu Painel | ' . env('APP_NAME'))
+@section('descriptionPage', 'Acesse o seu perfil!')
 
 @section('content')
 

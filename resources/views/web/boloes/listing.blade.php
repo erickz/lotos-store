@@ -1,7 +1,7 @@
 @extends('layouts.web.web')
 
-@section('titlePage', 'Confira os bolões da loteria online da ' . env('APP_NAME') . '!')
-@section('descriptionPage', 'Confira e compre cotas de bolões das suas loterias favoritas! Suas chances de ganhar são aumentadas! Aproveite e crie seu bolão também!')
+@section('titlePage', 'Bolões da Mega sena, Lotofácil, Quina e Dupla sena | ' . env('APP_NAME'))
+@section('descriptionPage', 'Participe dos Bolões das loterias, cotas a partir de R$7,50 com muita mais chances de ganhar!')
 
 @section('content')
 

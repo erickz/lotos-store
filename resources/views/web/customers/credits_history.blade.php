@@ -1,7 +1,7 @@
 @extends('layouts.web.web')
 
-@section('titlePage', 'Seu histórico de créditos na ' . env('APP_NAME') . '!')
-@section('descriptionPage', 'Veja o seu histórico de créditos.')
+@section('titlePage', 'Seu histórico de créditos | ' . env('APP_NAME'))
+@section('descriptionPage', 'Confira o seu histórico de créditos')
 
 @section('content')
 

@@ -29,6 +29,7 @@
 
         <title>Lotos Online - @yield('titlePage')</title>
         <meta name="description" content="@yield('descriptionPage', 'Venda seus bolões online com a plataforma Lotos Online')">
+        <meta name="robots" content="noindex,nofollow,noarchive" />
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700">
         <link href="{{ asset('css/web.css') }}?v=6" type="text/css" rel="stylesheet" />

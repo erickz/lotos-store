@@ -1,9 +1,7 @@
 @extends('layouts.checkout.checkout')
 
-@section('titlePage',  'Seu Carrinho de Compras - Loterias Fáceis ' . env('APP_NAME'))
-@section('descriptionPage',  'Confira o seu carrinho de compras na ' . env('APP_NAME') . '. 
-Verifique os bilhetes selecionados, finalize seus jogos e esteja pronto para concorrer aos grandes prêmios das 
-loterias. Garanta sua participação nos sorteios e aumente suas chances de ganhar!')
+@section('titlePage',  'Checkout ' . env('APP_NAME') . ' | Pagamento seguro em poucos passos')
+@section('descriptionPage',  'Finalize suas compras com Pix ou Cartão de crédito. Ambiente prático e seguro!')
 
 @section('content')
 

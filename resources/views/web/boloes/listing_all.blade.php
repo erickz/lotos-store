@@ -1,8 +1,6 @@
 @extends('layouts.web.web')
 
-@section('titlePage', 'Crie e compartilhe seus bolões online')
-
-@section('titlePage', 'Confira os bolões da loteria online ' . env('APP_NAME') . '!' . (isset($lotery) && $lotery ? 'Bolões da ' . $lotery->name : '') )
+@section('titlePage', 'Bolões da Mega sena, Lotofácil, Quina e Dupla sena | ' . env('APP_NAME'))
 @section('descriptionPage', 'Confira a lista completa de bolões ' . (isset($lotery) && $lotery ? 'da ' . $lotery->name . '!' : 'das suas loterias favoritas!') . ' Aqui suas chances de ganhar são aumentadas, aproveite e crie seu bolão agora mesmo!')
 
 @section('content')

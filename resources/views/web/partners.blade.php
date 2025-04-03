@@ -1,7 +1,7 @@
 @extends('layouts.web.web')
 
-@section('titlePage', 'Parceiros')
-@section('descriptionPage', 'Seja um parceiro e aproveite os beneficios!')
+@section('titlePage', 'Programa de Parceiros ' . env('APP_NAME') . ' | Ganhe descontos exclusivos para lucrar mais!')
+@section('descriptionPage', 'Ganhe 40% de desconto na criação de Bolões! Ferramentas automáticas, suporte dedicado e pagamentos mensais. Cadastre-se Grátis!')
 
 @section('content')
 

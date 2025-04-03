@@ -1,6 +1,7 @@
 @extends('layouts.web.web')
 
-@section('titlePage', 'Listagem de cotas compradas')
+@section('titlePage', 'Meus Bolões | ' . env('APP_NAME'))
+@section('descriptionPage', 'Acesse sua conta para ver o seu histórico de compras.')
 
 @section('content')
 

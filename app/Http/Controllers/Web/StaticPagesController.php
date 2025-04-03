@@ -60,7 +60,7 @@ class StaticPagesController extends WebBaseController
             return response()->json(['message' => 'Não foi possível enviar o formulário', 'error' => 1]);
         }
 
-        Mail::to('contato@lotosfacil.com.br')->send(new ContactMail(['name' => $request->get('name'), 'email' => $request->get('email'), 'reason' => $request->get('reason'), 'message' => $request->get('message')]));
+        Mail::to('contato@lotosonline.com.br')->send(new ContactMail(['name' => $request->get('name'), 'email' => $request->get('email'), 'reason' => $request->get('reason'), 'message' => $request->get('message')]));
 
         return response()->json(['message' => 'Email enviado com sucesso!', 'error' => 0]);
     }
