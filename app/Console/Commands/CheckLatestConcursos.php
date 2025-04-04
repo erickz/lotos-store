@@ -50,11 +50,16 @@ class CheckLatestConcursos extends Command
                 continue;
             }
 
+            \Log::info("Passou aqui");
+
             $lastConcursos = $response = Http::withHeaders([
                 'accept' => 'application/json'
             ])->get($urlApi . $loteryAlias .'/latest', []);
 
             $concursoDecoded = json_decode($lastConcursos->body());
+
+            \Log::info($concursoDecoded);
+
             $nConcurso = $concursoDecoded->concurso;
 
             $dateOfContest = Carbon::createFromFormat('d/m/Y', $concursoDecoded->data);
@@ -64,6 +69,8 @@ class CheckLatestConcursos extends Command
             // }
 
             $concurso = Concurso::where('number', $nConcurso)->where('draw_day', $dateOfContest->format('Y-m-d'))->where('lotery_id', $lotery->id)->first();
+
+            \Log::info($concurso);
 
             if (! $concurso){
                 Log::error('Concurso not found: N:' . json_encode($concurso) . ' - ' . ' Date:' . $concursoDecoded->format('Y-m-d'));
