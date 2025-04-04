@@ -38,7 +38,7 @@ class ConcursoRepository implements ConcursoRepositoryInterface
         }
         else {
             $now = Carbon::now()->format('Y-m-d');
-            return $query->orderBy('id', 'DESC')->where('draw_day', '>=', $now)->get();
+            return $query->orderBy('id', 'DESC')->where('draw_day', '>=', $now)->paginate($this->rowsPerPage);
         }
     }
 
