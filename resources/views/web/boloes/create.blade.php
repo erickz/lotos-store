@@ -1,6 +1,6 @@
 @extends('layouts.web.web')
 
-@section('titlePage', 'Criar Bolão ' ($loteries ? 'das Loterias' : 'da ' $lotery->name) . ' - Monte seus jogos | ' . env('APP_NAME'))
+@section('titlePage', 'Criar Bolão ' ($loteries ? 'das Loterias' : 'da ' . $lotery->name) . ' - Monte seus jogos | ' . env('APP_NAME'))
 @section('descriptionPage', 'Crie o seu Bolão personalizado em 2 minutos! Escolha os números, defina os preços das cotas e concorra. Comece agora!')
 
 @section('content')
