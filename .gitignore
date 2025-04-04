@@ -24,3 +24,4 @@ my-laradock
 todo.txt
 .DS_Store
 /public/mix-manifest.json
+public/mix-manifest.json

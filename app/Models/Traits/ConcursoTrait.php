@@ -145,7 +145,9 @@ trait ConcursoTrait
     public function getNextExpectedPrize($prefix = TRUE)
     {
         if (! $this->next_expected_prize){
-            return '<span class="position-relative"> >R$100.000,00 </span>';
+            if ($prefix){
+                return '<span class="position-relative"> >R$100.000,00 </span>';
+            }
         }
 
         return ($prefix ? 'R$' : '') . number_format($this->next_expected_prize, 2, ',', '.');
