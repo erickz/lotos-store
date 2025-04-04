@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('create:concursos-for-week')->weekly();
+        // $schedule->command('create:concursos-for-week')->weekly();
         $schedule->command('check:concursos-of-day')->dailyAt('20:10');
         $schedule->command('check:boloes-of-day')->dailyAt('20:15');
         // $schedule->command('inspire')->hourly();
