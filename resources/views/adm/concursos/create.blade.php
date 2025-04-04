@@ -32,8 +32,8 @@
                             <select class="form-control select2" name="lotery_id">
                                 <option value="" {{ old('lotery_id') == '' ? 'selected="selected"' : '' }}>Selecione a loteria</option>
 
-                                @foreach($loteries as $lotery)
-                                    <option value="{{ $lotery->id }}" {{ old('lotery_id') == $lotery->id ? 'selected="selected"' : '' }}>{{ $lotery->name }}</option>
+                                @foreach($loteries as $index => $lotery)
+                                    <option value="{{ $lotery->id }}" {{ old('lotery_id') == $lotery->id || $index == 0 ? 'selected="selected"' : '' }}>{{ $lotery->name }}</option>
                                 @endforeach
                             </select>
                             <span class="help-block"><i class="icon-remove-sign"></i> {{ $errors->first('lotery_id') }}</span>
@@ -43,7 +43,7 @@
                             <label>Tipo</label>
                             <select class="form-control select2" name="type">
                                 <option value="" {{ old('type') == '' ? 'selected="selected"' : '' }}>Selecione o tipo</option>
-                                <option value="1" {{ old('type') == 1 ? 'selected="selected"' : '' }}>Normal</option>
+                                <option value="1" {{ old('type') == 1 || ! old('type') ? 'selected="selected"' : '' }}>Normal</option>
                                 <option value="2" {{ old('type') == 2 ? 'selected="selected"' : '' }}>Especial</option>
                                 <option value="3" {{ old('type') == 3 ? 'selected="selected"' : '' }}>Acumulado</option>
                             </select>
