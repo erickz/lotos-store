@@ -119,8 +119,8 @@
             </section>
 
             @if (count($boloes) > 0)
-                <div class='boloesListing mt-5'>
-                    <h2 class='ps-0 color-default'><b class='d-flex'><i class='iconMg me-2'></i> <span>Top Bolões</span></b></h2>
+                <div class='boloesListing mt-5 container'>
+                    <h2 class='ps-0'><b class='d-flex'><span>Top Bolões da semana</span></b></h2>
                     @include('web.boloes.listing_boloes', ['boloes' => $boloes])
                 </div>
             @endif
@@ -542,6 +542,8 @@
         </div>
     </div><!--end::Container-->
 </div><!--end::Entry-->
+
+@include('web.boloes.bolao_infos_modal')
 
 <!-- Modal-->
 <div class="modal fade" id="requestPlatformModal" data-backdrop="true" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">

@@ -116,7 +116,6 @@
                     </div>
                 </div><!-- /col-lg-12 -->
 
-                @include('web.boxes_to_action')
             </div><!-- /col-lg-12 -->
         </div><!-- /boloesListing -->
     </div><!--end::Container-->

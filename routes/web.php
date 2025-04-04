@@ -48,8 +48,8 @@ Route::get('boloes/{bolaoId}/comprar', ['as' => 'web.boloes.buy', 'uses' => 'Bol
 Route::post('boloes/{bolaoId}/comprar', ['as' => 'web.boloes.finishbuy', 'uses' => 'BoloesController@finishBuy']);
 
 //Pagina de resultados
-Route::get('ultimos-resultados', ['as' => 'web.results', 'uses' => 'ResultsController@index']);
-Route::get('ultimo-resultado/{loteryName}', ['as' => 'web.results.byLotery', 'uses' => 'ResultsController@displayByLotery']);
+Route::get('resultados', ['as' => 'web.results', 'uses' => 'ResultsController@index']);
+Route::get('resultados/{loteryName}', ['as' => 'web.results.byLotery', 'uses' => 'ResultsController@displayByLotery']);
 
 Route::get('megasena', ['as' => 'web.loteries.megasena', 'uses' => 'StaticPagesController@loteries']);
 Route::get('mega-da-virada', ['as' => 'web.loteries.megasenaSpecial', 'uses' => 'StaticPagesController@loteriesSpecial']);

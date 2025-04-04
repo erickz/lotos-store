@@ -38,10 +38,10 @@
             </div>
         </div><!-- /alert -->
 
-        <div class='mb-2 ms-1'>
+        {{--<div class='mb-2 ms-1'>
             <!-- <div class='border border-secondary mb-3'></div> -->
             <div class='badge badge-primary mb-3 bg-info text-white cursor-p pb-2 printButton'><i class='fas fa-receipt text-white me-2'></i><span class='font-larger'>Imprimir</span></div>
-        </div>
+        </div>--}}
 
         <div class='mb-2'>
             {!! $bolao->getLblChances() !!}

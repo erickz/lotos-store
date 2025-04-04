@@ -26,13 +26,13 @@ class HomeController extends WebBaseController
             return redirect()->route('web.customers.profile');
         }
         
-        $boloesSelected = [];
+        $boloesSelected = collect();
 
         $mostPopulars = $this->repository->getSpecialBoloes($boloesSelected);
-        array_merge($boloesSelected, $mostPopulars->pluck('id')->toArray());
+        $boloesSelected = $boloesSelected->merge($mostPopulars);
 
         $biggestChances = $this->repository->getBiggestChances($boloesSelected);
-        array_merge($boloesSelected, $biggestChances->pluck('id')->toArray());
+        $boloesSelected = $boloesSelected->merge($biggestChances);
 
         // $mostEconomics = $this->repository->getMostEconomics($boloesSelected); 
 

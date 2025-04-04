@@ -1,7 +1,7 @@
 @extends('layouts.web.web')
 
-@section('titlePage', 'Últimos resultados da Mega Sena, Lotofacil, Quina, Dupla Sena')
-@section('descriptionPage', 'Confirá os últimos resultados da Mega Sena, Lotofacil, Quina, Dupla Sena')
+@section('titlePage', 'Ultimos resultados das suas loterias favoritas')
+@section('descriptionPage', 'Acesse nossa página e confirá os últimos resultados da Mega Sena, Lotofacil, Quina e Dupla Sena')
 
 @section('content')
 
@@ -73,7 +73,6 @@
                 @endif
             </div><!-- /col-lg-12 -->
 
-            @include('web.boxes_to_action')
         </div><!-- /boloesListing -->
     </div><!--end::Container-->
 </div><!--end::Entry-->

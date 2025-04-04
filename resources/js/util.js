@@ -199,7 +199,7 @@ $(window).load(function(){
                 })
                 .done(function(response){
                     if (response.error == 0){
-                        // handleAlert($this.parents('.bt-containers'), response.message, 'success', 'success');
+                        handleAlert($this.parents('.bt-containers'), response.message, 'success', 'success');
 
                         if (btnBuyBolao.is('.resetBuy')){
                             $this.parent().find('.slChooseCotas option:selected').removeAttr('selected');
