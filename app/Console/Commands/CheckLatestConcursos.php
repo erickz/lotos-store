@@ -58,7 +58,7 @@ class CheckLatestConcursos extends Command
 
             $concursoDecoded = json_decode($lastConcursos->body());
 
-            \Log::info($concursoDecoded);
+            \Log::info(print_r($concursoDecoded, true));
 
             $nConcurso = $concursoDecoded->concurso;
 
@@ -70,7 +70,7 @@ class CheckLatestConcursos extends Command
 
             $concurso = Concurso::where('number', $nConcurso)->where('draw_day', $dateOfContest->format('Y-m-d'))->where('lotery_id', $lotery->id)->first();
 
-            \Log::info($concurso);
+            \Log::info(print_r($concurso, true));
 
             if (! $concurso){
                 Log::error('Concurso not found: N:' . json_encode($concurso) . ' - ' . ' Date:' . $concursoDecoded->format('Y-m-d'));
