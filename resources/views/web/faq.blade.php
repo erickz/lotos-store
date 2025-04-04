@@ -1,6 +1,6 @@
 @extends('layouts.web.web')
 
-@section('titlePage', 'Perguntas Frequentes - ' . env('APP_NAME') . '| Tire suas dúvidas!')
+@section('titlePage', 'Perguntas Frequentes | Tire suas dúvidas!')
 @section('descriptionPage', 'Perguntas rápidas sobre Bolões, pagamentos, premiações e segurança. Confira nosso FAQ e aposte com mais tranquilidade!')
 
 @section('content')

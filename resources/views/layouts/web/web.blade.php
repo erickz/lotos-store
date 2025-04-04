@@ -28,7 +28,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>{{ request()->routeIs('web.home') ? '' : env('APP_NAME') . ' -' }} @yield('titlePage')</title>
+        <title>{{ request()->routeIs('web.home') ? '' : env('APP_NAME') . ' |' }} @yield('titlePage')</title>
         <meta name="description" content="@yield('descriptionPage', 'Nunca foi tão lucrativo apostar nas loterias online! Aposte de casa nas loterias mais populares do Brasil e venha vender seus bolões online!')">
 
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
