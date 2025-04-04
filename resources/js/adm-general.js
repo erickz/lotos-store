@@ -42,6 +42,7 @@ $(function(){
         maskMoney.maskMoney({
             decimal: ','
             ,thousands: '.'
+            ,precision: 2
         });
 
         //Trigger mask money from set values

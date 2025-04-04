@@ -142,13 +142,13 @@ trait ConcursoTrait
         return '';
     }
 
-    public function getNextExpectedPrize()
+    public function getNextExpectedPrize($prefix = TRUE)
     {
         if (! $this->next_expected_prize){
             return '<span class="position-relative"> >R$100.000,00 </span>';
         }
 
-        return 'R$' . number_format($this->next_expected_prize, 2, ',', '.');
+        return ($prefix ? 'R$' : '') . number_format($this->next_expected_prize, 2, ',', '.');
     }
 
     public function getValueAccumulated()

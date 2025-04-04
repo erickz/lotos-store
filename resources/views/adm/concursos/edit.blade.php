@@ -75,7 +75,7 @@
                             <label>Prêmio estimado</label>
                             <div class="input-group">
                                 <span class="input-group-addon">R$</span>
-                                <input type="text" name="next_expected_prize" class="form-control maskMoney" placeholder="Prêmio estimado" value="{{ $concurso->next_expected_prize }}">
+                                <input type="text" name="next_expected_prize" class="form-control maskMoney" placeholder="Prêmio estimado" value="{{ $concurso->getNextExpectedPrize(false) }}">
                             </div>
                             <span class="help-block"><i class="icon-remove-sign"></i> {{ $errors->first('next_expected_prize') }}</span>
                         </div>
