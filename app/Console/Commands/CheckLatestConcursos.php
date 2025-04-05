@@ -82,7 +82,7 @@ class CheckLatestConcursos extends Command
             $dataPremiacoes = [];
             $dataPremiacoes2 = [];
 
-            $drawNumbers = $concursoDecoded->dezenas;
+            $drawNumbers = implode(' ', $concursoDecoded->dezenas);
             $dataPremiacoes = $this->retrieveConcursosResult($concursoDecoded->premiacao, $lotery);
 
             $drawNumbers2 = NULL;
