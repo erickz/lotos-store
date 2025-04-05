@@ -87,8 +87,8 @@ class CheckLatestConcursos extends Command
 
             $drawNumbers2 = NULL;
             if ($lotery->initials == 'DS'){
-                $drawNumbers = implode(' ', array_slice($concursoDecoded->dezenas, 0, 6));
-                $drawNumbers2 = implode(' ', array_slice($concursoDecoded->dezenas, 6, 6));
+                $drawNumbers = implode(' ', $concursoDecoded->dezenas);
+                $drawNumbers2 = implode(' ', $concursoDecoded->dezenas_2);
 
                 $dataPremiacoes2 = $this->retrieveConcursosResult($concursoDecoded->premiacao, $lotery, true);
             }
