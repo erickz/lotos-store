@@ -47,9 +47,9 @@ class CheckLatestConcursos extends Command
             $arLoteryDays = explode(',', $lotery->draw_days);
             $urlApi = 'https://apiloterias.com.br/app/v2/resultado';
 
-            if (! in_array($now->dayOfWeek, $arLoteryDays)){
-                continue;
-            }
+            // if (! in_array($now->dayOfWeek, $arLoteryDays)){
+            //     continue;
+            // }
 
             $lastConcursos = $response = Http::withHeaders([
                 'accept' => 'application/json'
