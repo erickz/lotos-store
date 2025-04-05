@@ -48,15 +48,20 @@ class CheckBoloesOfDay extends Command
             $concursosOfDay = Concurso::where('draw_day', $now->format('Y-m-d'))->get();
 
             foreach($concursosOfDay as $concurso){
-                if ($concurso->checked || $concurso->prized || ! $concurso->draw_numbers ){
+                if (! $concurso->draw_numbers ){
                     continue;
                 }
 
                 $id = $concurso->id;
 
-                $this->repository->checkGames($id);
-                $this->repository->rewardGames($id);      
-                $this->repository->rollRevenue($id);
+                if (! $concurso->checked){
+                    $this->repository->checkGames($id);
+                }
+
+                if (! $concurso->prized){
+                    $this->repository->rewardGames($id);      
+                    $this->repository->rollRevenue($id);
+                }
             }
         }
         catch(\Exception $e){

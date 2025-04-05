@@ -33,7 +33,7 @@ class CheckLatestConcursos extends Command
      */
     public function handle()
     {
-        $urlApi = 'https://loteriascaixa-api.herokuapp.com/api/';
+        // $urlApi = 'https://loteriascaixa-api.herokuapp.com/api/';
         $loteries = [
             01 => 'megasena',
             02 => 'quina',
@@ -45,24 +45,26 @@ class CheckLatestConcursos extends Command
             $lotery = Lotery::find($loteryId);
             $now = Carbon::now();
             $arLoteryDays = explode(',', $lotery->draw_days);
+            $urlApi = 'https://apiloterias.com.br/app/v2/resultado';
 
             if (! in_array($now->dayOfWeek, $arLoteryDays)){
                 continue;
             }
 
-            \Log::info("Passou aqui");
-
             $lastConcursos = $response = Http::withHeaders([
                 'accept' => 'application/json'
-            ])->get($urlApi . $loteryAlias .'/latest', []);
+            ])->get($urlApi, [
+                'loteria' => $loteryAlias,
+                'token' => env("API_RESULTS_TOKEN")
+            ]);
 
             $concursoDecoded = json_decode($lastConcursos->body());
 
             \Log::info(print_r($concursoDecoded, true));
 
-            $nConcurso = $concursoDecoded->concurso;
+            $nConcurso = $concursoDecoded->numero_concurso;
 
-            $dateOfContest = Carbon::createFromFormat('d/m/Y', $concursoDecoded->data);
+            $dateOfContest = Carbon::createFromFormat('d/m/Y', $concursoDecoded->data_concurso);
 
             // if($dateOfContest->format('d/m/Y') != $now->format('d/m/Y')){
             //     continue;
@@ -73,26 +75,26 @@ class CheckLatestConcursos extends Command
             \Log::info(print_r($concurso, true));
 
             if (! $concurso){
-                Log::error('Concurso not found: N:' . json_encode($concurso) . ' - ' . ' Date:' . $concursoDecoded->format('Y-m-d'));
+                Log::error('Concurso not found: N:' . json_encode($concurso) . ' - ' . ' Date:' . $dateOfContest->format('Y-m-d'));
                 continue;
             }
 
             $dataPremiacoes = [];
             $dataPremiacoes2 = [];
 
-            $drawNumbers = implode(' ', $concursoDecoded->dezenas);
-            $dataPremiacoes = $this->retrieveConcursosResult($concursoDecoded->premiacoes, $lotery);
+            $drawNumbers = $concursoDecoded->dezenas;
+            $dataPremiacoes = $this->retrieveConcursosResult($concursoDecoded->premiacao, $lotery);
 
             $drawNumbers2 = NULL;
             if ($lotery->initials == 'DS'){
                 $drawNumbers = implode(' ', array_slice($concursoDecoded->dezenas, 0, 6));
                 $drawNumbers2 = implode(' ', array_slice($concursoDecoded->dezenas, 6, 6));
 
-                $dataPremiacoes2 = $this->retrieveConcursosResult($concursoDecoded->premiacoes, $lotery, true);
+                $dataPremiacoes2 = $this->retrieveConcursosResult($concursoDecoded->premiacao, $lotery, true);
             }
 
-            $concurso->next_expected_prize = $concursoDecoded->valorEstimadoProximoConcurso;
-            $concurso->value_accumulated = $concursoDecoded->valorAcumuladoProximoConcurso;
+            $concurso->next_expected_prize = $concursoDecoded->valor_estimado_proximo_concurso;
+            $concurso->value_accumulated = $concursoDecoded->valor_acumulado_especial;
             $concurso->draw_numbers = $drawNumbers;
             $concurso->draw_numbers_2 = $drawNumbers2;
             $concurso->results = $dataPremiacoes;
@@ -120,17 +122,17 @@ class CheckLatestConcursos extends Command
             }
 
             if ($lotery->initials == 'LF'){
-                $prizeType = $premiacao->descricao;
+                $prizeType = $premiacao->quantidade_acertos;
             }
             else {
-                $prizeTypeFromApi = str_replace(' acertos', '', $premiacao->descricao);
+                $prizeTypeFromApi = str_replace(' acertos', '', $premiacao->quantidade_acertos);
                 $prizeType = $prizeTypes[$prizeTypeFromApi];
             }
 
             $newPremiacao = [];
             $newPremiacao['prize_type'] = $prizeType;
-            $newPremiacao['value_prize'] = $premiacao->valorPremio;
-            $newPremiacao['number_winners'] = $premiacao->ganhadores;
+            $newPremiacao['value_prize'] = $premiacao->valor_premio;
+            $newPremiacao['number_winners'] = $premiacao->numero_ganhadores;
 
             $dataPremiacoes[] = $newPremiacao;
         }
