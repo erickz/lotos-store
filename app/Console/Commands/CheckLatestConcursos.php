@@ -41,7 +41,10 @@ class CheckLatestConcursos extends Command
             04 => 'duplasena'
         ];
 
+        \Log::info("Começou foreach");
+
         foreach($loteries as $loteryId => $loteryAlias){
+            \Log::info("Entrou no foreach para: " . $loteryAlias);
             $lotery = Lotery::find($loteryId);
             $now = Carbon::now();
             // $arLoteryDays = explode(',', $lotery->draw_days);
@@ -51,12 +54,16 @@ class CheckLatestConcursos extends Command
             //     continue;
             // }
 
+            \Log::info("Vai fazer http request");
+
             $lastConcursos = $response = Http::withHeaders([
                 'accept' => 'application/json'
             ])->get($urlApi, [
                 'loteria' => $loteryAlias,
                 'token' => env("API_RESULTS_TOKEN")
             ]);
+
+            \Log::info("Fez http request");
 
             $concursoDecoded = json_decode($lastConcursos->body());
 
