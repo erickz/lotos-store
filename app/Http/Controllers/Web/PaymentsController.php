@@ -103,8 +103,8 @@ class PaymentsController extends WebBaseController
                 return redirect()->route('web.cart')->with(['message' => 'Não foi possível iniciar o pagamento', ['credits' => $request->get('credits')]]);
             }
             if (session()->has('cart.customBolao') && ! session()->has('payment.onlyCredits')){
-                $lotery = Lotery::find(session()->get('cart.customBolao.lotery_id'));
-                return redirect()->route('web.boloes.config', [$lotery->initials])->with(['message' => 'Não foi possível iniciar o pagamento', ['credits' => $request->get('credits')]]);
+                $bolao = $this->bolaoRepo->find(session()->get('cart.customBolao.bolao_id'));
+                return redirect()->route('web.boloes.config', [$bolao->lotery->initials])->with(['message' => 'Não foi possível iniciar o pagamento', ['credits' => $request->get('credits')]]);
             }
             else {
                 return redirect()->back()->with(['message' => 'Não foi possível iniciar o pagamento', ['credits' => $request->get('credits')]]);
@@ -435,7 +435,7 @@ class PaymentsController extends WebBaseController
                 throw new \Exception('Not notification code sent');
             }
 
-            $response = \Http::get(env('PAGSEGURO_HOST') . 'v3/transactions/notifications/' . $notificationCode, [
+            $response = \Http::get('https://ws.pagseguro.uol.com.br/v3/transactions/notifications/' . $notificationCode, [
                 'email' => env('PAGSEGURO_EMAIL'),
                 'token' => env('PAGSEGURO_TOKEN')
             ]);

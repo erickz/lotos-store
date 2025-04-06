@@ -44,7 +44,7 @@ class CheckLatestConcursos extends Command
         foreach($loteries as $loteryId => $loteryAlias){
             $lotery = Lotery::find($loteryId);
             $now = Carbon::now();
-            $arLoteryDays = explode(',', $lotery->draw_days);
+            // $arLoteryDays = explode(',', $lotery->draw_days);
             $urlApi = 'https://apiloterias.com.br/app/v2/resultado';
 
             // if (! in_array($now->dayOfWeek, $arLoteryDays)){
