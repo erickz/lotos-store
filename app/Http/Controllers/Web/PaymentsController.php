@@ -280,6 +280,8 @@ class PaymentsController extends WebBaseController
 
                         foreach($reserves as $reserve){
                             $this->bolaoRepo->finishBolaoBuy($reserve->bolao_id, $reserve->cotas, auth()->guard('web')->user(), false);
+                            $reserve->processed = 1;
+                            $reserve->save();
                         }
                     }
                     else {
@@ -352,6 +354,8 @@ class PaymentsController extends WebBaseController
         
                     foreach($reserves as $reserve){
                         $this->bolaoRepo->finishBolaoBuy($reserve->bolao_id, $reserve->cotas, auth()->guard('web')->user());
+                        $reserve->processed = 1;
+                        $reserve->save();
                     }
                     
                     auth()->guard('web')->user()->remove_credits($toPay);
@@ -407,15 +411,6 @@ class PaymentsController extends WebBaseController
 
     private function _cleanUpSessions(){            
         $reserves = [];
-        if (session()->has('cart.boloes')){
-            $reserves = $this->bolaoRepo->getReservesByIds(session()->get('cart.boloes'));
-
-            foreach($reserves as $reserve){
-                $reserve->processed = 1;
-                $reserve->save();
-            }
-        }
-
         session()->forget('cart.boloes');
         session()->forget('cart.customBolao');
         session()->forget('cart.boloesData');  
@@ -464,8 +459,6 @@ class PaymentsController extends WebBaseController
                 throw new \Exception('Payment completed');
             }
 
-            \Log::info(gettype($xmlContent->status));
-
             $status = ["2" => 'Em análise', "3" => 'Pago', "4" => 'Finalizado', "6" => 'Devolvido', "7" => 'Cancelado'];
             $notificationStatus = (string) $xmlContent->status;
 
@@ -483,6 +476,8 @@ class PaymentsController extends WebBaseController
                     $arDescription = explode(':', $descriptionBuy);
                     $reservesIds = explode(',', $arDescription[1]);
                     $reserves = $this->bolaoRepo->getReservesByIds($reservesIds);
+
+                    \Log::info(print_r($reserves, true));
 
                     foreach($reserves as $reserve){
                         $this->bolaoRepo->finishBolaoBuy($reserve->bolao_id, $reserve->cotas, $reserve->customer, false);
