@@ -481,6 +481,9 @@ class PaymentsController extends WebBaseController
 
                     foreach($reserves as $reserve){
                         $this->bolaoRepo->finishBolaoBuy($reserve->bolao_id, $reserve->cotas, $reserve->customer, false);
+                        
+                        $reserve->processed = 1;
+                        $reserve->save();
                     }
                 }
             }
