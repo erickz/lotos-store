@@ -466,10 +466,12 @@ class PaymentsController extends WebBaseController
 
             \Log::info(gettype($xmlContent->status));
 
-            $status = [2 => 'Em análise', 3 => 'Pago', 4 => 'Finalizado', 6 => 'Devolvido', 7 => 'Cancelado'];
-            if(in_array($xmlContent->status, ["3","4"])){
+            $status = ["2" => 'Em análise', "3" => 'Pago', "4" => 'Finalizado', "6" => 'Devolvido', "7" => 'Cancelado'];
+            $notificationStatus = (string) $xmlContent->status;
+
+            $payment->status = $status[$notificationStatus];
+            if(in_array($notificationStatus, ["3","4"])){
                 $payment->completed = 1;
-                $payment->status = $status[$xmlContent->status];
                 $descriptionBuy = $payment->items;
 
                 if(str_contains($descriptionBuy, 'create_bolao')){
