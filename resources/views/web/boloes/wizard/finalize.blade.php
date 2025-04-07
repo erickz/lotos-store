@@ -17,6 +17,7 @@ Compartilhe e venda seus jogos, maximize as possibilidades e celebre prêmios. C
                     <form method='POST' action='{{ route("web.boloes.store", strtolower($lotery->initials)) }}' class='formFinalize'>
                         @csrf
                         <input type='hidden' name='totalToPay' class='inputHdTotalToPay' value='0' />
+                        <input type='hidden' name='price' value='7.5' />
 
                         <div class='mt-3'>
                             @include('web.includes.alert')
@@ -41,7 +42,7 @@ Compartilhe e venda seus jogos, maximize as possibilidades e celebre prêmios. C
                                     <div class=''>
                                         <b><span class='min-w-50px'>Ganhe até: </span> <u class='font-smaller revenueCt'></u></b>
                                     </div>
-                                </h3>
+                              t/h3>
                             </div>--}}
                             <div class='d-flex align-items-center mb-5'>
                                 <div class='col-4 text-end me-5'>
@@ -137,17 +138,17 @@ Compartilhe e venda seus jogos, maximize as possibilidades e celebre prêmios. C
                                     </span>
                                 </div><!-- /col -->
                             </div><!-- /d-flex -->
+                            <div class='col-md-3 m-auto text-center mb-5'>
+                                <h3 class='bg-light p-2 rounded'>
+                                    <div class='text-secondary2'>
+                                        <b><span class='min-w-50px me-2'>Pague</span> <span class='font-smaller text-secondary costCt'></span></b>
+                                    </div>
+                                    <div class='text-secondary2'>
+                                        <b><span class='min-w-50px'>Ganhe até</span> <span class='color-default font-larger revenueCt'></span></b>
+                                    </div>
+                                </h3>
+                            </div>
                             <div id='sellPanel' class="border border-secondary p-4 pb-0 rounded"> 
-                                <div class='col-md-3 m-auto text-center mb-5'>
-                                    <h3 class='bg-light p-2 rounded'>
-                                        <div class='text-secondary2'>
-                                            <b><span class='min-w-50px me-2'>Pague</span> <span class='font-smaller text-secondary costCt'></span></b>
-                                        </div>
-                                        <div class='text-secondary2'>
-                                            <b><span class='min-w-50px'>Ganhe até</span> <span class='color-default font-larger revenueCt'></span></b>
-                                        </div>
-                                    </h3>
-                                </div>
                                 <div class='d-flex align-items-center mb-5'>
                                     <div class='col-4 text-end me-5 position-relative'>
                                         <strong class=''>Escolha o preço da cota:</strong> 
