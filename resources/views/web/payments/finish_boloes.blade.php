@@ -47,7 +47,7 @@
                         </div>
 
                         <div class='d-flex justify-content-center mt-5'>
-                        @if($customBolao)
+                            @if($customBolao)
                                 <button class='btn btn-primary'><a href='{{ route("web.customers.bets") }}' class='text-white'><b>Veja seus Bolões</b></a></button>
                             @else
                                 <button class='btn btn-primary'><a href='{{ route("web.customers.mybuys") }}' class='text-white'><b>Veja suas compras</b></a></button>
