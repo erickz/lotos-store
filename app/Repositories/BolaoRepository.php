@@ -196,7 +196,7 @@ class BolaoRepository implements BolaoRepositoryInterface
         $bolao = $this->find($bolaoId);
 
         if ($cotas === null){
-            throw new \Exception('Cotas inválidas');
+            throw new \Exception(message: 'Cotas inválidas');
         }
         
         if (! $customerId){
@@ -354,6 +354,8 @@ class BolaoRepository implements BolaoRepositoryInterface
     {
         $bolao = $this->model->find($bolaoId);
 
+        \Log::info(print_r($bolao, true));
+
         if ($cotas <= 0 || $cotas > $bolao->cotas_available){
             throw new \Exception("Quantidade de cotas indisponivel. Por favor atualize a página.");
         }
@@ -366,6 +368,8 @@ class BolaoRepository implements BolaoRepositoryInterface
             throw new \Exception("Usuário não identificado");
         }
 
+        \Log::info("Passou ifs");
+
         $customerCredits = $customer->credits;
         $totalPrice = ($bolao->price * $cotas);
 
@@ -376,6 +380,8 @@ class BolaoRepository implements BolaoRepositoryInterface
         }
 
         $this->storeBuyHistory($bolaoId, $cotas, $customer->id);
+
+        \Log::info("Storou o rolê");
 
         Mail::to($customer->email)->send(new CotasBoughtMail($customer->getFirstName(), $bolao->name, $cotas));
 

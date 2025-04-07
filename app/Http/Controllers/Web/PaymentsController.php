@@ -472,7 +472,7 @@ class PaymentsController extends WebBaseController
 
                     $this->bolaoRepo->activateBolao($arDescription[1]);
                 }
-                elseif(str_contains($descriptionBuy, 'buy_bolao')){
+                else if(str_contains($descriptionBuy, 'buy_bolao')){
                     $arDescription = explode(':', $descriptionBuy);
                     $reservesIds = explode(',', $arDescription[1]);
                     $reserves = $this->bolaoRepo->getReservesByIds($reservesIds);
