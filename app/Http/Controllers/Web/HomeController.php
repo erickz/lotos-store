@@ -28,10 +28,10 @@ class HomeController extends WebBaseController
         
         $boloesSelected = collect();
 
-        $mostPopulars = $this->repository->getSpecialBoloes($boloesSelected);
+        $mostPopulars = $this->repository->getSpecialBoloes($boloesSelected->pluck('id')->toArray());
         $boloesSelected = $boloesSelected->merge($mostPopulars);
 
-        $biggestChances = $this->repository->getBiggestChances($boloesSelected);
+        $biggestChances = $this->repository->getBiggestChances($boloesSelected->pluck('id')->toArray());
         $boloesSelected = $boloesSelected->merge($biggestChances);
 
         // $mostEconomics = $this->repository->getMostEconomics($boloesSelected); 
