@@ -13,7 +13,7 @@
             <div class='col-lg-12'>
                 <h1 class='ps-0 mb-0 text-secondary'>Comprar créditos</h1>
                 
-                <form id='formCredits' method='GET' action='{{ route("web.credits.index") }}' class='col-lg-12 mt-5 bg-white p-5'>
+                <form id='formCredits' method='post' action='{{ route("web.credits.index") }}' class='col-lg-12 mt-5 bg-white p-5'>
                     <div class="alert d-none mb-5 ps-2"></div>
                     
                     <div class='d-flex d-flex-responsive'>

@@ -570,14 +570,20 @@ $(window).load(function(){
         formCredits.find(".tgForm").on('click', function(e){
             e.preventDefault();
             var valueSelected = $(this).data('value');
-            var convertedValue = valueSelected.replace('.', '').replace(',', '.');
 
-            if (convertedValue !== undefined && convertedValue && convertedValue >= 20){
-                formCredits.prepend('<input type="hidden" name="credits" value="' + valueSelected + '" />')
-                formCredits.trigger('submit');
+            if (valueSelected.length > 0){
+                var convertedValue = valueSelected.replace('.', '').replace(',', '.');
+
+                if (convertedValue !== undefined && convertedValue && convertedValue >= 20){
+                    formCredits.prepend('<input type="hidden" name="credits" value="' + valueSelected + '" />')
+                    formCredits.trigger('submit');
+                }
+                else {
+                    handleAlert(formCredits, "Selecione um valor válido", 'primary');
+                }
             }
             else {
-                handleAlert(formCredits, "Selecione um valor válido", 'info');
+                handleAlert(formCredits, "Selecione um valor válido", 'primary');
             }
         });
     }
