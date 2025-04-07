@@ -431,6 +431,8 @@ class PaymentsController extends WebBaseController
             $payload = $request->all();
             $notificationCode = $payload['notificationCode'];
 
+            \Log::info("Chegou notificação de pagamento");
+
             if (! $notificationCode){
                 throw new \Exception('Not notification code sent');
             }
@@ -441,6 +443,8 @@ class PaymentsController extends WebBaseController
             ]);
             
             $xmlContent = simplexml_load_string($response->getBody(),'SimpleXMLElement',LIBXML_NOCDATA);
+
+            \Log::info(print_r($xmlContent, true));
 
             if ($xmlContent->count() == 0){
                 throw new \Exception('Error');
