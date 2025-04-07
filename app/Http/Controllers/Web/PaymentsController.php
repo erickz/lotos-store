@@ -464,7 +464,9 @@ class PaymentsController extends WebBaseController
                 throw new \Exception('Payment completed');
             }
 
-            $status = ["3" => 'Pago', '4' => 'Finalizado'];
+            \Log::info(gettype($xmlContent->status));
+
+            $status = [2 => 'Em análise', 3 => 'Pago', 4 => 'Finalizado', 6 => 'Devolvido', 7 => 'Cancelado'];
             if(in_array($xmlContent->status, ["3","4"])){
                 $payment->completed = 1;
                 $payment->status = $status[$xmlContent->status];
