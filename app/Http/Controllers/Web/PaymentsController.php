@@ -223,7 +223,7 @@ class PaymentsController extends WebBaseController
                     'completed' => 0,
                     'name' => $customer->full_name,
                     'email' => $customer->email,
-                    'items' => [],
+                    'items' =>  $descriptionBuy,
                     'gateway'   => 'pagseguro',
                     'type'      => 'pix',
                     'status'    => 'WAITING',
