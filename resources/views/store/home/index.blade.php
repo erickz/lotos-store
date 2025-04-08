@@ -142,7 +142,7 @@
 
             @if ($mostPopulars->count() > 0)
                 <div class='boloesListing mt-5'>
-                    <h2 class='ps-0 color-default'><b class='d-flex'><i class='iconMg me-2'></i> <span>Bolões da Mega da Virada</span></b></h2>
+                    <h2 class='ps-0 color-default'><b class='d-flex'><span>Concurso Especial</span></b></h2>
                     @include('web.boloes.listing_boloes', ['boloes' => $mostPopulars])
                 </div>
             @endif
