@@ -21,6 +21,10 @@
 //Font awesome
 @import '../vendor/fa/css/all.css';
 
+h1, h2, h3, h4 {
+	padding-left: 0;
+}
+
 .border-radius {
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
