@@ -45,8 +45,9 @@ mix
         ,'resources/vendor/adm-template/js/jquery-ui.custom.js'
         ,'resources/vendor/adm-template/js/jquery-ui.custom.min_BAK.js'
 
-        ,'resources/vendor/adm-template/js/ckeditor.js'
+        ,'resources/vendor/adm-template/js/popper.js'
         ,'resources/vendor/adm-template/js/bootstrap.js'
+        ,'resources/vendor/adm-template/js/summernote.min.js'
         ,'resources/vendor/adm-template/js/bootstrap-datepicker.js'
         // ,'resources/vendor/adm-template/js/daterangepic/**/ker.js'
         ,'resources/vendor/adm-template/js/dropzone.js'

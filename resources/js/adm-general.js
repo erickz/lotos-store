@@ -327,11 +327,7 @@ $(function(){
 
     var ckeditor = $( '.ckeditor' );
     if (ckeditor.length > 0){
-        ClassicEditor
-            .create( ckeditor[0] )
-            .catch( error => {
-                console.error( error );
-            } );
+        ckeditor.summernote({dialogsInBody: true});          
     }
 
     select2();
