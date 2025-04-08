@@ -146,7 +146,7 @@ trait ConcursoTrait
     {
         if (! $this->next_expected_prize){
             if ($prefix){
-                return '<span class="position-relative"> >R$100.000,00 </span>';
+                return '<span class="position-relative"> +R$100.000,00 </span>';
             }
         }
 
@@ -156,7 +156,7 @@ trait ConcursoTrait
     public function getValueAccumulated()
     {
         if (! $this->value_accumulated){
-            return '<span class="position-relative"> >R$100.000,00 </span>';
+            return '<span class="position-relative"> +R$100.000,00 </span>';
         }
 
         return 'R$' . number_format($this->value_accumulated, 2, ',', '.');
