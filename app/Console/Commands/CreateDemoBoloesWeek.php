@@ -60,13 +60,13 @@ class CreateDemoBoloesWeek extends Command
 
             $newBolao = [
                 'lotery_id' => $concurso->lotery_id,
-                'customer_id' => 1,
+                'customer_id' => 13,
                 'concurso_id' => $concurso->id,
                 'name' => $this->getNewLuckyBird(),
                 'price' => 7.5,
                 'keepCotas' => 1,
-                'cotas' => 8,
-                'cotas_available' => 7,
+                'cotas' => 20,
+                'cotas_available' => 20,
                 'description' => '',
                 'games' => $games,
                 'quantity_games' => count($games),
@@ -95,7 +95,7 @@ class CreateDemoBoloesWeek extends Command
         }
         else if($loteryId == 2){
             $games = [
-                [7,16,45,54,64,76],
+                [7,16,45,54,64],
                 [10,12,23,40,51],
                 [7,15,16,37,62],
                 [12,15,21,33,52],
