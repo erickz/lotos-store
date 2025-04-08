@@ -29,7 +29,7 @@
 
                     @if(count($specialBoloes) > 0)
                         <div class='mt-5'>
-                            <h2 class='ps-0 color-default'><b class='d-flex'><span>Concurso especial</span></b></h2>
+                            <h2 class='ps-0'><b class='d-flex'><span>Concurso especial</span></b></h2>
                             <div>
                                 <div class='d-flex align-items-center'>
                                     

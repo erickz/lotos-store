@@ -79,7 +79,7 @@
                         @if(count($specialBoloes) > 0)
                             <div>
                                 <div class='d-flex align-items-center'>
-                                    <h2 class='ps-0 color-default'><b class='d-flex'><span>Concurso Especial</span></b></h2>
+                                    <h2 class='ps-0'><b class='d-flex'><span>Concurso Especial</span></b></h2>
                                 </div>
                                 @include('web.boloes.listing_boloes', ['boloes' => $specialBoloes])
                             </div>
