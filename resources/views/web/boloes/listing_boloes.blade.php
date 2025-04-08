@@ -45,7 +45,7 @@
                                     </select>
                                 </div>
                             </td>
-                            <td align='left' class='p-4'>
+                            <td align='right' class='p-4'>
                                 <a class='cursor-p btn btn-success btn-sm text-center btnBuyCota isFromTable disabled' data-toggle="modal" data-target="#buyConfirmationModal" data-gamesurl='{{ route("web.boloes.buy", [$bolao->id]) }}'><i class='fa fa-shopping-cart'></i></a>
                             </td>
                         </tr>
@@ -54,7 +54,7 @@
             </tbody>
         </table>
 
-        <div class='mt-2 ps-2 me-12 text-end'>
+        <div class='mt-2 ps-2 me-4 text-end'>
             @if(isset($displayPagination) && $displayPagination)
                 @if($boloes->count() > 0)
                     {{ $boloes->withQueryString()->links('pagination::bootstrap-5') }}
