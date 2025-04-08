@@ -11,6 +11,7 @@
         </div>
         <div class="nav nav-dark order-1 order-md-2 font-weight-bold">
             <a href="{{ route('web.staticPages.faq') }}" class="nav-link pr-3 pl-0">Ajuda</a>
+            <a href="{{ route('web.blog.index') }}" class="nav-link pr-3 pl-0">Blog</a>
             <a href="{{ route('web.staticPages.partners') }}" class="nav-link pr-3 pl-0">Parceiros</a>
             <a href="{{ route('web.results') }}" class="nav-link pr-3 pl-0">Resultados</a>
             <a href="{{ route('web.staticPages.about') }}" class="nav-link pr-3 pl-0">Sobre nós</a>
