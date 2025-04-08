@@ -50,6 +50,8 @@ class CreateDemoBoloesWeek extends Command
         $concursosOfTheWeek = Concurso::where('draw_day', '>=', $beginningWeek)->where('draw_day', '<=', $endWeek)
             ->orderBy('draw_day', 'DESC')->get();
 
+        \Log::info(print_r($concursosOfTheWeek, true));
+
         $loteriesDone = [];
         foreach($concursosOfTheWeek as $concurso){
             $games = $this->generateGames($concurso->lotery_id);
@@ -57,6 +59,8 @@ class CreateDemoBoloesWeek extends Command
             if (in_array($concurso->lotery_id, $loteriesDone)){
                 continue;
             }
+
+            \Log::info(print_r($concurso, true));
 
             $newBolao = [
                 'lotery_id' => $concurso->lotery_id,
