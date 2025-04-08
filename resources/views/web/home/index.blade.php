@@ -11,7 +11,7 @@
     <div class="">
 
         <div class=''>
-            <section class="py-30 bg-white" id="home">
+            <section class="py-30 pt-10 bg-white" id="home">
                 <div class="container">
                     <div class="text-center mb-5">
                         <!-- <h1 class="display-5 text-center mb-3"><b>Crie um Bolão e venda suas cotas online 🤑</b></h1> -->
