@@ -48,7 +48,7 @@
 
         <div class='d-flex d-flex-responsive justify-content-center m-auto'>
 
-            <div class='col-7 generateNumbersCt mt-4 border rounded border-dash p-4'>
+            <div class='col generateNumbersCt mt-4 border rounded border-dash p-4'>
                 <h3 class='ps-0 border-0 mb-4 text-start'><b>Gerar jogos</b></h3>
                 <div class='d-flex justify-content-start align-items-center'>
                     <div class='slHolder max-w-80px'>
