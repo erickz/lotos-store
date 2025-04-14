@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Countable;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -55,6 +56,7 @@ class CreateDemoBoloesWeek extends Command
         $loteriesDone = [];
         foreach($concursosOfTheWeek as $concurso){
             $games = $this->generateGames($concurso->lotery_id);
+            $qtGames = count($games);
 
             if (in_array($concurso->lotery_id, $loteriesDone)){
                 continue;
@@ -68,12 +70,13 @@ class CreateDemoBoloesWeek extends Command
                 'concurso_id' => $concurso->id,
                 'name' => $this->getNewLuckyBird(),
                 'price' => 7.5,
+                'chances' => $qtGames,
                 'keepCotas' => 1,
                 'cotas' => 20,
                 'cotas_available' => 20,
                 'description' => '',
                 'games' => $games,
-                'quantity_games' => count($games),
+                'quantity_games' => $qtGames,
                 'total_value' => 0
             ];
 
