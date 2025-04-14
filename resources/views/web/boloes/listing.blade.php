@@ -95,7 +95,7 @@
                                 @include('web.boloes.listing_boloes', ['boloes' => $mostPopulars])
                             </div>
                         @else
-                            <div class='alert alert-light'><i class='fas fa-info-circle me-2 text-primary'></i> Nenhum bolão público cadastrado</div>
+                            <!-- <div class='alert alert-light'><i class='fas fa-info-circle me-2 text-primary'></i> Nenhum bolão público cadastrado</div> -->
                         @endif
 
                         <div class='d-flex flex-column col-md-12 ps-0 mt-10'>
