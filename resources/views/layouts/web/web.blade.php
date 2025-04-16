@@ -37,7 +37,7 @@
         <!-- Favicon -->
         <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon" />
         <link type="image/x-icon" href="{{ asset('img/favicon.ico') }}?v=2" rel="shortcut icon"/>
-        {!! RecaptchaV3::initJs() !!}
+        <!-- {!! RecaptchaV3::initJs() !!} -->
 
         <!--[if lt IE 9]>
             <script src="{{ asset('js/html5shiv.js') }}"></script>
