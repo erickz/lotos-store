@@ -10,9 +10,6 @@
                 <tr>
                     <td valign="top" class="bodyContent" mc:edit="body_content">
                         <p>
-                            <b>Receba suas cotas e concorra a {{ $concursoPrize }}!</b>
-                        </p>
-                        <p>
                             Olá, você foi presenteado por {{ $ownerName }} com {{ $invite->cotas }} cota{{ $invite->cotas > 1 ? 's' : '' }}
                             para participar do concurso da {{ $lotery->name }},
                         </p>
