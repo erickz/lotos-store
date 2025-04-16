@@ -41,7 +41,7 @@
                     @endif
 
                     <div class='my-4'>
-                        <h2 class='ps-1 pb-0'><b class='text-info3'>Como apostar na Lotos Fácil</b></h2>
+                        <h2 class='ps-1 pb-0'><b class='text-info3'>Como apostar na Lotos Online</b></h2>
                         <div class="stepByStepCt d-flex justify-content-between d-flex-responsive">
                             <div class='bg-info p-5 me-2 text-white stepByStepHome position-relative col'>
                                 <div class='titleStep d-flex flex-column mb-5'>

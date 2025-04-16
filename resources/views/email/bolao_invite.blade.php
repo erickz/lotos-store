@@ -26,7 +26,7 @@
                         </p>
                         <p>
                             Você será redirecionado para confirmar seus dados e receber as cotas. <br />
-                            Fique de olho na data do concurso para lembrar de acessar o site da Lotos Fácil e ver se seu Bolão foi premiado!
+                            Fique de olho na data do concurso para lembrar de acessar o site da Lotos Online e ver se seu Bolão foi premiado!
                         </p>
                         <p>
                             Se tiver alguma dúvida, não hesite em entrar em contato com nossa equipe de suporte. 

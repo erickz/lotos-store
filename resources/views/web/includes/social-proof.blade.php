@@ -6,7 +6,7 @@
         $testimonies = [
             [
                 'name' => 'Adilson C.',
-                'text' => 'A Lotos Fácil é boa para apostar com outras pessoas.',
+                'text' => 'A Lotos Online é boa para apostar com outras pessoas.',
                 'rating' => 5
             ],
             [

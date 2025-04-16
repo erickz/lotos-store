@@ -238,7 +238,7 @@
                             </svg>
                             <!--end::Svg Icon-->
                         </span>
-                        <div class="card-label text-dark pl-4">Quais as vantagens de usar o Lotos Fácil?</div>
+                        <div class="card-label text-dark pl-4">Quais as vantagens de usar o Lotos Online?</div>
                     </div>
                 </div>
                 <!--end::Header-->

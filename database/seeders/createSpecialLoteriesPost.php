@@ -78,7 +78,7 @@ class createSpecialLoteriesPost extends Seeder
             <h2>Realize Seus Sonhos com a Quina de São João</h2>
             <p>A Quina de São João é uma das festas mais emocionantes do mundo das loterias. Não deixe de participar dessa celebração e tenha a chance de realizar seus sonhos. Com um pouco de estratégia e muita empolgação, você pode ser o próximo vencedor da Quina de São João!</p>'
             ,'meta_title' => 'Quina de São João'
-            ,'meta_description' => 'A Quina de São João é um dos concursos mais esperados do ano, com prêmios extraordinários. Descubra o que torna essa loteria tão especial, conheça suas regras, e saiba como maximizar suas chances de ganhar. Escolha seus números e participe deste emocionante evento na Lotos Fácil!'
+            ,'meta_description' => 'A Quina de São João é um dos concursos mais esperados do ano, com prêmios extraordinários. Descubra o que torna essa loteria tão especial, conheça suas regras, e saiba como maximizar suas chances de ganhar. Escolha seus números e participe deste emocionante evento na Lotos Online!'
         ]
         ,[
             'title' => 'Lotofácil de independência'
@@ -97,7 +97,7 @@ class createSpecialLoteriesPost extends Seeder
             <h2>Tente Sua Sorte na Lotofácil da Independência </h2>
             <p>Participar da Lotofácil da Independência é mais do que um jogo; é uma celebração da história do Brasil com a chance de realizar seus sonhos. Os prêmios substanciais oferecidos tornam este concurso uma tradição emocionante para milhares de brasileiros a cada ano. Não deixe de tentar a sorte e, quem sabe, realizar seus sonhos na Lotofácil da Independência!</p>'
             ,'meta_title' => 'Lotofácil da Independência'
-            ,'meta_description' => 'A Lotofácil da Independência é um concurso especial da Lotofácil realizado anualmente em comemoração à Independência do Brasil. Descubra como participar dessa emocionante loteria, saiba como funciona e aumente suas chances de ganhar grandes prêmios. Jogue na Lotos Fácil e concorra agora!'
+            ,'meta_description' => 'A Lotofácil da Independência é um concurso especial da Lotofácil realizado anualmente em comemoração à Independência do Brasil. Descubra como participar dessa emocionante loteria, saiba como funciona e aumente suas chances de ganhar grandes prêmios. Jogue na Lotos Online e concorra agora!'
         ]
         ,[
             'title' => 'Dupla sena de páscoa'
@@ -116,7 +116,7 @@ class createSpecialLoteriesPost extends Seeder
             <h2>Realize Seus Sonhos</h2>
             <p>A Dupla Sena de Páscoa é uma das festas mais emocionantes do mundo das loterias. Escolha seus números e participe dessa celebração especial. Com um pouco de estratégia e muita empolgação, você pode ser o próximo vencedor da Dupla Sena de Páscoa e realizar seus sonhos. Aproveite essa oportunidade única e aposte na Dupla Sena de Páscoa hoje mesmo!</p>'
             ,'meta_title' => 'Dupla Sena de Páscoa: Dobre Suas Chances de Ganhar'
-            ,'meta_description' => 'A Dupla Sena de Páscoa é um concurso especial que ocorre às vésperas da Páscoa, oferecendo prêmios incríveis. Saiba como funciona essa loteria única, conheça suas regras e descubra estratégias para aumentar suas chances de ganhar. Escolha seus números e aposte na Lotos Fácil para participar deste emocionante sorteio!'
+            ,'meta_description' => 'A Dupla Sena de Páscoa é um concurso especial que ocorre às vésperas da Páscoa, oferecendo prêmios incríveis. Saiba como funciona essa loteria única, conheça suas regras e descubra estratégias para aumentar suas chances de ganhar. Escolha seus números e aposte na Lotos Online para participar deste emocionante sorteio!'
         ]];
 
         foreach($data as $row){
