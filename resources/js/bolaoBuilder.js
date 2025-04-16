@@ -107,7 +107,7 @@ $(function(){
 
                     var priceCota = slPrices.length > 0 ? slPrices.find(':selected').val() : $('.priceCotas').val();
                     //Previous factor 1.4, now 2.
-                    var revenue = Math.ceil(bolaoTotal * 2);
+                    var revenue = Math.ceil(bolaoTotal * 3);
                     var recomendedCotas = Math.round((revenue / priceCota));
                     recomendedCotas = recomendedCotas <= 1 ? 2 : recomendedCotas;
 

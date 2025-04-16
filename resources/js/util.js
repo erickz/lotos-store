@@ -777,7 +777,7 @@ $(window).load(function(){
 
             if (totalCost > 0){
                 var priceCota = 7.5;
-                var revenue = Math.ceil(totalCost * 2);
+                var revenue = Math.ceil(totalCost * 3);
                 var recomendedCotas = Math.round((revenue / priceCota));
                 recomendedCotas = recomendedCotas <= 1 ? 2 : recomendedCotas;
 
