@@ -293,6 +293,7 @@ $(window).load(function(){
             let btnSend = inviteCotasForm.find('.btn-send');
             btnSend.on("click", function(e){
                 e.preventDefault();
+                inviteCotasForm.find('input[name="_token"]').val($('meta[name="csrf-token"]').attr('content'));
 
                 var dataForm = inviteCotasForm.serializeArray();
 
