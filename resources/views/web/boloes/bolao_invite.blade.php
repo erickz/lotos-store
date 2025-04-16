@@ -13,8 +13,8 @@
     <div class='container pe-4 ps-4 mt-4 mb-2' id='inviteCotasCt'>
         <div class='alert alert-secondary d-flex justify-content-center'>
             <div class='text-center me-9'>
-                <span>Nome do Bolão</span> <br />
-                <strong class='font-larger'>{{ $bolao->name }}</strong>
+                <span>Premiação</span> <br />
+                <strong class='font-larger'>{{ $bolao->concurso->getFormattedNextExpectedPrize() }}</strong>
             </div>
             <div class='text-center me-9'>
                 <span>Data do concurso</span> <br />

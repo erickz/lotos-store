@@ -14,10 +14,10 @@
             <div class="card-body">
                 <div class='col-lg-12'>
                     @if ($message)
-                        <h1 class='ps-0 mb-0 text-secondary text-center mt-10'>Convite já efetivado ✅</h1>
+                        <h1 class='ps-0 mb-0 text-secondary text-center mt-10'>Convite efetivado ✅</h1>
                         
                         <div class='col-lg-12 finishCheckoutMessage mt-5 mb-10 h-180px text-center'>
-                            Este convite já foi efetivado e a as cotas já recebidas! <br /> Acesse e veja seus jogos no painel do cliente: <br />
+                            Este convite foi efetivado e a as cotas já recebidas! <br /> Acesse e veja seus jogos no painel do cliente: <br />
 
                             <div class='d-flex justify-content-center mt-5'>
                                 <button class='btn btn-primary'><a href='{{ route("web.customers.mybuys") }}' class='text-white'><b>Meus jogos</b></a></button>

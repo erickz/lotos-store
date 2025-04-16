@@ -457,7 +457,7 @@ class BoloesController extends WebBaseController
             return redirect()->back()->with(['message' => 'Must to be logged in ']);
         }
 
-        $message = '';
+        $message = null;
         $error = 0;
         
         try {
