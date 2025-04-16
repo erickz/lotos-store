@@ -25,7 +25,7 @@ class BoloesController extends WebBaseController
     public function __construct(BolaoRepositoryInterface $repository)
     {
         $this->repository = $repository;
-        // \LaravelFacebookPixel::createEvent('ViewContent', ["content_ids" => 00123,"content_category" => "Normal","content_name" => request()->route()->getName(),"content_type" => "Product","contents" => "a","currency" => "BRL","value" => "AAA"]);
+        \LaravelFacebookPixel::createEvent('ViewContent', ["content_ids" => 00123,"content_category" => "Normal","content_name" => request()->route()->getName(),"content_type" => "Product","contents" => "a","currency" => "BRL","value" => "AAA"]);
 
         parent::__construct();
     }

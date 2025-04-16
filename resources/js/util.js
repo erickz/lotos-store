@@ -822,7 +822,7 @@ $(window).load(function(){
             bolaoGamesList.html('');
 
             if(arGamesSelected.length <= 0){
-                bolaoGamesList.prepend('<ul><li class="display-4 text-warning text-center mt-10 d-flex"><b><i class="fas fa-info-circle me-1 fa-1x text-warning"></i>Adicione jogos para simular seus lucros</b></li></ul>')
+                bolaoGamesList.prepend('<ul><li class="display-5 text-warning text-center mt-16 d-flex justify-content-center" style="font-size: 28px;"><b><i class="fas fa-info-circle me-1 fa-1x text-warning"></i>Adicione jogos para simular seus lucros</b></li></ul>')
             }
             else {
                 $.each(arGamesSelected, (index, val) => {
@@ -870,8 +870,12 @@ $(window).load(function(){
 
         //Add another set of default games (the first one is done by triggering the chance event)
         var setDefaultGames = function(){
-            var newGame = { cost: 7, dozens: 6, quantity: 10, chances: 1 };
-            arGamesSelected.push(newGame);
+            var newGame = { cost: 7, dozens: 6, quantity: 1, chances: 1 };
+
+            for(var i = 0; i <= 10; i++){
+                arGamesSelected.push(newGame);
+            }
+
             buildGamesList();
         }();
     }

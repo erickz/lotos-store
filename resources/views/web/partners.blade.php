@@ -34,19 +34,19 @@
                         </div><!-- /d-flex -->
                         <div class="d-flex align-items-center mb-5">
                             <div class='col-3 text-end me-5'>
-                                <strong>Adicione jogos:</strong>
+                                <strong>Gerar dezenas:</strong>
                             </div>    
                             <div class='col-8'>
                                 <div class="d-flex d-flex-responsive justify-content-between">
-                                    <div class="mb-1 col">
+                                    <input type="hidden" class="form-control inputNumberGames" value="1">
+                                    <!-- <div class="mb-1 col">
                                         <div class="input-group bootstrap-touchspin bootstrap-touchspin-injected">
-                                            <input type="text" class="form-control inputNumberGames" value="1">
                                         </div>
-                                    </div>
-                                    <select class="mx-2 form-control col select slGames" data-costs='{{ json_encode($costs) }}'>
+                                    </div> -->
+                                    <select class="me-4 form-control col select slGames" data-costs='{{ json_encode($costs) }}'>
                                         
                                     </select>
-                                    <div class="mt-1 col"><div class='btn btn-info btnAddGame rounded w-100 text-white'><b><i class="fas fa-plus"></i>Adicionar</b></div></div>
+                                    <div class="mt-1 col"><div class='btn btn-info btnAddGame rounded text-white'><b><i class="fas fa-plus"></i>Adicionar</b></div></div>
                                 </div>
                             </div>    
                         </div><!-- /d-flex -->
@@ -54,7 +54,7 @@
                             <div class='col-3 text-end me-5'>
                                 <strong>Bolão simulado:</strong>
                             </div>    
-                            <div class='col-8 h-150px overflow-hidden border rounded'>
+                            <div class='col-8 h-150px overflow-auto border rounded'>
                                 <ul class="list-group bolaoGamesList"></ul>
                             </div>    
                         </div><!-- /d-flex -->
