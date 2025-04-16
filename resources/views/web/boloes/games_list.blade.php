@@ -60,9 +60,10 @@
             @foreach($games as $game)
                 <li class='mb-2 d-flex'>
                     <span class=''>
-                        <strong class='id-game d-inline-block mt-2'>{{ sprintf("%04d", $num++) }}</strong> - 
+                        <strong class='id-game d-inline-block mt-2'>{{ sprintf("%04d", $num++) }}.</strong> 
                     </span>
-                    <span class='col ms-2'>
+                    <span class='col ms-1'>
+                        <span><b>{{ $game->obs ? $game->obs . ':' : '' }}</b></span>
                         @foreach(explode(',', $game->numbers) as $number)
                             <span class='number bg-light border border-{{ $bolao->lotery->getColorClass() }} rounded rounded-circle w-35px text-center p-2 mb-1 d-inline-block {{ $game->prized ? "bg-success text-white" : "text-" . $bolao->lotery->getColorClass() }}'><b>{{ str_replace(',', '', sprintf("%02d", $number)) }}</b></span>
                         @endforeach

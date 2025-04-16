@@ -37,7 +37,7 @@ class CustomersController extends WebBaseController
     {
         $customer = auth()->guard('web')->user();
 
-        return view('web.customers.mybets', ['customer' => $customer, 'boloes' => $customer->boloes()->orderBy('updated_at', 'DESC')->orderBy('id', 'DESC')->get()]);
+        return view('web.customers.mybets', ['customer' => $customer, 'boloes' => $customer->boloes()->orderBy('updated_at', 'DESC')->orderBy('id', 'DESC')->paginate()]);
     }
 
     public function myBuys(Request $request)

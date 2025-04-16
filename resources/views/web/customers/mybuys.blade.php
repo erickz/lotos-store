@@ -92,7 +92,7 @@
                                         <tr>
                                             <td>Loteria</td>
                                             <td>Concurso</td>
-                                            <td>Data da compra</td>
+                                            <td>Premiação</td>
                                             <td>Cotas compradas</td>
                                             <td>Status</td>
                                             <td>Premiação</td>
