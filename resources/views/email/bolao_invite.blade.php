@@ -22,7 +22,6 @@
                             <b>Prêmio estimado: <span style='color: #80CB2E !important;'>{{ $concursoPrize }}</span> </b><br />
                             <b>Loteria:</b> {{ $lotery->name }} <br />
                             <b>Concurso:</b> Nº{{ $concurso->number }} - {{ $concursoDate }} <br />
-                            <b>Nome do Bolão:</b> {{ $bolao->name }} <br />
                             <b>Cotas:</b> {{ $invite->cotas }} cota{{ $invite->cotas > 1 ? 's' : '' }} <br />
                         </p>
                         <p>

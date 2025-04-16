@@ -39,7 +39,7 @@ class BolaoInviteMail extends Mailable
         $lotery = $this->data['lotery'];
 
         return new Envelope(
-            subject: 'Você ganhou ' . $invite->cotas . ' cota' . ($invite->cotas > 1 ? 's' : '') . ' de um Bolão da ' . $lotery->name,
+            subject: 'Seu amigo te presentou ' . $invite->cotas . ' cota' . ($invite->cotas > 1 ? 's' : '') . ' de um Bolão da ' . $lotery->name,
         );
     }
 
