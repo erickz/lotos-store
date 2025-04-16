@@ -54,7 +54,7 @@
                             <div class='col-3 text-end me-5'>
                                 <strong>Bolão simulado:</strong>
                             </div>    
-                            <div class='col-8 h-150px overflow-scroll border rounded'>
+                            <div class='col-8 h-150px overflow-hidden border rounded'>
                                 <ul class="list-group bolaoGamesList"></ul>
                             </div>    
                         </div><!-- /d-flex -->
