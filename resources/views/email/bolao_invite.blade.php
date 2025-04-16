@@ -22,7 +22,7 @@
                             <b>Cotas:</b> {{ $invite->cotas }} cota{{ $invite->cotas > 1 ? 's' : '' }} <br />
                         </p>
                         <p>
-                            <a href='{{ route("web.customers.receiveInvite", [$invite->token]) }}'>Clique aqui receber suas cotas!</a>
+                            <a href='{{ route("web.customers.receiveInvite", [$invite->token]) }}'>Clique aqui para receber suas cotas!</a>
                         </p>
                         <p>
                             Você será redirecionado para confirmar seus dados e receber as cotas. <br />
