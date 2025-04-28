@@ -24,10 +24,17 @@
 
     <div class='container pe-4 ps-4 gamesList mt-4'>
         <div class='alert alert-secondary d-flex justify-content-center'>
-            <div class='text-center me-9'>
-                <span>Criador</span> <br />
-                <strong class='font-larger'>{{ $bolao->customer->getProfileName() }}</strong>
-            </div>
+            @if ($bolao->type == 3)
+                <div class='text-center me-9'>
+                    <span>Nome</span> <br />
+                    <strong class='font-larger'>{{ $bolao->name }}</strong>
+                </div>
+            @else
+                <div class='text-center me-9'>
+                    <span>Criador</span> <br />
+                    <strong class='font-larger'>{{ $bolao->customer->getProfileName() }}</strong>
+                </div>
+            @endif
             <div class='text-center me-9'>
                 <span>Data do concurso</span> <br />
                 <strong class='font-larger'>{{ $bolao->concurso->getDrawDay() }}</strong>
