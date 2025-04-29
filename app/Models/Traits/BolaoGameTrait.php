@@ -48,7 +48,7 @@ trait BolaoGameTrait
             if(auth()->guard('web')->check()){
                 $totalPrize = $this->prize;
                 $valuePerPrize = $totalPrize / $this->bolao->cotas;
-                $qtOwnedByUser = $this->bolao->buyers()->where('customer_id', auth()->guard('web')->user()->id)->get()->sum('cotas');
+                $qtOwnedByUser = $this->bolao->buyers()->get()->sum('cotas');
                 $prize = $valuePerPrize * $qtOwnedByUser;
             }
             else {
