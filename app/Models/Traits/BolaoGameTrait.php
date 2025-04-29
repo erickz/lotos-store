@@ -45,7 +45,7 @@ trait BolaoGameTrait
             return "";
         }
         else {
-            if(auth()->guard('web')->check()){
+            if($this->bolao->buyers()->count() > 0){
                 $totalPrize = $this->prize;
                 $valuePerPrize = $totalPrize / $this->bolao->cotas;
                 $qtOwnedByUser = $this->bolao->buyers()->get()->sum('cotas');
