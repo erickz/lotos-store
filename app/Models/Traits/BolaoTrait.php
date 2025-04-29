@@ -68,7 +68,7 @@ trait BolaoTrait
         return $this->games()->select('id', 'numbers', 'cost')->orderBy('id', 'DESC')->get();
     }
 
-    public function getFormattedPrize()
+    public function getFormattedPrize($customerId = NULL)
     {
         if ($this->prize <= 0){
             return "";
@@ -77,7 +77,7 @@ trait BolaoTrait
             if($this->buyers()->count() > 0){
                 $totalPrize = $this->prize;
                 $valuePerPrize = $totalPrize / $this->cotas;
-                $qtOwnedByUser = $this->buyers()->get()->sum('cotas');
+                $qtOwnedByUser = $this->buyers()->where('customer_id', $customerId)->get()->sum('cotas');
                 $prize = $valuePerPrize * $qtOwnedByUser;
             }
             else {

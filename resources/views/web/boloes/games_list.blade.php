@@ -57,7 +57,7 @@
             {!! $bolao->description !!}
         </div>
         <div class='mb-4 ms-1'>
-            <span>Prêmiação estimada:</span> <strong class='font-larger color-default position-relative'>{!! $bolao->concurso->getNextExpectedPrize() !!}</strong>
+            <span>Prêmiação estimada:</span> <strong class='font-larger color-default position-relative'>{!! $bolao->concurso->getNextExpectedPrize(auth()->guard('web')->user()->id) !!}</strong>
         </div>
 
         <?php 
