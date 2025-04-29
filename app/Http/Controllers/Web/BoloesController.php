@@ -243,15 +243,22 @@ class BoloesController extends WebBaseController
         }
 
         $bolaoData = ['bolao_id' => $newBolao->id];
-        session()->put('payment.total', $request->get('totalToPay'));
-        session()->put('cart.customBolao', $bolaoData);
-        session()->forget('payment.onlyCredits');
 
         if (! auth()->guard('web')->check() || auth()->guard('web')->user()->credits < $request->get('totalToPay')){
+            session()->put('payment.total', $request->get('totalToPay'));
+            session()->put('cart.customBolao', $bolaoData);
+            session()->forget('payment.onlyCredits');
+
             return redirect()->route('web.payments.index');
         }
-        else {    
-            return redirect()->route('web.payments.pay')->with(['message' => "Bolão criado com sucesso! Confira a <a href='" . route("web.boloes.listing") . "'>lista de bolões</a> para visualizá-lo!", 'error' => 0]);    
+        else {
+            session()->put('cart.customBolao', $bolaoData);
+            session()->forget('payment.onlyCredits');
+
+            $this->repo->activateBolao($newBolao->id);
+            auth()->guard('web')->user()->remove_credits($request->get('totalToPay'));
+    
+            return redirect()->route('web.payments.finish_boloes')->with(['message' => "Bolão criado com sucesso! Confira a <a href='" . route("web.boloes.listing") . "'>lista de bolões</a> para visualizá-lo!", 'error' => 0]);    
         }
     }
 
