@@ -255,7 +255,7 @@ class BoloesController extends WebBaseController
             session()->put('cart.customBolao', $bolaoData);
             session()->forget('payment.onlyCredits');
 
-            $this->repo->activateBolao($newBolao->id);
+            $this->repository->activateBolao($newBolao->id);
             auth()->guard('web')->user()->remove_credits($request->get('totalToPay'));
     
             return redirect()->route('web.payments.finish_boloes')->with(['message' => "Bolão criado com sucesso! Confira a <a href='" . route("web.boloes.listing") . "'>lista de bolões</a> para visualizá-lo!", 'error' => 0]);    
