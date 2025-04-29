@@ -74,10 +74,10 @@ trait BolaoTrait
             return "";
         }
         else {
-            if(auth()->guard('web')->check()){
+            if($this->buyers()->count() > 0){
                 $totalPrize = $this->prize;
                 $valuePerPrize = $totalPrize / $this->cotas;
-                $qtOwnedByUser = $this->buyers()->where('customer_id', auth()->guard('web')->user()->id)->get()->sum('cotas');
+                $qtOwnedByUser = $this->buyers()->get()->sum('cotas');
                 $prize = $valuePerPrize * $qtOwnedByUser;
             }
             else {
