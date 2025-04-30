@@ -180,7 +180,7 @@
                 @csrf
                 <input type='hidden' name='totalToPay' class='inputHdTotalToPay' value='0' />
 
-                <span class='me-3'><strong>Valor mínimo:</strong> R$25,00</span>
+                <span class='me-3'><strong>Valor mínimo:</strong> R$12,50</span>
                 <button type='submit' class="btn-submit btn btn-success ml-2">
                     <b>Finalizar <i class="fas fa-chevron-right fa-lg ms-2"></i></b>
                 </button>

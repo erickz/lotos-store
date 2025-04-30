@@ -328,7 +328,7 @@ $(function(){
                     total += cost;
                 });
 
-                if (total >= 25.00){
+                if (total >= 12.50){
                     bolaoBuilder.find('.finishButton .btn-submit').removeClass('disabled');
                     stepFinalize.attr('href', stepFinalize.attr('data-href'));
                 }
