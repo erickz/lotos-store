@@ -38,6 +38,11 @@ class LoginController extends WebBaseController
         return response()->json(['message' => 'Seu email ou senha estão errado(s), por favor tente de novo.', 'error' => 1]);
     }
 
+    public function forgotMyPassword(Request $request)
+    {
+        
+    }
+
     public function logout()
     {
         auth()->guard('web')->logout();

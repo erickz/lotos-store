@@ -182,7 +182,7 @@
 
                 <span class='me-3'><strong>Valor mínimo:</strong> R$12,50</span>
                 <button type='submit' class="btn-submit btn btn-success ml-2">
-                    <b>Finalizar <i class="fas fa-chevron-right fa-lg ms-2"></i></b>
+                    <b>Prosseguir <i class="fas fa-chevron-right fa-lg ms-2"></i></b>
                 </button>
             </form>
         </div>
