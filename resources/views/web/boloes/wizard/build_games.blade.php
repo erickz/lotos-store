@@ -48,45 +48,7 @@
 
         <div class='d-flex d-flex-responsive justify-content-center m-auto'>
 
-            <div class='col generateNumbersCt mt-4 border rounded border-dash p-4'>
-                <h3 class='ps-0 border-0 mb-4 text-start'><b>Gerar jogos</b></h3>
-                <div class='d-flex justify-content-start align-items-center'>
-                    <div class='slHolder max-w-80px'>
-                        <select class='form-control numbersDozens'>
-                            @for($i = $lotery->min_numbers; $i <= $lotery->max_numbers; $i++)                    
-                                <option value='{{ $i }}'>{{ $i }}</option>
-                            @endfor
-                        </select>
-                    </div>
-                    <div class='ms-2'>
-                        Quantidade de dezenas
-                    </div>
-                </div>
-                <div class='d-flex justify-content-start align-items-center mt-2'>
-                    <div class='slHolder max-w-80px'>
-                        <select class='form-control slQtGames'>
-                            @for($i = 1; $i <= 10; $i++)                    
-                                <option value='{{ $i }}'>{{ $i }}</option>
-                            @endfor
-                        </select>
-                    </div>
-                    <div class='ms-2'>
-                        Quantidade de jogos
-                    </div>
-                </div>
-                <div class='text-start mt-2'>
-                    <button class='btn btn-lg btn-primary btGenerate'>
-                        <i class='fas fa-dice'></i><b>Criar jogos</b> 
-                    </button>
-                </div>
-                <div class='text-start mt-2'>
-                    <button class='btn btn-lg btn-warning btGenerate' data-dozens="{{ $lotery->costs->first()->number_matches + 1 }}">
-                        <i class='fas fa-star'></i><b>Criar 1 aposta de {{ $lotery->costs->first()->number_matches + 1 }} dezenas</b> 
-                    </button>
-                </div>
-            </div>
-
-            <div class="col ms-2 numberPicker col-md-5 text-center mt-4 mb-2 border rounded border-dash p-4">
+            <div class="col numberPicker col-md-5 text-center mt-4 mb-2 border rounded border-dash p-4">
                 <h3 class='ps-0 border-0 mb-4 text-start'><b>Selecionar meus números</b></h3>
                 <div class="statsCt chosenNumbersCt p-0 mt-8 mb-5 pb-2">
                     <div class='container ps-0 pe-0 mb-3'>
@@ -150,6 +112,44 @@
                     </div>
                 </div>
             </div><!-- /bolaoBuilder -->
+
+            <div class='col generateNumbersCt mt-4 ms-2 border rounded border-dash p-4'>
+                <h3 class='ps-0 border-0 mb-4 text-start'><b>Gerar jogos</b></h3>
+                <div class='d-flex justify-content-start align-items-center'>
+                    <div class='slHolder max-w-80px'>
+                        <select class='form-control numbersDozens'>
+                            @for($i = $lotery->min_numbers; $i <= $lotery->max_numbers; $i++)                    
+                                <option value='{{ $i }}'>{{ $i }}</option>
+                            @endfor
+                        </select>
+                    </div>
+                    <div class='ms-2'>
+                        Quantidade de dezenas
+                    </div>
+                </div>
+                <div class='d-flex justify-content-start align-items-center mt-2'>
+                    <div class='slHolder max-w-80px'>
+                        <select class='form-control slQtGames'>
+                            @for($i = 1; $i <= 10; $i++)                    
+                                <option value='{{ $i }}'>{{ $i }}</option>
+                            @endfor
+                        </select>
+                    </div>
+                    <div class='ms-2'>
+                        Quantidade de jogos
+                    </div>
+                </div>
+                <div class='text-start mt-2'>
+                    <button class='btn btn-lg btn-primary btGenerate'>
+                        <i class='fas fa-dice'></i><b>Criar jogos</b> 
+                    </button>
+                </div>
+                <div class='text-start mt-2'>
+                    <button class='btn btn-lg btn-warning btGenerate' data-dozens="{{ $lotery->costs->first()->number_matches + 1 }}">
+                        <i class='fas fa-star'></i><b>Criar 1 aposta de {{ $lotery->costs->first()->number_matches + 1 }} dezenas</b> 
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
