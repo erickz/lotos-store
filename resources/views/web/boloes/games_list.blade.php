@@ -31,13 +31,13 @@
                 </div>
             @else
                 <div class='text-center me-9'>
-                    <span>Criador</span> <br />
-                    <strong class='font-larger'>{{ $bolao->customer->getProfileName() }}</strong>
+                    <span>Data do concurso</span> <br />
+                    <strong class='font-larger'>{{ $bolao->concurso->getDrawDay() }}</strong>
                 </div>
             @endif
             <div class='text-center me-9'>
-                <span>Data do concurso</span> <br />
-                <strong class='font-larger'>{{ $bolao->concurso->getDrawDay() }}</strong>
+                <span>Premiação estimada</span> <br />
+                <strong class='font-larger position-relative'>{!! $bolao->concurso->getFormattedNextExpectedPrize() !!}</strong>
             </div>
             <div class='text-center'>
                 <span>Quantidade de jogos</span> <br />
@@ -56,9 +56,9 @@
         <div class='mb-2'>
             {!! $bolao->description !!}
         </div>
-        <div class='mb-4 ms-1'>
+        {{--<div class='mb-4 ms-1'>
             <span>Prêmiação estimada:</span> <strong class='font-larger color-default position-relative'>{!! $bolao->concurso->getNextExpectedPrize() !!}</strong>
-        </div>
+        </div>--}}
 
         <?php 
         $num = sprintf("%04d", 1);
@@ -88,9 +88,9 @@
                 <div class='border border-secondary'></div>
             </div>
 
-            <div class='shareButtons onGamesModal text-left'>
+            {{--<div class='shareButtons onGamesModal text-left'>
                 {!! $bolao->buildShareButtons() !!}
-            </div>
+            </div>--}}
 
             <form class='bt-containers mt-5'>
                 @csrf
