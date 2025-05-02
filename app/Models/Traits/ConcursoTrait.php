@@ -146,7 +146,7 @@ trait ConcursoTrait
     {
         if (! $this->next_expected_prize){
             if ($prefix){
-                return '<span class="position-relative"> +R$100.000,00 </span>';
+                return '<span class="position-relative"> R$1.100.000,00 </span>';
             }
         }
 
