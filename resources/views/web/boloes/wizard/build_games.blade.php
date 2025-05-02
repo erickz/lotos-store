@@ -4,7 +4,7 @@
     @csrf
 
     <div class='justify-content-center'>
-        <div class='alert alert-light ms-0 mb-0'><i class='fas fa-info-circle me-2 text-primary'></i> Selecione seus números da sorte e crie um Bolão <b>(o valor mínimo é R$12,00)</b></div>
+        <div class='alert alert-light ms-0 mb-0'><i class='fas fa-info-circle me-2 text-primary'></i> Selecione seus números da sorte e crie um Bolão <b>(o valor mínimo é R$12,50)</b></div>
 
         {{--<h2 class="border-0 text-start mb-0 mt-3"><b>Modelos pré-prontos</b></h2>
         <div class="d-flex justify-content-between align-items-start d-flex-responsive m-auto">
