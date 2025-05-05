@@ -167,7 +167,7 @@ trait ConcursoTrait
         $nextExpectedPrize = $this->next_expected_prize;
 
         if ($nextExpectedPrize <= 0){
-            $nextExpectedPrize = 1100.000;
+            $nextExpectedPrize = 1100000;
         }
 
         $human_readable = new \NumberFormatter(
