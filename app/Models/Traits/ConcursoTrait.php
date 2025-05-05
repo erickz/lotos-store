@@ -165,6 +165,11 @@ trait ConcursoTrait
     public function getFormattedNextExpectedPrize()
     {
         $nextExpectedPrize = $this->next_expected_prize;
+
+        if ($nextExpectedPrize <= 0){
+            $nextExpectedPrize = 1.100.000;
+        }
+
         $human_readable = new \NumberFormatter(
             'pt_BR', 
             \NumberFormatter::PADDING_POSITION
