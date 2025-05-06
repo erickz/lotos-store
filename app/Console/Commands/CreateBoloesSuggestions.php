@@ -135,7 +135,7 @@ class CreateBoloesSuggestions extends Command
             ],
             [
                 'lotery_id' => 1,
-                'name' => 'Bolão Master',
+                'name' => 'Bolão Premium',
                 'bets' => ['7' => 2, '6' => 4],
                 'qt_bets' => NULL,
                 'price' => NULL,
@@ -144,7 +144,7 @@ class CreateBoloesSuggestions extends Command
             ],
             [
                 'lotery_id' => 1,
-                'name' => 'Bolão Supremo',
+                'name' => 'Bolão Master',
                 'bets' => ['8' => 1, '7' => 1, '6' => 5],
                 'qt_bets' => NULL,
                 'price' => NULL,
@@ -172,7 +172,7 @@ class CreateBoloesSuggestions extends Command
             ],
             [
                 'lotery_id' => 2,
-                'name' => 'Bolão Master',
+                'name' => 'Bolão Premium',
                 'bets' => ['7' => 1, '6' => 1, '5' => 10],
                 'qt_bets' => NULL,
                 'price' => NULL,
@@ -181,7 +181,7 @@ class CreateBoloesSuggestions extends Command
             ],
             [
                 'lotery_id' => 2,
-                'name' => 'Bolão Supremo',
+                'name' => 'Bolão Master',
                 'bets' => ['8' => 1, '7' => 1, '5' => 3],
                 'qt_bets' => NULL,
                 'price' => NULL,
@@ -209,7 +209,7 @@ class CreateBoloesSuggestions extends Command
             ],
             [
                 'lotery_id' => 3,
-                'name' => 'Bolão Master',
+                'name' => 'Bolão Premium',
                 'bets' => ['16' => 1, '15' => 15],
                 'qt_bets' => NULL,
                 'price' => NULL,
@@ -218,7 +218,7 @@ class CreateBoloesSuggestions extends Command
             ],
             [
                 'lotery_id' => 3,
-                'name' => 'Bolão Supremo',
+                'name' => 'Bolão Master',
                 'bets' => ['16' => 3, '15' => 19],
                 'qt_bets' => NULL,
                 'price' => NULL,
@@ -246,7 +246,7 @@ class CreateBoloesSuggestions extends Command
             ],
             [
                 'lotery_id' => 4,
-                'name' => 'Bolão Master',
+                'name' => 'Bolão Premium',
                 'bets' => ['8' => 1,'7' => 1, '6' => 2],
                 'qt_bets' => NULL,
                 'price' => NULL,
@@ -255,7 +255,7 @@ class CreateBoloesSuggestions extends Command
             ],
             [
                 'lotery_id' => 4,
-                'name' => 'Bolão Supremo',
+                'name' => 'Bolão Master',
                 'bets' => ['8' => 2, '7' => 1, '6' => 17],
                 'qt_bets' => NULL,
                 'price' => NULL,

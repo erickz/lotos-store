@@ -34,7 +34,7 @@
                         </div><!-- /d-flex -->
                         <div class="d-flex align-items-center mb-5">
                             <div class='col-3 text-end me-5'>
-                                <strong>Gerar dezenas:</strong>
+                                <strong>Adicionar jogos:</strong>
                             </div>    
                             <div class='col-8'>
                                 <div class="d-flex d-flex-responsive justify-content-between">
