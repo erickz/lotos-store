@@ -768,10 +768,23 @@ class BoloesController extends WebBaseController
                 if (! $reserves->contains('bolao_id', $bolaoId)){
                     $reserve = $this->repository->reserveCotas($bolaoId, $customerId, $cotasSelected);
                     session()->push('cart.boloes', $reserve->id);
-                }                        
+                }
+                
+                $total = 0;
+                foreach($reserves as $reserve){
+                    $total += $reserve->bolao->price * $reserve->cotas;
+                }
+
+                session()->put('payment.total', $total);
+                session()->put('payment.toPay', $total);
             }
             else {
                 $reserve = $this->repository->reserveCotas($bolaoId, $customerId, $cotasSelected);
+
+                $total += $reserve->bolao->price * $reserve->cotas;
+                
+                session()->put('payment.total', $total);
+                session()->put('payment.toPay', $total);
                 session()->push('cart.boloes', $reserve->id);
             }
 
@@ -789,8 +802,6 @@ class BoloesController extends WebBaseController
         }
 
         $plural = ($cotasSelected > 1 ? 's' : '');
-
-
         return response()->json(['message' => "Cota" . ($plural) . " adicionada" . ($plural) . " ao carrinho e reservada" . ($plural) . " por 15 minutos. <a class='text-white' href='" . route('web.cart')  . "'><u>Clique aqui para visualizar</u></a> <button type='button' class='close pe-2 position-absolute top-0 right-0' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>", 'error' => 0, 'cartItemsQt' => count(session()->get('cart.boloes')), 'redirectTo' => route('web.customers.bets')]);
     }
 }
