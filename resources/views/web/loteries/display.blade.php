@@ -26,13 +26,13 @@
                             <a href='{{ route("web.loteries.duplasenaSpecial") }}' class='btn btn-primary'><b>Saiba também sobre a Dupla sena de páscoa</b></a>
                         @endif
                     </div>
-                    @if ($mostPopulars->count() > 0)
+                    @if ($mainListingBoloes->count() > 0)
                         <div class='col-lg-12 mt-5 p-0'>
                             <div>
                                 <div class='d-flex align-items-center'>
                                     <h2 class='ps-0'><b>Confira nossos bolões mais populares da {{ $lotery->name }}</b></h2>
                                 </div>
-                                @include('web.boloes.listing_boloes', ['boloes' => $mostPopulars])
+                                @include('web.boloes.listing_boloes', ['boloes' => $mainListingBoloes])
                             </div>
                         </div>
                     @endif

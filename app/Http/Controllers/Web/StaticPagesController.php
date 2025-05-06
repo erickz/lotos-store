@@ -80,9 +80,9 @@ class StaticPagesController extends WebBaseController
         $loteryNameFromUrl = $request->path();
         $lotery = Lotery::getBySlug($loteryNameFromUrl)->first();
 
-        $mostPopulars = $this->bolaoRepo->getMostPopular([], $lotery->id);
+        $mainListingBoloes = $this->bolaoRepo->getMainListing([], $lotery->id);
 
-        return view('web.loteries.display', ['lotery' => $lotery, 'mostPopulars' => $mostPopulars]);
+        return view('web.loteries.display', ['lotery' => $lotery, 'mainListingBoloes' => $mainListingBoloes]);
     }
 
     public function loteriesSpecial(Request $request)

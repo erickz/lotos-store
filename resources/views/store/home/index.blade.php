@@ -140,10 +140,10 @@
                 </div>
             </div>
 
-            @if ($mostPopulars->count() > 0)
+            @if ($mainListingBoloes->count() > 0)
                 <div class='boloesListing mt-5'>
                     <h2 class='ps-0'><b class='d-flex'><span>Concurso Especial</span></b></h2>
-                    @include('web.boloes.listing_boloes', ['boloes' => $mostPopulars])
+                    @include('web.boloes.listing_boloes', ['boloes' => $mainListingBoloes])
                 </div>
             @endif
 

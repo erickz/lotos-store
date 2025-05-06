@@ -31,8 +31,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if($mostPopulars->count() > 0)
-                                @foreach($mostPopulars as $bolao)
+                            @if($mainListingBoloes->count() > 0)
+                                @foreach($mainListingBoloes as $bolao)
                                     <tr>
                                         <td>{!! $bolao->lotery->getLabelInitials() !!}</td>
                                         <td>{{ $bolao->concurso->getDrawDay() }}</td>
