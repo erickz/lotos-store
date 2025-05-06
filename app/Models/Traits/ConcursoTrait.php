@@ -146,7 +146,32 @@ trait ConcursoTrait
     {
         if (! $this->next_expected_prize){
             if ($prefix){
-                return '<span class="position-relative"> R$1.100.000,00 </span>';
+                $value = "R$1.100.000,00";
+
+                switch($this->lotery->id){
+                    case 1:
+                    {
+                        $value = "R$1.900.000,00";
+                        break;   
+                    }
+                    case 2:
+                    {
+                        $value = "R$1.700.000,00";
+                        break;   
+                    }
+                    case 3:
+                    {
+                        $value = "R$1.300.000,00";
+                        break;   
+                    }
+                    case 4:
+                    {
+                        $value = "R$900.000,00";
+                        break;   
+                    }
+                }
+
+                return '<span class="position-relative">' . $value . '</span>';
             }
         }
 
