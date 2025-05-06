@@ -123,7 +123,10 @@
                                 @endfor
                             </select>
                         </div>
-                        <div class='btn btnBuyCota btnBuyValidate btn-success ms-auto resetBuy disabled' data-url='{{ route("web.boloes.finishbuy", [$bolao->id]) }}'><i class='fa fa-shopping-cart'></i>Comprar</div>
+                        <div class='d-block'>
+                            <div class='btn btnBuyCota btnConfirmation btnBuyValidate btn-success ms-auto resetBuy disabled' data-url='{{ route("web.boloes.finishbuy", [$bolao->id]) }}'><i class='fa fa-shopping-cart'></i>Comprar</div>
+                            <a href='{{ route("web.payments.index") }}' class='btn btn-success' style="display: none"><i class='fa fa-check-circle'></i><b>Ir para pagamento</b></a>
+                        </div>
                     </div>
                 </div>
             </form>
