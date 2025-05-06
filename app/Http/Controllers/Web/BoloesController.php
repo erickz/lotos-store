@@ -781,10 +781,11 @@ class BoloesController extends WebBaseController
             else {
                 $reserve = $this->repository->reserveCotas($bolaoId, $customerId, $cotasSelected);
 
-                $total += $reserve->bolao->price * $reserve->cotas;
-                
+                $total = $reserve->bolao->price * $reserve->cotas;
+
                 session()->put('payment.total', $total);
                 session()->put('payment.toPay', $total);
+
                 session()->push('cart.boloes', $reserve->id);
             }
 
