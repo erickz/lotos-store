@@ -104,6 +104,8 @@ class CreateDemoBoloesWeek extends Command
                     'total_value' => $suggestion->price
                 ]);
             }
+
+            $loteriesDone[] = $concurso->lotery_id;
         }
         
         return Command::SUCCESS;
