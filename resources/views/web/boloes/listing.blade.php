@@ -79,7 +79,7 @@
                         @if(count($specialBoloes) > 0)
                             <div>
                                 <div class='d-flex align-items-center'>
-                                    <h2 class='ps-0'><b class='d-flex'><span>Concurso Especial</span></b></h2>
+                                    <h2 class='ps-0 display-4'><b class='d-flex'><span>Concurso Especial</span></b></h2>
                                 </div>
                                 @include('web.boloes.listing_boloes', ['boloes' => $specialBoloes])
                             </div>
@@ -90,7 +90,7 @@
                         @if(count($mostPopulars) > 0)
                             <div class='mt-10'>
                                 <div class='d-flex align-items-center'>
-                                    <h2 class='ps-0'><b>Bolões mais populares</b></h2>
+                                    <h2 class='ps-0 display-4'><b>Bolões mais populares</b></h2>
                                 </div>
                                 @include('web.boloes.listing_boloes', ['boloes' => $mostPopulars])
                             </div>
@@ -102,7 +102,7 @@
                             @if(count($biggestChances) > 0)
                                 <div class=''>
                                     <div class='d-flex align-items-center'>
-                                        <h2 class='ps-0'><b>Bolões com maiores chances</b></h2>
+                                        <h2 class='ps-0 display-4'><b>Bolões com maiores chances</b></h2>
                                     </div>
                                     @include('web.boloes.listing_boloes', ['boloes' => $biggestChances])
                                 </div>
@@ -111,7 +111,7 @@
                             @if(count($mostEconomics) > 0)
                                 <div class='mt-10'>
                                     <div class='d-flex align-items-center'>
-                                        <h2 class='ps-0'><b>Bolões mais econômicos</b></h2>
+                                        <h2 class='ps-0 display-4'><b>Bolões mais econômicos</b></h2>
                                     </div>
                                     @include('web.boloes.listing_boloes', ['boloes' => $mostEconomics])
                                 </div>
