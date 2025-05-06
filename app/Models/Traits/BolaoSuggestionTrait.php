@@ -75,4 +75,9 @@ trait BolaoSuggestionTrait
 
         return $html;
     }
+
+    public function buildName($loteryAlias = 'MG', $concursoNumber = '1')
+    {
+        return $this->name . ' - ' . strtoupper($loteryAlias) . $concursoNumber . rand(1,9999);
+    }
 }

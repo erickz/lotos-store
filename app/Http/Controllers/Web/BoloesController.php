@@ -331,7 +331,7 @@ class BoloesController extends WebBaseController
                 'customer_id' => $customerId,
                 'concurso_id' => $lastConcurso->id,
                 'active' => 0,
-                'name' => $suggestion->name . ' - ' . strtoupper($lotery->initials) . $lastConcurso->number . rand(1,9999),
+                'name' => $suggestion->buildName(strtoupper($lotery->initials), $lastConcurso->number),
                 'display_for_selling' => 1,
                 'price' => $suggestion->price_cota,
                 'keepCotas' => 1,

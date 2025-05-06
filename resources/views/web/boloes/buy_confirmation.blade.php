@@ -36,7 +36,7 @@
             <div class='alert d-none'></div>
             <div class='d-block'>
                 <div class='btn btnBuyCota btnConfirmation btn-success' data-url='{{ route("web.boloes.finishbuy", parameters: [$bolao->id]) }}' data-cotas='{{ $cotasSelected }}'><i class='fa fa-shopping-cart'></i><b>Adicionar ao carrinho</b></div>
-                <a href='{{ route("web.cart") }}' class='btn btn-primary' style="display: none"><i class='fa fa-check'></i><b>Ver carrinho</b></a>
+                <a href='{{ route("web.payments.index") }}' class='btn btn-success' style="display: none"><i class='fa fa-check-circle'></i><b>Ir para pagamento</b></a>
             </div>
         </div>
     </form>

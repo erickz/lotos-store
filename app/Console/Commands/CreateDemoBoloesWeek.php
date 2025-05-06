@@ -55,37 +55,66 @@ class CreateDemoBoloesWeek extends Command
 
         $loteriesDone = [];
         foreach($concursosOfTheWeek as $concurso){
-            $games = $this->generateGames($concurso->lotery_id);
-            $qtGames = count($games);
 
             if (in_array($concurso->lotery_id, $loteriesDone)){
                 continue;
             }
 
-            \Log::info(print_r($concurso, true));
+            $suggestions = BolaoSuggestion::where('lotery_id', $concurso->lotery->id)->get();
 
-            $newBolao = [
-                'lotery_id' => $concurso->lotery_id,
-                'customer_id' => 13,
-                'concurso_id' => $concurso->id,
-                'name' => $this->getNewLuckyBird(),
-                'price' => 7.5,
-                'chances' => $qtGames,
-                'keepCotas' => 1,
-                'cotas' => 20,
-                'cotas_available' => 20,
-                'description' => '',
-                'games' => $games,
-                'quantity_games' => $qtGames,
-                'total_value' => 0
-            ];
+            foreach($suggestions as $index => $suggestion){
+                $games = $suggestion->generateGames();
+                $qtGames = count($games);
 
-            $this->repo->finalizeBolaoCreation($newBolao, false, true);
-            
+                \Log::info(print_r($concurso, true));
+
+                //Register a cheaper basic bolão.
+                if($index == 0){
+                    $this->registerBolao([
+                        'lotery_id' => $concurso->lotery_id,
+                        'customer_id' => 13,
+                        'concurso_id' => $concurso->id,
+                        'name' => $suggestion->buildName(strtoupper($concurso->lotery->initials), $concurso->number),
+                        'description' => $suggestion->buildDescription(),
+                        'price' => 7.5,
+                        'chances' => $concurso->lotery->calculateChances($games, $concurso->lotery->id),
+                        'keepCotas' => 1,
+                        'cotas' => 21,
+                        'cotas_available' => 20,
+                        'games' => $games,
+                        'quantity_games' => $qtGames,
+                        'total_value' => $suggestion->price
+                    ]);
+                }
+
+                $this->registerBolao([
+                    'lotery_id' => $concurso->lotery_id,
+                    'customer_id' => 13,
+                    'concurso_id' => $concurso->id,
+                    'name' => $suggestion->buildName(strtoupper($concurso->lotery->initials), $concurso->number),
+                    'description' => $suggestion->buildDescription(),
+                    'price' => $suggestion->price,
+                    'chances' => $concurso->lotery->calculateChances($games, $concurso->lotery->id),
+                    'keepCotas' => 1,
+                    'cotas' => 4,
+                    'cotas_available' => 3,
+                    'games' => $games,
+                    'quantity_games' => $qtGames,
+                    'total_value' => $suggestion->price
+                ]);
+            }
+
             $loteriesDone[] = $concurso->lotery_id;
         }
         
         return Command::SUCCESS;
+    }
+
+    public function registerBolao($bolaoData = [])
+    {
+        $newBolao = $bolaoData;
+
+        $this->repo->finalizeBolaoCreation($newBolao, false, true);                
     }
 
     public function generateGames($loteryId = 1)
@@ -94,10 +123,7 @@ class CreateDemoBoloesWeek extends Command
         if ($loteryId == 1){
             $games = [
                 [2,5,6,28,34,56],
-                [4,12,20,34,46,52],
-                [10,18,21,29,44,50],
-                [12,15,21,33,52,56],
-                [4,19,29,42,55,60]
+                [4,12,20,34,46,52]
             ];
         }
         else if($loteryId == 2){
@@ -105,13 +131,14 @@ class CreateDemoBoloesWeek extends Command
                 [7,16,45,54,64],
                 [10,12,23,40,51],
                 [7,15,16,37,62],
-                [12,15,21,33,52],
-                [2,8,13,22,52],
+                [12,15,21,33,52]
             ];
         }
         else if($loteryId == 3){
             $games = [
                 [1,2,4,7,9,10,14,15,16,17,18,19,20,21,22],
+                [2,4,5,7,9,10,12,16,17,18,19,20,22,23,25],
+                [2,4,5,7,9,10,12,16,17,18,19,20,22,23,25],
                 [2,4,5,7,9,10,12,16,17,18,19,20,22,23,25]
             ];
         }
@@ -121,7 +148,6 @@ class CreateDemoBoloesWeek extends Command
                 [4,12,20,34,46,50],
                 [10,18,21,29,44,50],
                 [12,15,21,33,42,50],
-                [4,19,29,42,44,50]
             ];
         }
 
