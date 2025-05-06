@@ -69,17 +69,36 @@ class CreateDemoBoloesWeek extends Command
 
                 \Log::info(print_r($concurso, true));
 
+                //Register a cheaper basic bolão.
+                if($index == 0){
+                    $this->registerBolao([
+                        'lotery_id' => $concurso->lotery_id,
+                        'customer_id' => 13,
+                        'concurso_id' => $concurso->id,
+                        'name' => $suggestion->buildName(strtoupper($concurso->lotery->initials), $concurso->number),
+                        'description' => $suggestion->buildDescription(),
+                        'price' => 7.5,
+                        'chances' => $concurso->lotery->calculateChances($games, $concurso->lotery->id),
+                        'keepCotas' => 1,
+                        'cotas' => 21,
+                        'cotas_available' => 20,
+                        'games' => $games,
+                        'quantity_games' => $qtGames,
+                        'total_value' => $suggestion->price
+                    ]);
+                }
+
                 $this->registerBolao([
                     'lotery_id' => $concurso->lotery_id,
                     'customer_id' => 13,
                     'concurso_id' => $concurso->id,
                     'name' => $suggestion->buildName(strtoupper($concurso->lotery->initials), $concurso->number),
                     'description' => $suggestion->buildDescription(),
-                    'price' => $suggestion->price,
+                    'price' => ceil( ($suggestion->price - ($suggestion->price * 0.2)) / 5 ) * 5,
                     'chances' => $concurso->lotery->calculateChances($games, $concurso->lotery->id),
                     'keepCotas' => 1,
-                    'cotas' => 4,
-                    'cotas_available' => 3,
+                    'cotas' => 3,
+                    'cotas_available' => 2,
                     'games' => $games,
                     'quantity_games' => $qtGames,
                     'total_value' => $suggestion->price
