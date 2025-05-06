@@ -10,6 +10,7 @@ use App\Repositories\BolaoRepository;
 
 use App\Models\Concurso;
 use App\Models\Bolao;
+use App\Models\BolaoSuggestion;
 use App\Models\Lotery;
 use Carbon\Carbon;
 
