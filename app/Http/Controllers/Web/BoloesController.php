@@ -584,10 +584,10 @@ class BoloesController extends WebBaseController
         $mostPopulars = $this->repository->getMostPopular($boloesSelected);
         $boloesSelected = array_merge($boloesSelected, $mostPopulars->pluck('id')->toArray());
 
-        $biggestChances = $this->repository->getBiggestChances($boloesSelected);
-        $boloesSelected = array_merge($boloesSelected, $biggestChances->pluck('id')->toArray());
+        // $biggestChances = $this->repository->getBiggestChances($boloesSelected);
+        // $boloesSelected = array_merge($boloesSelected, $biggestChances->pluck('id')->toArray());
 
-        $mostEconomics = $this->repository->getMostEconomics($boloesSelected);
+        // $mostEconomics = $this->repository->getMostEconomics($boloesSelected);
 
         return view('web.boloes.listing', ['followingConcursos' => $followingConcursos, 'specialBoloes' => $specialBoloes, 'mostPopulars' => $mostPopulars, 'biggestChances' => $biggestChances, 'mostEconomics' => $mostEconomics]);
     }

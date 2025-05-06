@@ -290,7 +290,7 @@ class BolaoRepository implements BolaoRepositoryInterface
             $query = $query->where('lotery_id', $loteryId);
         }
         
-        return $query->take(20)->get();
+        return $query->take(30)->get();
     }
 
     public function getSpecialBoloes($exceptions = [], $loteryId = NULL)
