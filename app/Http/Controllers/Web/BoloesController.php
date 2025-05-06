@@ -589,7 +589,7 @@ class BoloesController extends WebBaseController
 
         // $mostEconomics = $this->repository->getMostEconomics($boloesSelected);
 
-        return view('web.boloes.listing', ['followingConcursos' => $followingConcursos, 'specialBoloes' => $specialBoloes, 'mostPopulars' => $mostPopulars, 'biggestChances' => $biggestChances, 'mostEconomics' => $mostEconomics]);
+        return view('web.boloes.listing', ['followingConcursos' => $followingConcursos, 'specialBoloes' => $specialBoloes, 'mostPopulars' => $mostPopulars]);
     }
 
     public function listByLot(Request $request, $loterySlug = 'megasena')
