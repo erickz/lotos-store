@@ -18,7 +18,7 @@ class BolaoSuggestion extends BaseModel
      * @var array
      */
     protected $fillable = [
-        'lotery_id', 'name', 'bets', 'qt_bets', 'price', 'chances', 'receipt'
+        'lotery_id', 'name', 'bets', 'qt_bets', 'price', 'price_cota', 'cotas', 'chances', 'receipt'
     ];
 
     /**

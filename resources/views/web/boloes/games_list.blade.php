@@ -13,10 +13,10 @@
             </div> 
             <div class='bolao-contest mt-3 ms-auto'>
                 <h4>
-                    <b>Concurso: Nº {{ $bolao->concurso->number }}</b>
+                    <b>Concurso:</b> Nº{{ $bolao->concurso->number }}
                 </h4>
             </div>
-            <button type="button" class="close ms-6 me-2" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close ms-4 me-2" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
@@ -39,9 +39,13 @@
                 <span>Premiação estimada</span> <br />
                 <strong class='font-larger position-relative'>{!! $bolao->concurso->getFormattedNextExpectedPrize() !!}</strong>
             </div>
-            <div class='text-center'>
+            <div class='text-center me-9'>
                 <span>Quantidade de jogos</span> <br />
                 <strong class='font-larger'>{{ $bolao->getQtGames() }}</strong>
+            </div>
+            <div class='text-center'>
+                <span>Cotas disponíveis</span> <br />
+                <strong class='font-larger'>{{ $bolao->getAvailableCotas() }} / {{ $bolao->cotas }}</strong>
             </div>
         </div><!-- /alert -->
 

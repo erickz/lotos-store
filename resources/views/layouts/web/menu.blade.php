@@ -8,7 +8,7 @@
         </li>
         <li class="menu-item menu-item-submenu menu-item-rel {{ request()->routeIs('web.boloes.listing') ? 'menu-item-open menu-item-here' : '' }}" data-menu-toggle="click" aria-haspopup="true">
             <a href="{{ route('web.boloes.listing') }}" class="menu-link">
-                <span class="menu-text"><b>Ver Bolões</b></span>
+                <span class="menu-text"><b>Bolões</b></span>
                 <span class="menu-desc"></span>
                 <i class="menu-arrow"></i>
             </a>
@@ -51,15 +51,8 @@
                 <i class="menu-arrow"></i>
             </a>
         </li>
-        <li class="menu-item menu-item-submenu menu-item-rel {{ request()->routeIs('web.boloes.customer', [auth()->guard('web')->user()->id, auth()->guard('web')->user()->getProfileNameForURL()]) ? 'menu-item-open menu-item-here' : '' }}" data-menu-toggle="click" aria-haspopup="true">
-            <a href="{{ route("web.boloes.customer", [auth()->guard('web')->user()->id, auth()->guard('web')->user()->getProfileNameForURL()]) }}" class="menu-link">
-                <span class="menu-text"><b>Minha página</b></span>
-                <span class="menu-desc"></span>
-                <i class="menu-arrow"></i>
-            </a>
-        </li>
-        <li class="menu-item menu-item-submenu menu-item-rel {{ request()->routeIs('web.customers.bets') ? 'menu-item-open menu-item-here' : '' }}" data-menu-toggle="click" aria-haspopup="true">
-            <a href="{{ route("web.customers.bets") }}" class="menu-link">
+        <li class="menu-item menu-item-submenu menu-item-rel {{ request()->routeIs('web.boloes.listing') ? 'menu-item-open menu-item-here' : '' }}" data-menu-toggle="click" aria-haspopup="true">
+            <a href="{{ route('web.boloes.listing') }}" class="menu-link">
                 <span class="menu-text"><b>Bolões</b></span>
                 <span class="menu-desc"></span>
                 <i class="menu-arrow"></i>
@@ -71,15 +64,29 @@
                 <i class="menu-arrow"></i>
             </a>
         </li>
-        <li class="menu-item menu-item-submenu menu-item-rel {{ request()->routeIs('web.customers.edit') ? 'menu-item-open menu-item-here' : '' }}" data-menu-toggle="click" aria-haspopup="true">
-            <a href="{{ route('web.customers.edit') }}" class="menu-link">
-                <span class="menu-text"><b>Alterar dados</b></span>
+        <li class="menu-item menu-item-submenu menu-item-rel {{ request()->routeIs('web.customers.bets') ? 'menu-item-open menu-item-here' : '' }}" data-menu-toggle="click" aria-haspopup="true">
+            <a href="{{ route("web.customers.bets") }}" class="menu-link">
+                <span class="menu-text"><b>Meus Bolões</b></span>
+                <span class="menu-desc"></span>
                 <i class="menu-arrow"></i>
             </a>
         </li>
         <li class="menu-item menu-item-submenu menu-item-rel {{ request()->routeIs('web.customers.rescue') ? 'menu-item-open menu-item-here' : '' }}" data-menu-toggle="click" aria-haspopup="true">
             <a href="{{ route('web.customers.rescue') }}" class="menu-link">
                 <span class="menu-text"><b>Créditos</b></span>
+                <i class="menu-arrow"></i>
+            </a>
+        </li>
+        <li class="menu-item menu-item-submenu menu-item-rel {{ request()->routeIs('web.customers.edit') ? 'menu-item-open menu-item-here' : '' }}" data-menu-toggle="click" aria-haspopup="true">
+            <a href="{{ route('web.customers.edit') }}" class="menu-link">
+                <span class="menu-text"><b>Alterar dados</b></span>
+                <i class="menu-arrow"></i>
+            </a>
+        </li>
+        <li class="menu-item menu-item-submenu menu-item-rel {{ request()->routeIs('web.boloes.customer', [auth()->guard('web')->user()->id, auth()->guard('web')->user()->getProfileNameForURL()]) ? 'menu-item-open menu-item-here' : '' }}" data-menu-toggle="click" aria-haspopup="true">
+            <a href="{{ route("web.boloes.customer", [auth()->guard('web')->user()->id, auth()->guard('web')->user()->getProfileNameForURL()]) }}" class="menu-link">
+                <span class="menu-text"><b>Minha página</b></span>
+                <span class="menu-desc"></span>
                 <i class="menu-arrow"></i>
             </a>
         </li>

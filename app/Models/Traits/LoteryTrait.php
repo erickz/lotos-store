@@ -144,7 +144,7 @@ trait LoteryTrait
     {
         $chances = 0;
         foreach($games as $game){
-            $arGame = explode(',', $game);
+            $arGame = is_array($game) ? $game : explode(',', $game);
             $dozens = count($arGame);
             $costs = \App\Models\LoteryCosts::where('lotery_id', $loteryId)->where('number_matches', $dozens)->first();
             $chance = $costs->chances;

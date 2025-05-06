@@ -958,3 +958,14 @@ a.badge {
 		filter: brightness(90%);
 	}
 }
+
+#bolaoInfosModal .modal-dialog {
+	width: 50%;
+}
+
+@media only screen and (max-width: 767px) {
+	#bolaoInfosModal .modal-dialog {
+		width: auto;
+		max-width: auto;
+	}
+}

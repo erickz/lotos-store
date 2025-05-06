@@ -30,12 +30,16 @@ Route::post('cadastre-se', ['as' => 'web.customers.store', 'uses' => 'CustomersC
 Route::get('boloes', ['as' => 'web.boloes.listing', 'uses' => 'BoloesController@list']);
 Route::get('{loteryName}/boloes', ['as' => 'web.boloes.listingByLot', 'uses' => 'BoloesController@listByLot']);
 Route::get('boloes/todos', ['as' => 'web.boloes.listing_all', 'uses' => 'BoloesController@listAll']);
-Route::get('boloes/criar/{lotoAlias?}', ['as' => 'web.boloes.create', 'uses' => 'BoloesController@create']);
+
+Route::middleware('auth:web')->group(function(){
+    Route::get('boloes/criar/{lotoAlias?}', ['as' => 'web.boloes.create', 'uses' => 'BoloesController@create']);
+    Route::post('boloes/criar/{lotoAlias?}', ['as' => 'web.boloes.store', 'uses' => 'BoloesController@store']);
+});
 Route::get('boloes/configurar/{lotoAlias?}', ['as' => 'web.boloes.config', 'uses' => 'BoloesController@configure']);
 Route::post('boloes/finalizar/{lotoAlias?}', ['as' => 'web.boloes.finalize', 'uses' => 'BoloesController@finalize']);
-Route::post('boloes/criar/{lotoAlias?}', ['as' => 'web.boloes.store', 'uses' => 'BoloesController@store']);
 Route::get('boloes/{bolaoId}/games', ['as' => 'web.boloes.games', 'uses' => 'BoloesController@getGames']);
 Route::get('boloes/{suggestionId}/suggestions', ['as' => 'web.boloes.suggestions', 'uses' => 'BoloesController@getSuggestions']);
+Route::post('boloes/{suggestionId}/suggestions/buy', ['as' => 'web.boloes.buySuggestion', 'uses' => 'BoloesController@buySuggestion']);
 Route::get('boloes/{customerId}/{alias?}/e', ['as' => 'web.boloes.customer', 'uses' => 'BoloesController@getFromCustomer']);
 
 Route::get('boloes/receive_invite/{token}', ['as' => 'web.customers.receiveInvite', 'uses' => 'BoloesController@receiveInvite']);

@@ -43,7 +43,7 @@
                                             <td>Loteria</td>
                                             <td>Concurso</td>
                                             <td>Cotas</td>
-                                            <td>Preço</td>
+                                            <td>Preço das Cotas</td>
                                             <td>Status</td>
                                             <td>Premiação</td>
                                             <td>Ações</td>

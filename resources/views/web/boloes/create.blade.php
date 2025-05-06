@@ -12,7 +12,7 @@
         <div class="col-lg-12">
             <div class="main-box clearfix">                
                 <div class="row profile-user-info">
-                    @include('web.boloes.wizard.menu_steps')
+                    {{-- @include('web.boloes.wizard.menu_steps') --}}
                     
                     @if ($loteries)
                         @include('web.boloes.wizard.choose_lotery')

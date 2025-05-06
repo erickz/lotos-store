@@ -17,8 +17,8 @@
 
         <div class="row justify-content-center align-items-center">
             <div class='text-center'>
-            <a href="{{ route('web.boloes.create') }}" class="btn btn-success btn-lg mt-3"><b>Criar Bolão</b></a>
-                <a href="{{ route("web.boloes.customer", [auth()->guard('web')->user()->id, auth()->guard('web')->user()->getProfileNameForURL()]) }}" class="btn btn-primary btn-lg mt-3"><b>Minha página</a>
+                <a href="{{ route('web.boloes.create') }}" class="btn btn-success btn-lg mt-3"><b>Criar Bolão</b></a>
+                <a href="{{ route("web.boloes.listing") }}" class="btn btn-primary btn-lg mt-3"><b>Ver Bolões</a>
             </div>
         </div>
     </div>

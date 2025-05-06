@@ -25,12 +25,15 @@ trait BolaoTrait
                 $item->price = floatval($item->price);
             }
             
-            $concurso = Concurso::find($item->concurso_id);
+            if (! $item->lotery_id){
+                $concurso = Concurso::find($item->concurso_id);
 
-            if (! $concurso)
-                $item->lotery_id = null;
+                if (! $concurso){
+                    $item->lotery_id = null;
+                }
 
-            $item->lotery_id = $concurso->lotery_id;
+                $item->lotery_id = $concurso->lotery_id;
+            }
         });
     }
 

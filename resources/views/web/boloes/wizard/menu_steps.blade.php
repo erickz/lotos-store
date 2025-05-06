@@ -13,11 +13,11 @@
             <!-- <i class="fas fa-chevron-right iconHolder" ></i> -->
         @endif
     </a>
-    <a {{ isset($lotery) ? "" : "" }} class='bolaoStep stepFinalize rounded p-3 bg-steps col d-flex align-items-center justify-content-between'>
+    {{--<a {{ isset($lotery) ? "" : "" }} class='bolaoStep stepFinalize rounded p-3 bg-steps col d-flex align-items-center justify-content-between'>
         <span class='titleStep {{ $currentMenu == 3 ? "text-primary" : "" }}'><b>03. Finalize o bolão</b></span>
 
         @if ($currentMenu == 3)
             <!-- <i class="fas fa-chevron-right iconHolder" ></i> -->
         @endif
-    </a>
+    </a>--}}
 </div>

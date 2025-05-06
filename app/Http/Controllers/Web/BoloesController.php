@@ -38,12 +38,15 @@ class BoloesController extends WebBaseController
         
         $loteries = NULL;
         $lotery = NULL;
+        $suggestions = NULL;
         $followingConcursos = Concurso::following()->orderBy('type', 'DESC')->get();
         $currentMenu = 1;
         
         if ($lotoAlias){
             $currentMenu = 2;
             $lotery = Lotery::byInitials(strtolower($lotoAlias))->first();
+            $suggestions = BolaoSuggestion::where('lotery_id', $lotery->id)->get();
+
             // $followingConcursos = Concurso::following()->where('lotery_id', $lotery->id)->get();
         }
         else {
@@ -52,7 +55,7 @@ class BoloesController extends WebBaseController
 
         // $luckBird = $this->generateLuckBird();
 
-        return view('web.boloes.create', ['lotery' => $lotery, 'followingConcursos' => $followingConcursos, 'currentMenu' => $currentMenu, 'loteries' => $loteries]);
+        return view('web.boloes.create', ['lotery' => $lotery, 'suggestions' => $suggestions,'followingConcursos' => $followingConcursos, 'currentMenu' => $currentMenu, 'loteries' => $loteries]);
     }
 
     public function configure(Request $request, $lotoAlias = '')
@@ -198,15 +201,15 @@ class BoloesController extends WebBaseController
         // $followingConcursos = Concurso::following()->where('lotery_id', $lotery->id)->get();
         
         if (! $lotery ){
-            return redirect()->route('web.boloes.config', [$lotoAlias])->with(['message' => 'Loteria não encontrada', 'error' => 1]);
+            return redirect()->back()->with(['message' => 'Loteria não encontrada', 'error' => 1]);
         }
 
         if (! $request->has('games')){
-            return redirect()->route('web.boloes.config', [$lotoAlias])->with(['message' => 'Erro ao enviar jogos', 'error' => 1]); 
+            return redirect()->back()->with(['message' => 'Erro ao enviar jogos', 'error' => 1]); 
         }
 
         if (! $this->repository->priceIsValid($request->get('games'), $request->get('totalToPay'), $lotery)){
-            return redirect()->route('web.boloes.config', [$lotoAlias])->with(['message' => 'Valor total inválido, atualize seus jogos e caso o erro persista entre em contato.', 'error' => 1]); 
+            return redirect()->back()->with(['message' => 'Valor total inválido, atualize seus jogos e caso o erro persista entre em contato.', 'error' => 1]); 
         }
 
         $customerId = auth()->guard('web')->check() ? auth()->guard('web')->user()->id : NULL;
@@ -239,7 +242,7 @@ class BoloesController extends WebBaseController
             ]);
         }
         catch (\Exception $e){
-            return redirect()->route('web.boloes.config', [$lotoAlias])->with(['message' => 'Error ocurred', 'error' => 1]); 
+            return redirect()->back()->with(['message' => 'Error ocurred', 'error' => 1]); 
         }
 
         $bolaoData = ['bolao_id' => $newBolao->id];
@@ -288,7 +291,6 @@ class BoloesController extends WebBaseController
     public function getSuggestions(Request $request, $suggestionId)
     {
         try{
-
             $suggestion = BolaoSuggestion::find($suggestionId);
         }
         catch( \Exception $e){
@@ -298,11 +300,75 @@ class BoloesController extends WebBaseController
         $games = $suggestion->generateGames();
 
         //Get the last concurso
-        $concurso = Concurso::where('lotery_id', $suggestion->lotery_id)->orderBy('draw_day', 'DESC')->first();
+        $followingConcursos = Concurso::following()->orderBy('type', 'DESC')->get();
 
-        return view('web.boloes.bolao_suggestions', ['suggestion' => $suggestion, 'games' => $games, 'concurso' => $concurso]);
+        return view('web.boloes.bolao_suggestions', ['suggestion' => $suggestion, 'games' => $games, 'lotery' => $suggestion->lotery, 'followingConcursos' => $followingConcursos]);
     }
 
+    /**
+     * 
+     */
+    public function buySuggestion(Request $request, $suggestionId)
+    {
+        try{
+            $suggestion = BolaoSuggestion::find($suggestionId);
+        }
+        catch( \Exception $e){
+            return response()->json(['message' => $e->getMessage(), 'error' => 1], 400);
+        }
+
+        $games = $suggestion->generateGames();
+        $lotery = $suggestion->lotery;
+        $customerId = auth()->guard('web')->user()->id;
+        $chances = $lotery->calculateChances($games, $lotery->id);
+        
+        $lastConcurso = Concurso::following()->where('lotery_id', $lotery->id)->first();
+        
+        try {
+            $newBolao = $this->repository->finalizeBolaoCreation([
+                'lotery_id' => $lotery->id,
+                'lotery_name' => $lotery->name,
+                'customer_id' => $customerId,
+                'concurso_id' => $lastConcurso->id,
+                'active' => 0,
+                'name' => $suggestion->name . ' - ' . strtoupper($lotery->initials) . $lastConcurso->number . rand(1,9999),
+                'display_for_selling' => 1,
+                'price' => $suggestion->price_cota,
+                'keepCotas' => 1,
+                'cotas' => $suggestion->cotas,
+                'cotas_available' => $suggestion->cotas,
+                'description' => $suggestion->buildDescription(),
+                'games' => $games,
+                'quantity_games' => count($games),
+                'chances' => $chances,
+                'total_value' => $suggestion->price,
+                //Used in sessions:
+                'totalToPay' => $suggestion->price
+            ]);
+        }
+        catch (\Exception $e){
+            return redirect()->back()->with(['message' => 'Error ocurred', 'error' => 1]); 
+        }
+
+        $bolaoData = ['bolao_id' => $newBolao->id];
+
+        if (! auth()->guard('web')->check() || auth()->guard('web')->user()->credits < $suggestion->price){
+            session()->put('payment.total', $suggestion->price);
+            session()->put('cart.customBolao', $bolaoData);
+            session()->forget('payment.onlyCredits');
+
+            return response()->json(['url' => route('web.payments.index')]);
+        }
+        else {
+            session()->put('cart.customBolao', $bolaoData);
+            session()->forget('payment.onlyCredits');
+
+            $this->repository->activateBolao($newBolao->id);
+            auth()->guard('web')->user()->remove_credits($suggestion->price);
+    
+            return response()->json(['url' => route('web.payments.finish_boloes')]);    
+        }
+    }
 
     /**
      * 

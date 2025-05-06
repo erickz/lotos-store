@@ -62,129 +62,142 @@ $(function(){
                 gamesListTbody.append($line);
                 total += value.cost;
             });
-            var $lineTFoot = $('<b>TOTAL: </b><span class="bolaoTotal" data-cost="' + total + '">R$' + total.toLocaleString('pt-BR', { minimumFractionDigits: 2,maximumFractionDigits: 2 }) + '</span>');
+            var $lineTFoot = $('<b>TOTAL À PAGAR: </b><span class="bolaoTotal" data-cost="' + total + '">R$' + total.toLocaleString('pt-BR', { minimumFractionDigits: 2,maximumFractionDigits: 2 }) + '</span>');
             gamesListTfoot.html($lineTFoot);
         }
         //Calculate chances
         var chancesTg = $('.chancesTg');
-        chancesTg.html('<b>' + (nChances <= 0 ? '' : nChances + 'x') + ' mais chances</b>');
+        chancesTg.html('<b>' + (nChances <= 0 ? '1x' : nChances + 'x') + ' MAIS CHANCES</b>');
 
         $(".qtGames").text(countGames);
+        calculateProfitAndCotas();
     }
+
+    var calculateProfitAndCotas = function(targetCt){
+
+        if (targetCt == undefined || targetCt.length <= 0){
+            targetCt = $(".bolaoBuilder");
+        }
+
+        var profitCt = targetCt.find('.profitCt');
+        var revenueCt = targetCt.find('.revenueCt');
+        var costCt = targetCt.find('.costCt');
+        var cotasCt = targetCt.find('.cotasCt');
+        var slPrices = targetCt.find('.slPrices');
+        var bettingsSessionData = JSON.parse(sessionStorage.getItem('bettings'));
+        var bolaoTotal = 0;
+        var qtGames = Object.keys(bettingsSessionData).length;
+
+        if (bettingsSessionData.length <= 0){
+            return null;
+        }
+
+        $.each(bettingsSessionData, function(index, value){
+            bolaoTotal += value.cost;
+        });
+
+        var slKeepCotas = targetCt.find('.slKeepCotas');
+
+        if (bolaoTotal > 0){
+            var pricesOptions = slPrices.find('option');
+            targetCt.find('.inputHdTotalToPay').val(bolaoTotal);
+
+            if(pricesOptions.filter(':selected').val() > parseFloat(bolaoTotal)){
+                pricesOptions.filter(':selected').removeAttr('selected');
+                pricesOptions.first().attr('selected', 'selected');
+            }
+
+            var priceCota = slPrices.length > 0 ? slPrices.find(':selected').val() : $('.priceCotas').val();
+            //Previous factor 1.4, now 2.
+            var revenue = Math.ceil(bolaoTotal * 3);
+            var recomendedCotas = Math.round((revenue / priceCota));
+            recomendedCotas = recomendedCotas <= 1 ? 2 : recomendedCotas;
+
+            //Any change in the formatings will probably break the code
+            var revenueTotal = String((priceCota * recomendedCotas));
+            //19% do preço da cota
+            var taxPlatform = (priceCota * 0.19) * recomendedCotas;
+            var profitBolao = String((revenueTotal - bolaoTotal - taxPlatform));
+            //var taxPlatform = profitBolao * 0.337;
+            profitBolao = (new Intl.NumberFormat('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}).format(profitBolao));
+            costTotal = (new Intl.NumberFormat('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}).format(bolaoTotal));
+            revenueTotal = (new Intl.NumberFormat('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}).format(revenueTotal - taxPlatform));
+
+            cotasCt.text(recomendedCotas);
+            revenueCt.text('R$' + (revenueTotal));
+            costCt.text('R$' + (costTotal));
+            profitCt.html('R$' + (profitBolao));
+
+            pricesOptions.each(function(index, value){
+                var $this = $(this);
+                var opValue = parseFloat($this.val());
+
+                if(opValue > parseFloat(bolaoTotal)){
+                    $this.attr('disabled', 'disabled');
+                }
+                else {
+                    $this.removeAttr('disabled');
+                }
+            })
+
+            var formatedPriceCota = 'R$' + (new Intl.NumberFormat('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}).format(priceCota));
+            var formatedBolaoTotal = 'R$' + (new Intl.NumberFormat('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}).format(bolaoTotal));
+
+            slKeepCotas.html('').append('<option value="0">Nenhuma cota</option>')
+            for(var i = 1; i <= recomendedCotas; i++){
+                var plural = i > 1 ? 's' : '';
+                slKeepCotas.append('<option value="' + i + '">' + i + ' cota' + plural + '</option>');
+            }
+        }
+        else {
+            cotasCt.text(0);
+            profitCt.text('');
+            slKeepCotas.html('').append('<option value="0">Nenhuma cota</option>')
+        }
+    };
+
+    var btnBuySuggestion = () => {
+        var btnBuySuggestion = $('.btnBuySuggestion');
+
+        if (btnBuySuggestion.length > 0) {
+
+            btnBuySuggestion.on("click", function(e){
+                var $this = $(this);
+                e.preventDefault();
+
+                $.ajax({
+                    url: $this.data('url'),
+                    dataType: 'json',
+                    type: 'POST',
+                    data: { 
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    beforeSend: function(e){
+                        $this.find('i').removeClass('fa').addClass('spinner me-7');
+                        $this.attr('disabled', 'disabled');
+                    }
+                })
+                .done(function(response){
+                    window.location = response.url;
+                    // $this.find('i').removeClass('spinner me-7').addClass('fa');
+                    // $this.removeAttr('disabled');
+                })
+            })
+        }
+    };btnBuySuggestion();
 
     var bolaoFinalize = function()
     {
-        var bolaoFinalize = $("#bolaoFinalize");
+        var bolaoFinalize = $(".bolaoFinalize");
 
         if (bolaoFinalize.length > 0){
             var slPrices = bolaoFinalize.find('.slPrices');
-
-            var calculateProfitAndCotas = function(){
-                var profitCt = bolaoFinalize.find('.profitCt');
-                var revenueCt = bolaoFinalize.find('.revenueCt');
-                var costCt = bolaoFinalize.find('.costCt');
-                var cotasCt = bolaoFinalize.find('.cotasCt');
-                var bettingsSessionData = JSON.parse(sessionStorage.getItem('bettings'));
-                var bolaoTotal = 0;
-                var qtGames = Object.keys(bettingsSessionData).length;
-
-                if (bettingsSessionData.length <= 0){
-                    return null;
-                }
-
-                $.each(bettingsSessionData, function(index, value){
-                    bolaoTotal += value.cost;
-                });
-
-                if (bolaoTotal > 0){
-                    var pricesOptions = slPrices.find('option');
-                    bolaoFinalize.find('.inputHdTotalToPay').val(bolaoTotal);
-
-                    if(pricesOptions.filter(':selected').val() > parseFloat(bolaoTotal)){
-                        pricesOptions.filter(':selected').removeAttr('selected');
-                        pricesOptions.first().attr('selected', 'selected');
-                    }
-
-                    var priceCota = slPrices.length > 0 ? slPrices.find(':selected').val() : $('.priceCotas').val();
-                    //Previous factor 1.4, now 2.
-                    var revenue = Math.ceil(bolaoTotal * 3);
-                    var recomendedCotas = Math.round((revenue / priceCota));
-                    recomendedCotas = recomendedCotas <= 1 ? 2 : recomendedCotas;
-
-                    //Any change in the formatings will probably break the code
-                    var revenueTotal = String((priceCota * recomendedCotas));
-                    //19% do preço da cota
-                    var taxPlatform = (priceCota * 0.19) * recomendedCotas;
-                    var profitBolao = String((revenueTotal - bolaoTotal - taxPlatform));
-                    //var taxPlatform = profitBolao * 0.337;
-                    profitBolao = (new Intl.NumberFormat('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}).format(profitBolao));
-                    costTotal = (new Intl.NumberFormat('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}).format(bolaoTotal));
-                    revenueTotal = (new Intl.NumberFormat('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}).format(revenueTotal - taxPlatform));
-
-                    cotasCt.text(recomendedCotas);
-                    revenueCt.text('R$' + (revenueTotal));
-                    costCt.text('R$' + (costTotal));
-                    profitCt.html('R$' + (profitBolao));
-
-                    if(recomendedCotas <= 3){
-                        cotasCt.removeClass('text-danger');
-                        cotasCt.removeClass('color-default');
-                        cotasCt.addClass('text-warning');
-                    }
-                    else if(recomendedCotas <= 50){
-                        cotasCt.removeClass('text-danger');
-                        cotasCt.removeClass('text-warning');
-                        cotasCt.addClass('color-default');
-                    }
-                    else if(recomendedCotas >= 50 && recomendedCotas <= 100){
-                        cotasCt.removeClass('text-danger');
-                        cotasCt.removeClass('color-default');
-                        cotasCt.addClass('text-warning');
-                    }
-                    else {
-                        cotasCt.removeClass('text-danger');
-                        cotasCt.removeClass('color-default');
-                        cotasCt.addClass('text-danger');
-                    }
-
-                    pricesOptions.each(function(index, value){
-                        var $this = $(this);
-                        var opValue = parseFloat($this.val());
-
-                        if(opValue > parseFloat(bolaoTotal)){
-                            $this.attr('disabled', 'disabled');
-                        }
-                        else {
-                            $this.removeAttr('disabled');
-                        }
-                    })
-
-                    var formatedPriceCota = 'R$' + (new Intl.NumberFormat('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}).format(priceCota));
-                    var formatedBolaoTotal = 'R$' + (new Intl.NumberFormat('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}).format(bolaoTotal));
-                    updateConfirmationBolao(formatedPriceCota, qtGames, cotasCt.text(), formatedBolaoTotal );
-                }
-                else {
-                    cotasCt.text(0);
-                    profitCt.text('');
-                    updateConfirmationBolao(0, 0, 0, 0);
-                }
-            };
 
             var updateConfirmationBolao = function(priceCota, numbersBet, numberCotas, total){
                 bolaoFinalize.find('.priceCota').text(priceCota);
                 bolaoFinalize.find('.numberBets').text(numbersBet + ' jogos');
                 bolaoFinalize.find('.numberCotas').text(numberCotas);
                 bolaoFinalize.find('.totalBolao').text(total);
-
-                var slKeepCotas = bolaoFinalize.find('.slKeepCotas');
-
-                slKeepCotas.html('');
-
-                slKeepCotas.append('<option value="0">Nenhuma cota</option>');
-                for(var i = 1; i <= numberCotas; i++){
-                    var plural = i > 1 ? 's' : '';
-                    slKeepCotas.append('<option value="' + i + '">' + i + ' cota' + plural + '</option>');
-                }
 
                 var bettingsSessionData = JSON.parse(sessionStorage.getItem('bettings'));
                 if (bettingsSessionData && bettingsSessionData.length > 0){
@@ -203,7 +216,7 @@ $(function(){
             }
 
             slPrices.on('change', function(){
-                calculateProfitAndCotas();
+                calculateProfitAndCotas(bolaoFinalize);
             });
 
             var finalizeBolao = function(){
@@ -217,10 +230,10 @@ $(function(){
                     var formFinalize = bolaoFinalize.find('.formFinalize');
                     var bettingsSessionData = JSON.parse(sessionStorage.getItem('bettings'));
 
-                    // $.each(Object.values(bettingsSessionData), function(index,value){
-                        // var inputNew = '<input type="hidden" name="games[]" value="' + value.numbers.toString() + '" />';
-                        // formFinalize.prepend(inputNew);
-                    // });
+                    $.each(Object.values(bettingsSessionData), function(index,value){
+                        var inputNew = '<input type="hidden" name="games[]" value="' + value.numbers.toString() + '" />';
+                        formFinalize.prepend(inputNew);
+                    });
 
                     formFinalize.prepend("<input type='hidden' name='qtCotas' value='" + formFinalize.find('.cotasCt').text() + "' /> ");
 
@@ -234,7 +247,6 @@ $(function(){
 
             var initFunctions = function(){
                 $(document).on('ready', function(){
-                    calculateProfitAndCotas();
                     buildGamesList();
                     finalizeBolao();
                 });
@@ -338,7 +350,7 @@ $(function(){
                 }
 
                 //Remove bolao
-                bolaoBuilder.find(".qtGames").text('(' + countGames + ')');
+                bolaoBuilder.find(".qtGames").text(countGames);
                 var removeBolaoTg = bolaoBuilder.find(".removeBolao");
                 removeBolaoTg.off('click').on('click', function(){
                     removeBolao($(this));
@@ -392,6 +404,35 @@ $(function(){
                     }
                 }
             }
+
+            var finalizeBolao = function(){
+                var btnFinalize = bolaoBuilder.find(".btn-submit");
+                
+                btnFinalize.on('click', $.debounce(500, true, function(e){
+                    e.preventDefault();
+
+                    var $this = $(this);
+                    var gamesArray = [];
+                    var formSubmit = $this.parents('form');
+                    var bettingsSessionData = JSON.parse(sessionStorage.getItem('bettings'));
+
+                    $this.find('i').removeClass('fa').addClass('spinner me-7');
+                    $this.attr('disabled', 'disabled');
+
+                    $.each(Object.values(bettingsSessionData), function(index,value){
+                        var inputNew = '<input type="hidden" name="games[]" value="' + value.numbers.toString() + '" />';
+                        formSubmit.prepend(inputNew);
+                    });
+
+                    formSubmit.prepend("<input type='hidden' name='qtCotas' value='" + formSubmit.find('.cotasCt').text() + "' /> ");
+
+                    //Clear Sessions
+                    sessionStorage.setItem('bettings', JSON.stringify([]));
+                    sessionStorage.setItem('lotoAlias', '');
+                    
+                    formSubmit.trigger('submit');
+                }));
+            }();
 
             bolaoBuilder.find('.numberPicker .number').on('click', selectNumber);
 

@@ -65,4 +65,14 @@ trait BolaoSuggestionTrait
 
         return $arBets;
     }
+
+    public function buildDescription()
+    {
+        $html = '';
+        foreach( $this->getBets() as $index => $bet ){
+            $html .= "<li class='w-75 m-auto d-flex justify-content-center'><span><b>" . $bet . "</b> aposta" . ($bet > 1 ? 's ' : ' ') . "de </span>  <b class='ms-1'>" . $index . " dezenas</b></li>";
+        }
+
+        return $html;
+    }
 }
