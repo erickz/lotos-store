@@ -281,9 +281,9 @@ class BolaoRepository implements BolaoRepositoryInterface
         return $query->paginate(15);
     }
 
-    public function getMostPopular($exceptions = [], $loteryId = NULL)
+    public function getMainListing($exceptions = [], $loteryId = NULL)
     {
-        $query = $this->model->with('concurso')->orderBy('visits', 'DESC')->orderBy('id', 'DESC')->whereNotIn('id', $exceptions)
+        $query = $this->model->with('concurso')->orderBy('price', 'ASC')->orderBy('visits', 'DESC')->whereNotIn('id', $exceptions)
         ->isValidToDisplay();
 
         if ($loteryId){

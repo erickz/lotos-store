@@ -581,15 +581,15 @@ class BoloesController extends WebBaseController
         $specialBoloes = $this->repository->getSpecialBoloes($boloesSelected);
         $boloesSelected = array_merge($boloesSelected, $specialBoloes->pluck('id')->toArray());
 
-        $mostPopulars = $this->repository->getMostPopular($boloesSelected);
-        $boloesSelected = array_merge($boloesSelected, $mostPopulars->pluck('id')->toArray());
+        $mainListingBoloes = $this->repository->getMainListing($boloesSelected);
+        $boloesSelected = array_merge($boloesSelected, $mainListingBoloes->pluck('id')->toArray());
 
         // $biggestChances = $this->repository->getBiggestChances($boloesSelected);
         // $boloesSelected = array_merge($boloesSelected, $biggestChances->pluck('id')->toArray());
 
         // $mostEconomics = $this->repository->getMostEconomics($boloesSelected);
 
-        return view('web.boloes.listing', ['followingConcursos' => $followingConcursos, 'specialBoloes' => $specialBoloes, 'mostPopulars' => $mostPopulars]);
+        return view('web.boloes.listing', ['followingConcursos' => $followingConcursos, 'specialBoloes' => $specialBoloes, 'mainListingBoloes' => $mainListingBoloes]);
     }
 
     public function listByLot(Request $request, $loterySlug = 'megasena')

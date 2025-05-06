@@ -54,12 +54,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class='mt-2'>
+                                    {{--<div class='mt-2'>
                                         <b>Nome do Perfil:</b>
                                         <div class='form-group ps-0'>
                                             <input type="text" name="profile_name" class="form-control" />
                                         </div>
-                                    </div>
+                                    </div>--}}
                                 </div><!-- / -->
                                 <div class='ps-0 d-flex justify-content-end align-items-center mt-4'>
                                     <div>
@@ -87,12 +87,12 @@
                             <!-- <div class='alert alert-light'><i class='fas fa-info-circle me-2 text-primary'></i> Nenhum bolão cadastrado para os próximos concursos, seja o primeiro e <a href='{{ route("web.boloes.create") }}'>crie agora</a> seu bolão!</div> -->
                         @endif
 
-                        @if(count($mostPopulars) > 0)
+                        @if(count($mainListingBoloes) > 0)
                             <div class='mt-10'>
                                 <div class='d-flex align-items-center'>
-                                    <h2 class='ps-0 display-4'><b>Bolões mais populares</b></h2>
+                                    <h2 class='ps-0 display-4'><b>Bolões com muito mais chances de ganhar!</b></h2>
                                 </div>
-                                @include('web.boloes.listing_boloes', ['boloes' => $mostPopulars])
+                                @include('web.boloes.listing_boloes', ['boloes' => $mainListingBoloes])
                             </div>
                         @else
                             <!-- <div class='alert alert-light'><i class='fas fa-info-circle me-2 text-primary'></i> Nenhum bolão público cadastrado</div> -->
