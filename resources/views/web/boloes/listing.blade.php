@@ -97,26 +97,6 @@
                         @else
                             <!-- <div class='alert alert-light'><i class='fas fa-info-circle me-2 text-primary'></i> Nenhum bolão público cadastrado</div> -->
                         @endif
-
-                        <div class='d-flex flex-column col-md-12 ps-0 mt-10'>
-                            @if(count($biggestChances) > 0)
-                                <div class=''>
-                                    <div class='d-flex align-items-center'>
-                                        <h2 class='ps-0 display-4'><b>Bolões com maiores chances</b></h2>
-                                    </div>
-                                    @include('web.boloes.listing_boloes', ['boloes' => $biggestChances])
-                                </div>
-                            @endif
-
-                            @if(count($mostEconomics) > 0)
-                                <div class='mt-10'>
-                                    <div class='d-flex align-items-center'>
-                                        <h2 class='ps-0 display-4'><b>Bolões mais econômicos</b></h2>
-                                    </div>
-                                    @include('web.boloes.listing_boloes', ['boloes' => $mostEconomics])
-                                </div>
-                            @endif
-                        </div>
                     </div>
                 </div>
             </div>
