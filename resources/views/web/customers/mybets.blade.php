@@ -75,7 +75,6 @@
 
                                                             <a data-toggle="modal" data-target="#bolaoInfosModal" data-gamesurl='{{ route("web.boloes.stats", [$bolao->id]) }}'><i class="fas fa-chart-bar text-light rounded bg-warning p-2" title='Relatório do Bolão' role='button'></i></a>
 
-
                                                             <a data-toggle="modal" data-target="#bolaoInfosModal" data-id='{{ $bolao->id }}' data-gamesurl='{{ route("web.boloes.games", [$bolao->id]) }}' class='ms-2 me-2 gamesTrigger bolao_{{ $bolao->id }}'>
                                                                 <i class="fas fa-search text-light rounded bg-info p-2" title='Visualizar Jogos' role='button'></i>
                                                             </a>

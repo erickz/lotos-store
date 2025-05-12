@@ -39,10 +39,6 @@
                 <span>Premiação estimada</span> <br />
                 <strong class='font-larger position-relative'>{!! $bolao->concurso->getFormattedNextExpectedPrize() !!}</strong>
             </div>
-            <div class='text-center me-9'>
-                <span>Quantidade de jogos</span> <br />
-                <strong class='font-larger'>{{ $bolao->getQtGames() }}</strong>
-            </div>
             <div class='text-center'>
                 <span>Cotas disponíveis</span> <br />
                 <strong class='font-larger'>{{ $bolao->getAvailableCotas() }} / {{ $bolao->cotas }}</strong>
