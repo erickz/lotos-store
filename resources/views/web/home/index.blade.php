@@ -15,8 +15,8 @@
                 <div class="container">
                     <div class="text-center mb-5">
                         <!-- <h1 class="display-5 text-center mb-3"><b>Crie um Bolão e venda suas cotas online 🤑</b></h1> -->
-                        <h2 class="display-5 text-center mb-3"><b>Monte seus jogos ou compre cotas online! 🤑</b></h2>
-                        <p class="lead">Crie bolões lucrativos ou compre cotas e concorra a prêmios das loterias, tudo com segurança e praticidade!</p>
+                        <h2 class="display-5 text-center mb-3"><b>Junte-se a bolões vencedores ou Monte seus jogos!</b></h2>
+                        <p class="lead">Compre cotas e concorra a prêmios das loterias ou Crie bolões lucrativos, tudo com segurança e praticidade!</p>
                     </div>
 
                     <div class="row g-4 justify-content-center">
@@ -29,23 +29,23 @@
                 </div>
             </section>
 
-            <section class="py-10 bg-info2 text-white" id="howItWorks">
+            <section class="py-10 bg-primary text-white" id="howItWorks">
                 <div class="d-flex justify-content-center text-center mb-4">
                     <div class="d-flex justify-content-center text-center tgHolder">
                         <label class="col-form-label tgCreateBolao rounded rounded-right-0 bg-info2 border border-end-0 pt-3 px-2 text-white" style="border-color: #FFF !Important;"><b>Quero criar um Bolão</b></label>
                         <div class="switchHolder border-top border-bottom bg-diagonal bg-diagonal-info bg-diagonal-r-primary overflow">
-                            <span class="switch switch-info mt-1 position-relative">
+                            <span class="switch switch-primary mt-1 position-relative">
                                 <label>
-                                    <input type="checkbox" name="select">
+                                    <input type="checkbox" name="select" checked>
                                     <span class="border"></span>
                                 </label>
                             </span>
                         </div>
-                        <label class="col-form-label tgBuyCotas rounded rounded-left-0 bg-primary border border-start-0 pt-3 px-2 text-white"><b>Quero comprar cotas</b></label>
+                        <label class="col-form-label tgBuyCotas rounded rounded-left-0 bg-primary border border-start-0 pt-3 px-2 text-white" style="border-color: #FFF !Important;"><b>Quero comprar cotas</b></label>
                     </div>
                 </div>
 
-                <div class="container container-bolao">
+                <div class="container container-bolao" style="display: none;">
                     <div class="text-center mb-5">
                         <h2 class="display-5 mb-1"><b>Como criar um Bolão e vender as cotas online</b></h2>
                         <p class="lead">Ganhe dinheiro vendendo seus bolões da loteria online!</p>
@@ -81,7 +81,7 @@
                     </div>
                 </div>
 
-                <div class="container container-cotas" style="display: none;">
+                <div class="container container-cotas">
                     <div class="text-center mb-5">
                         <h2 class="display-5 mb-1"><b>Como comprar cotas online e concorrer a loteria</b></h2>
                         <p class="lead">Concorra com muito mais chances a prêmios milionários</p>
