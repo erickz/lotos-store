@@ -18,9 +18,9 @@ This platform is a comprehensive e-commerce solution for creating, managing, and
   - Automatic winner detection and notification
 
 ### E-commerce Operations
-- **Cota (Share) System**
-  - Sell fractional shares in bolões
-  - Dynamic pricing and share allocation
+- **Betting pools System**
+  - Sell fractional shares
+  - Dynamic pricing
 - **Payment Gateway**
   - Credit card processing (PCI-compliant)
   - PIX (Brazilian instant payment) integration
