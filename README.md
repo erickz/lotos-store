@@ -53,36 +53,5 @@ This platform is a comprehensive e-commerce solution for creating, managing, and
 - **Chrome Extension**: Manifest V3
 
 ### Prerequisites
-- PHP 8.2+
-- Composer 2.x
+- PHP 8.0+
 - MySQL 8.x
-- Node.js 16.x
-- Redis 6.x
-
-### Setup Instructions
-```bash
-# Clone repository
-git clone https://github.com/your-username/lottery-platform.git
-cd lottery-platform
-
-# Install PHP dependencies
-composer install
-
-# Install JavaScript dependencies
-npm install
-
-# Build assets
-npm run build
-
-# Configure environment
-cp .env.example .env
-php artisan key:generate
-
-# Edit .env file with your credentials
-nano .env
-
-# Run migrations
-php artisan migrate --seed
-
-# Link storage
-php artisan storage:link
